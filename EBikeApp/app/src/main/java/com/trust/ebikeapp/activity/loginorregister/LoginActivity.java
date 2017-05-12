@@ -2,9 +2,12 @@ package com.trust.ebikeapp.activity.loginorregister;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -24,6 +27,7 @@ public class LoginActivity extends BaseActivity {
     private Button login;
     private EditText userEd,pwdEd;
     private LinearLayout registerBtn;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,19 @@ public class LoginActivity extends BaseActivity {
 
         initView();
 
+        init();
+
+    }
+    public void init(){
+        SharedPreferences editor = context.getSharedPreferences("UserMsg",
+                Context.MODE_PRIVATE);
+        long phone = editor.getLong("phone",0);
+        if(phone != 0){
+            checkBox.setChecked(true);
+            String pwd = editor.getString("pwd",null);
+            userEd.setText(phone+"");
+            pwdEd.setText(pwd);
+        }
 
 
     }
@@ -44,6 +61,14 @@ public class LoginActivity extends BaseActivity {
         registerBtn = (LinearLayout) findViewById(R.id.login_register);
         onClick(registerBtn);
         onClick(login);
+
+        checkBox = (CheckBox) findViewById(R.id.login_check_box);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Config.checkBox = b;
+            }
+        });
     }
 
     @Override
@@ -55,10 +80,12 @@ public class LoginActivity extends BaseActivity {
                 if (user == 0 || pwd.equals("")) {
                     T.showToast(context, "密码或用户名有误!");
                 } else {
+                    Config.phone = user;
+                    Config.pwd = pwdEd.getText().toString().trim();
                     Map<String, Object> map = new WeakHashMap<>();
                     map.put("cp", user);
                     map.put("pw", pwd);
-                    post.Request(Config.Login,map,Config.login,false);
+                    post.Request(Config.Login,map,Config.login,Config.noAdd);
                 }
                 break;
             case R.id.login_register:

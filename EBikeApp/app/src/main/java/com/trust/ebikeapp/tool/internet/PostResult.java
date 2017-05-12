@@ -1,5 +1,7 @@
 package com.trust.ebikeapp.tool.internet;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -29,6 +31,9 @@ public class PostResult extends Handler {
                     loginResult((String)msg.obj,Config.login);
                 }
                 break;
+            case Config.lock:
+                L.d("msg:"+msg.obj);
+                break;
         }
     }
 
@@ -53,6 +58,20 @@ public class PostResult extends Handler {
     private void loginResult(String msg, int type) {
         LoginResultBean bean = gson.fromJson(msg,LoginResultBean.class);
         if(bean.getStatus()){
+            SharedPreferences.Editor editor = Config.context.getSharedPreferences("UserMsg",
+                    Context.MODE_PRIVATE).edit();
+            if(Config.checkBox){
+                editor.putLong("phone", Config.phone);
+                editor.putString("pwd", Config.pwd);
+
+            }else{
+                editor.putLong("phone",0);
+                editor.putString("pwd", null);
+            }
+            editor.commit();
+
+            Config.termId = bean.getContent().getTermId();
+
             sendMessage(null,Config.SUCCESS,type);
         }else{
             sendMessage("error",Config.ERROR,type);

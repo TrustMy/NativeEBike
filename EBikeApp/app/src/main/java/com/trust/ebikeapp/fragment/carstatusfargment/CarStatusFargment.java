@@ -42,4 +42,7 @@ public class CarStatusFargment extends BaseFragment {
         setHasOptionsMenu(true);
         return v;
     }
+
+
+
 }

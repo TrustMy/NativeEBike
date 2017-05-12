@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.trust.ebikeapp.activity.location.CarLocationActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_car_location_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "10%"
+        app:layout_widthPercent="100%"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</RelativeLayout>
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:onClick="ext"
+                android:src="@drawable/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="车辆位置"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:visibility="gone"
+                    android:textColor="#ffffff"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/activity_car_location_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.amap.api.maps.MapView>
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

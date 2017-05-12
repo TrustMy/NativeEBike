@@ -14,9 +14,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.activity.carstatus.CarStatusActivity;
+import com.trust.ebikeapp.activity.help.HelpActivity;
+import com.trust.ebikeapp.activity.location.CarLocationActivity;
 import com.trust.ebikeapp.fragment.BaseFragment;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TimeTool;
+
+import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Created by Trust on 2017/5/11.
@@ -185,17 +193,38 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         Intent intent = new Intent();
         switch (v.getId()){
             case R.id.home_fortification:
+                clickFortificationBtn = true;
+                Map<String,Object> map = new WeakHashMap<>();
+                map.put("termId",Config.termId+"");
+                map.put("userCellPhone",Config.phone+"");
+                map.put("appSN", (TimeTool.getSystemTimeDate()/1000)+"");
+                map.put("lock",true);
+
+                post.Request(Config.Lock,map,Config.lock,Config.needAdd);
                 break;
             case R.id.home_car_history:
+                clickFortificationBtn = false;
                 break;
             case R.id.home_location:
+                clickFortificationBtn = false;
+                intent.setClass(context, CarLocationActivity.class);
                 break;
             case R.id.home_car_status:
+                clickFortificationBtn = false;
+                intent.setClass(context, CarStatusActivity.class);
                 break;
             case R.id.home_alarm:
+                clickFortificationBtn = false;
                 break;
             case R.id.home_help:
+                clickFortificationBtn = false;
+                intent.setClass(context, HelpActivity.class);
                 break;
         }
+        if(!clickFortificationBtn){
+            context.startActivity(intent);
+        }
     }
+
+
 }

@@ -29,10 +29,16 @@ public class BaseFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        post = new Post(fragmentHandler);
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        post = new Post(fragmentHandler);
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -52,5 +58,9 @@ public class BaseFragment extends Fragment {
 
     public void clickResult(View v){
 
+    }
+
+    public void extFragmet(){
+        getFragmentManager().popBackStack();
     }
 }

@@ -43,6 +43,7 @@ public class Post {
     public void Request(String url ,Map<String,Object> map,int type,boolean needHeader)
     {
         JSONObject jsonObject = new JSONObject(map);
+        L.d("jsonObject:"+jsonObject);
         needHeader(Config.Server+url,type,jsonObject.toString(),needHeader);
     }
 
@@ -83,6 +84,9 @@ public class Post {
 
                 if(response.code() == 200)
                 {
+                    if(type == Config.login){
+                        Config.token = response.header("Token");
+                    }
                     sendMessage(json,Config.SUCCESS,type);
                 }else
                 {

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    tools:context="com.trust.ebikeapp.activity.help.HelpActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_help_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorBg"
+        app:layout_heightPercent = "10%"
+        app:layout_widthPercent="100%"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:id="@+id/activity_help_ext"
+                android:src="@drawable/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="帮助和服务"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:visibility="gone"
+                    android:textColor="#ffffff"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "40%"
+        android:background="@color/colorBg"
+        >
+
+        <ImageView
+          app:layout_marginTopPercent = "10%"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent = "30%"
+            android:gravity="center"
+            app:layout_marginTopPercent = "60%"
+            app:layout_marginLeftPercent="5%"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp"
+                android:text="500M"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:text="剩余流量"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "7%"
+        app:layout_widthPercent = "100%"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:textSize="16sp"
+            app:layout_marginLeftPercent = "10%"
+            android:text="使用说明"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:gravity="center"
+            app:layout_marginLeftPercent = "60%"
+            android:textSize="24sp"
+            android:text=">"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    <View
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "7%"
+        app:layout_widthPercent = "100%"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:textSize="16sp"
+            app:layout_marginLeftPercent = "10%"
+            android:text="购买服务"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:gravity="center"
+            app:layout_marginLeftPercent = "60%"
+            android:textSize="24sp"
+            android:text=">"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    <View
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "7%"
+        app:layout_widthPercent = "100%"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:textSize="16sp"
+            app:layout_marginLeftPercent = "10%"
+            android:text="使用说明"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:gravity="center"
+            app:layout_marginLeftPercent = "60%"
+            android:textSize="24sp"
+            android:text=">"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    <View
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

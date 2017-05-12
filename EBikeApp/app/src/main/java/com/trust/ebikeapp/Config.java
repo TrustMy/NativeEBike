@@ -9,18 +9,31 @@ import android.os.Bundle;
  * Created by Trust on 2017/5/10.
  */
 public class Config extends Application {
-    public static Context context;
-    public static String token;
 
+    public static Context context;
+    public static boolean needAdd = true;
+    public static boolean noAdd = false;
+
+    //配置参数
+    public static String token;
+    public static long termId;
+    public static long phone;
+    public static String pwd;
+    public static boolean checkBox = false;
+
+    //结果状态
     public final static int SUCCESS = 0;
     public final static int ERROR = 1;
 
+    //tag
     public final static int register = 0x001;
     public final static int login = 0x002;
+    public final static int lock = 0x003;
 
-
+    //url
     public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
     public static final String Login = "rest/user/login/";
+    public static final String Lock = "rest/cmd/lock/";
 
 
     @Override

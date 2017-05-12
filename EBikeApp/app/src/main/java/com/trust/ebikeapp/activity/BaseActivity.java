@@ -71,6 +71,11 @@ public class BaseActivity extends AppCompatActivity {
                 });
     }
 
+    public void  onClickFinsh( final Activity activity){
+                activity.finish();
+    }
+
+
 
 
 }
