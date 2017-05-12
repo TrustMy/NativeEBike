@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/colorBg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.loginorregister.LoginActivity">
+
+   <android.support.v7.widget.Toolbar
+       android:id="@+id/carstatus_toolbar"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_heightPercent = "10%"
+       app:layout_widthPercent="100%"
+       >
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <ImageButton
+               android:layout_centerVertical="true"
+               android:background="@null"
+               android:onClick="ext"
+               android:src="@drawable/back"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+
+
+           <ImageButton
+               android:layout_centerVertical="true"
+               android:src="@drawable/out"
+               android:background="@null"
+               android:layout_alignParentRight="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="20dp"/>
+
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_alignParentRight="true"
+               android:orientation="horizontal">
+
+
+               <Button
+                   android:id="@+id/activity_blue_device_disconnect"
+                   android:visibility="gone"
+                   android:textColor="#ffffff"
+                   android:background="@null"
+                   android:text="disconnect"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+           </LinearLayout>
+
+       </RelativeLayout>
+
+   </android.support.v7.widget.Toolbar>
+
+
+    <ImageView
+        android:src="@drawable/user"
+        android:id="@+id/myfragment_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <ScrollView
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:scrollbars="none"
+        android:layout_marginLeft="20dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/iphone"
+                    android:text="手机"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="13888888888"
+                    android:layout_width="wrap_content"
+                    android:layout_toLeftOf="@+id/phone_intent"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/phone_intent"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right"/>
+            <View
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000"></View>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/icloud_down"
+                    android:text="车辆解绑"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="888888888888888"
+                    android:layout_width="wrap_content"
+                    android:layout_toLeftOf="@+id/car_unbundling"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/car_unbundling"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/speed"
+                    android:text="限速\n(km/h)"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_toLeftOf="@+id/chang_speed"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/chang_speed"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/oil"
+                    android:text="断油/电"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/un_oil"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/off"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/iphone"
+                    android:text="车灯控制"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/open_light"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/off"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/key_btn"
+                    android:text="修改密码"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/chang_pwd"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/user_icon"
+                    android:text="昵称"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/user_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <TextView
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorWhite"
+                    android:drawableLeft="@drawable/email"
+                    android:text="电子邮件"
+                    android:drawablePadding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"></View>
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

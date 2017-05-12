@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.loginorregister.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/register_finsh"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "5%"
+        app:layout_widthPercent="80%"
+        >
+
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="手机号:"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="35%"
+            />
+
+        <EditText
+            android:id="@+id/register_user"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="70%"
+            android:background="@null"
+            />
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "5%"
+        app:layout_widthPercent="80%"
+        >
+
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="密码:"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="35%"
+            />
+
+        <EditText
+            android:id="@+id/register_pwd"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="70%"
+            android:background="@null"
+            />
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "5%"
+        app:layout_widthPercent="80%"
+        >
+
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="邮箱:"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="35%"
+            />
+
+        <EditText
+            android:id="@+id/register_email"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="70%"
+            android:background="@null"
+            />
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "5%"
+        app:layout_widthPercent="80%"
+        >
+
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="密令:"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="35%"
+            />
+
+        <EditText
+            android:id="@+id/register_secret_order"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="70%"
+            android:background="@null"
+            />
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "5%"
+        app:layout_widthPercent="80%"
+        >
+
+
+
+
+        <EditText
+            android:id="@+id/register_checknum"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="60%"
+            android:background="@null"
+            />
+
+        <Button
+            android:text="获取验证码"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent = "100%"
+            app:layout_widthPercent="40%" />
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    <Button
+        android:id="@+id/register_sumbit"
+        android:text="注册"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "7%"
+        app:layout_widthPercent="80%"
+        />
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

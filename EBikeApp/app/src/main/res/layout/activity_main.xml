@@ -1,21 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBg"
     android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.trust.ebikeapp.MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/homefragment_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@mipmap/ic_launcher"
-        app:layout_heightPercent = "5%"
-        app:layout_widthPercent="60%"/>
-
-    
+        app:layout_heightPercent = "90%"
+        app:layout_widthPercent="100%"
+        >
 
 
-</com.trust.ebikeapp.uitool.PercentLinearLayout>
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/main_radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "10%"
+        app:layout_widthPercent="100%"
+        android:orientation="horizontal"
+        android:layout_marginBottom="6dp"
+        >
+        <RadioButton
+            android:textColor="@color/colorWhite"
+            android:id="@+id/radio_home"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:drawableTop="@drawable/home"
+            android:drawablePadding="-5dp"
+            android:text="主页面"
+            android:layout_weight="1"/>
+
+        <RadioButton
+            android:textColor="@color/colorWhite"
+            android:id="@+id/radio_carstatus"
+            android:drawablePadding="-5dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:drawableTop="@drawable/test"
+            android:text="车辆检测"
+            android:layout_weight="1"/>
+
+        <RadioButton
+            android:textColor="@color/colorWhite"
+            android:id="@+id/radio_my"
+            android:drawablePadding="-5dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:drawableTop="@drawable/home_user"
+            android:text="我的"
+
+            android:layout_weight="1"/>
+
+
+    </RadioGroup>
+
+
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
