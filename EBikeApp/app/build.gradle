@@ -20,6 +20,13 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs'];
+            res.srcDirs = [
+                    'src/main/res/layout/activtiy',
+                    'src/main/res/layout/fragment',
+                    'src/main/res/layout/item',
+                    'src/main/res/layout/tool',
+                    'src/main/res/layout',
+                    'src/main/res/'];
         }
     }
 }
