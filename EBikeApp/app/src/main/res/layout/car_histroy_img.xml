@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="#285166"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.loginorregister.LoginActivity">
+
+   <ImageView
+       android:src="@drawable/cat_sleep"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:text="今天没有用车"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

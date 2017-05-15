@@ -37,7 +37,9 @@
         <activity android:name=".activity.loginorregister.RegisterActivity" />
         <activity android:name=".activity.location.CarLocationActivity" />
         <activity android:name=".activity.help.HelpActivity" />
-        <activity android:name=".activity.carstatus.CarStatusActivity"></activity>
+        <activity android:name=".activity.carstatus.CarStatusActivity" />
+        <activity android:name=".activity.carhistroy.CarHistroyActivity" />
+        <activity android:name=".activity.carhistroy.ChooseTimeActivity"></activity>
     </application>
 
 </manifest>

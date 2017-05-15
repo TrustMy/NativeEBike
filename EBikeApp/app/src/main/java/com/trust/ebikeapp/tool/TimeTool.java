@@ -1,5 +1,6 @@
 package com.trust.ebikeapp.tool;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 public class TimeTool {
     public static String  getSystemTime()
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date dateTime = new Date(System.currentTimeMillis());//获取当前时间
         String systemTime = formatter.format(dateTime);
         return systemTime;
@@ -19,12 +20,22 @@ public class TimeTool {
         return    System.currentTimeMillis();
     }
 
-    public static String getGPSTime(long  time)
+    public static String getTime(long  time)
     {
-        L.d("time:"+time);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date dateTime = new Date(time);//获取当前时间
         String GPSTime = formatter.format(dateTime);
         return GPSTime;
+    }
+
+    public static long getTime( String format) {
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long timeStart=sdf.parse(format+"   00:00:00").getTime();
+            return timeStart;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

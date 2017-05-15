@@ -8,4 +8,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorTextColor">#b06e00</color>
     <color name="colorStatusBar">#153a45</color>
+
+    <color name="colorCarHistroyBg">#5AB494</color>
 </resources>

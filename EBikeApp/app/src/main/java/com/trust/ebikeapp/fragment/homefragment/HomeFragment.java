@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.activity.carhistroy.CarHistroyActivity;
 import com.trust.ebikeapp.activity.carstatus.CarStatusActivity;
 import com.trust.ebikeapp.activity.help.HelpActivity;
 import com.trust.ebikeapp.activity.location.CarLocationActivity;
@@ -204,6 +205,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 break;
             case R.id.home_car_history:
                 clickFortificationBtn = false;
+                intent.setClass(context, CarHistroyActivity.class);
                 break;
             case R.id.home_location:
                 clickFortificationBtn = false;

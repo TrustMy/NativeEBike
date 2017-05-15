@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.trust.ebikeapp.activity.carhistroy.CarHistroyActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_car_location_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "10%"
+        app:layout_widthPercent="100%"
+        android:background="@color/colorCarHistroyBg"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:onClick="ext"
+                android:src="@drawable/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="用车信息"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:visibility="gone"
+                    android:textColor="#ffffff"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <include layout="@layout/car_histroy_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "30%"
+        app:layout_widthPercent="100%"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:background="#1e455c"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent = "10%"
+        app:layout_widthPercent="100%"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:text="2017-5-11 ~ 2017-5-15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:onClick="chooseTime"
+            android:id="@+id/activity_car_histroy_select_histroy"
+            android:textColor="@color/colorWhite"
+            android:text="查询更多"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/test"
+        app:layout_marginTopPercent = "10%"
+        android:gravity="center"
+        android:text="该时间段内没有行程"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
