@@ -5,7 +5,17 @@ import android.content.Context;
 import android.util.Log;
 
 import com.amap.api.maps.AMap;
-
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkPath;
+import com.amap.api.services.route.WalkRouteResult;
+import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.gps.gpsconfig.WalkRouteOverlay;
 
 
 /**
@@ -14,24 +24,24 @@ import com.amap.api.maps.AMap;
 public class GPSRoutePlanning implements RouteSearch.OnRouteSearchListener{
 
     private RouteSearch routeSearch;
-    private Context context;
+    private Context context = Config.context;
     private RouteSearch.FromAndTo fromAndTol;
     private LatLonPoint startLat;
     private LatLonPoint endLat;
     private AMap aMap;
-    private WaitPopopWindow popupWindow;
+
 
 
 
 //    private AMapNavi mAMapNavi;
 
 
-    public GPSRoutePlanning(Context context, LatLonPoint start, LatLonPoint end, AMap aMap, WaitPopopWindow popupWindow) {
-        this.context = context;
+    public GPSRoutePlanning( LatLonPoint start, LatLonPoint end, AMap aMap) {
+
         this.startLat = start;
         this.endLat = end;
         this.aMap = aMap;
-        this.popupWindow = popupWindow;
+
         fromAndTol = new RouteSearch.FromAndTo(this.startLat,this.endLat);
         init();
     }
@@ -67,23 +77,24 @@ public class GPSRoutePlanning implements RouteSearch.OnRouteSearchListener{
     @Override
     public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
 
-        Log.d("GPSRoutePlanning", "路径规划的结果 :"+i);
+
        if (i == 3003) {
-            ToastUtil.showToast(context,"距离车辆位置过长!");
+           T.showToast(context, "距离车辆位置过长!");
         }else if(i ==3001)
         {
-            ToastUtil.showToast(context,"附近搜不到路!");
+            T.showToast(context,"附近搜不到路!");
         }else if(i == 3002)
         {
-            ToastUtil.showToast(context,"路线计算失败!");
+            T.showToast(context,"路线计算失败!");
         }else if(i == 3000)
         {
-            ToastUtil.showToast(context,"不在中国陆地范围内!");
+            T.showToast(context,"不在中国陆地范围内!");
         }else
         {
+
             WalkPath walkPath = walkRouteResult.getPaths().get(0);
 
-            Log.d("GPSRoutePlanning", " Show WalkPath :" + walkPath);
+
             WalkRouteOverlay walkRouteOverlay = new WalkRouteOverlay(context,
                     aMap, walkPath, walkRouteResult.getStartPos(),
                     walkRouteResult.getTargetPos());
@@ -93,16 +104,13 @@ public class GPSRoutePlanning implements RouteSearch.OnRouteSearchListener{
         }
 
 
-        if(popupWindow != null)
-        {
-            popupWindow.stopPopopWindow();
-        }
+
 
     }
 
     @Override
     public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
-
+        L.d("onRideRouteSearched");
     }
 
     public void setFromAndTo(LatLonPoint start , LatLonPoint end){

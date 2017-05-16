@@ -50,7 +50,8 @@ public class Config extends Application {
     public final static int foundCar = 0x006;
 
     //url
-    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
+    public static final String Server = "http://192.168.1.134:8080/";
+//    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
     public static final String Login = "rest/user/login/";
     public static final String car_location_url = "rest/gps/latest/";
     public static final String car_time_tracking_lcation_url = "rest/cmd/track/";//实时追踪

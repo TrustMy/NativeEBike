@@ -111,6 +111,7 @@
             android:layout_height="match_parent" />
 
         <TextView
+            android:id="@+id/login_chang_pwd"
             android:gravity="center"
             android:layout_alignParentRight="true"
             android:text="无法登录?"

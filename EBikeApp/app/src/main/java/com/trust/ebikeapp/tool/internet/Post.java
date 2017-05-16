@@ -67,7 +67,7 @@ public class Post {
         executeResponse(request, type);
     }
 
-    public void executeResponse(Request request , final int type) {
+    public void executeResponse(final Request request , final int type) {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -81,7 +81,7 @@ public class Post {
 
                 String json = response.body().string();
 
-                L.i("response.body() :"+response.body().toString());
+                L.i("response:"+response.toString());
 
                 if(response.code() == 200)
                 {
@@ -94,6 +94,7 @@ public class Post {
 
 
                 }
+
 
             }
         });

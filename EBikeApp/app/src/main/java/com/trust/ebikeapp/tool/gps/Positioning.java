@@ -10,6 +10,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.core.LatLonPoint;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.trustinterface.PositionCallBack;
@@ -22,11 +23,12 @@ public class Positioning {
     private AMapLocationClient mLocationClient;
     private AMapLocationClientOption mLocationOption;
 
-    private LatLng date;
+    private LatLonPoint date;
     private PositionCallBack positionCallBack;
 
     public Positioning(PositionCallBack positionCallBack) {
         this.positionCallBack = positionCallBack;
+        init();
     }
 
     public void init(){
@@ -54,6 +56,11 @@ public class Positioning {
         mLocationClient.startLocation();
     }
 
+    public void startGps(){
+        //启动定位
+        mLocationClient.startLocation();
+    }
+
 
     //声明定位回调监听器
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
@@ -62,8 +69,9 @@ public class Positioning {
 
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
-                date = new LatLng(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                date = new LatLonPoint(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 positionCallBack.positionCallBack(date);
+                L.d("定位成功");
             } else {
                 L.e("定位失败:"+aMapLocation.getErrorCode());
 

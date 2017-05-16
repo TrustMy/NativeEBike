@@ -12,12 +12,14 @@ import android.widget.ImageButton;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.core.LatLonPoint;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.gps.GPSRoutePlanning;
 import com.trust.ebikeapp.tool.gps.Maker;
 import com.trust.ebikeapp.tool.gps.Positioning;
 import com.trust.ebikeapp.tool.trustinterface.PositionCallBack;
@@ -34,9 +36,9 @@ public class CarLocationActivity extends BaseActivity {
     closeFoundCarBtn;
     private boolean isTrack = false , isRoute = false;
 
-    private LatLng mDate;
+    private LatLonPoint mDate;
     private Positioning positioning;
-
+    private GPSRoutePlanning routePlanning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class CarLocationActivity extends BaseActivity {
 
     private void initDate() {
         positioning = new Positioning(positionCallBack);
+
     }
 
     private void initView() {
@@ -85,6 +88,7 @@ public class CarLocationActivity extends BaseActivity {
 
             case R.id.activity_car_location_track:
                 isTrack(map,Config.startInterval,Config.startDurationtime);
+
                 break;
 
             case R.id.activity_car_location_car_location:
@@ -93,7 +97,7 @@ public class CarLocationActivity extends BaseActivity {
 
             case R.id.activity_car_location_route_plan:
                 isRoute = true;
-                foundCar(map,Config.startFoundCarStatus);
+                carLocation();
                 break;
 
             case R.id.activity_car_location_found_car:
@@ -157,7 +161,7 @@ public class CarLocationActivity extends BaseActivity {
      * 路径规划
      * @param carLoationMessage
      */
-    private void route(CarLoationMessage carLoationMessage) {
+    private void route(final CarLoationMessage carLoationMessage) {
         if(mDate!=null){
             if(carLoationMessage.getGpsType() == 1){
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -171,12 +175,21 @@ public class CarLocationActivity extends BaseActivity {
                 builder.setPositiveButton("继续", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        initRoutePlanning(startLat, endLat, popopWindow);
+                        LatLonPoint startDate = new LatLonPoint(carLoationMessage.getLat(),carLoationMessage.
+                                getLon());
+
+                        routePlanning = new GPSRoutePlanning(startDate,mDate,aMap);
+//
                     }
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }else{
+//                LatLonPoint endDate = new LatLonPoint(carLoationMessage.getLat(),carLoationMessage.
+//                        getLon());
+
             }
+
         }
     }
 
@@ -186,7 +199,7 @@ public class CarLocationActivity extends BaseActivity {
      */
     private PositionCallBack positionCallBack = new PositionCallBack() {
         @Override
-        public void positionCallBack(LatLng data) {
+        public void positionCallBack(LatLonPoint data) {
             mDate = data;
         }
     };
