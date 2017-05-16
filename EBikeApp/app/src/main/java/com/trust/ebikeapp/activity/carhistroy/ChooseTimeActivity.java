@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.R;
@@ -14,7 +13,6 @@ import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.dialog.DoubleDatePickerDialog;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class ChooseTimeActivity extends BaseActivity {
     private Button determineBtn,cancelBtn,todayBtn,yesterdatBtn,lastWeekBtn;

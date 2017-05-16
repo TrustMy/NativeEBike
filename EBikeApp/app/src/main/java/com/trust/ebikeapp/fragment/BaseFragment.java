@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.tool.internet.Post;
+import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,16 +23,16 @@ import io.reactivex.functions.Consumer;
  */
 public class BaseFragment extends Fragment {
     public Post post;
-    public Handler fragmentHandler = new Handler(){
+    public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
-        public void handleMessage(Message msg) {
-            Result(msg.what,msg.obj);
+        public void CallBeck(Object obj, int type, int status) {
+
         }
     };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        post = new Post(fragmentHandler);
+        post = new Post(resultCallBack);
         super.onCreate(savedInstanceState);
     }
 
@@ -42,9 +43,7 @@ public class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public void Result (int type , Object msg){
 
-    }
 
     public void  onClick(final View v){
         RxView.clicks(v).throttleFirst(5, TimeUnit.SECONDS).

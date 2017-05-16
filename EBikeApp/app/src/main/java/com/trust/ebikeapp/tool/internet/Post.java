@@ -6,6 +6,7 @@ import android.os.Message;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.internet.ssl.TrustAllCerts;
+import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import org.json.JSONObject;
 
@@ -29,14 +30,14 @@ public class Post {
     private OkHttpClient okHttpClient ;
     private Request.Builder builder;
     private PostResult postResult;
-    public Post(Handler handler) {
+    public Post(ResultCallBack callBack) {
         this.okHttpClient = new OkHttpClient.Builder()
                 .sslSocketFactory(TrustAllCerts.createSSLSocketFactory(),new TrustAllCerts())
                 .hostnameVerifier(new TrustAllCerts.TrustAllHostnameVerifier())
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(15, TimeUnit.SECONDS)
                 .build();
-        postResult = new PostResult(handler);
+        postResult = new PostResult(callBack);
     }
 
 

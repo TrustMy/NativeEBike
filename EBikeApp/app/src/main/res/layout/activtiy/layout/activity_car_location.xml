@@ -56,13 +56,90 @@
 
     </android.support.v7.widget.Toolbar>
 
-
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.amap.api.maps.MapView
         android:id="@+id/activity_car_location_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+
+
     </com.amap.api.maps.MapView>
 
+        <LinearLayout
+            app:layout_marginTopPercent = "15%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            app:layout_marginRightPercent = "1%"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_height="wrap_content"
+                    android:id="@+id/activity_car_location_track"
+                    android:background="@drawable/track_on"
+                    android:layout_width="wrap_content" />
+
+                <ImageButton
+                    android:visibility="gone"
+                    android:id="@+id/activity_car_location_track_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/close_on"/>
+
+            </LinearLayout>
+
+
+            <ImageButton
+                android:layout_margin="10dp"
+                android:id="@+id/activity_car_location_car_location"
+                android:background="@drawable/location_on"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:layout_margin="10dp"
+                android:id="@+id/activity_car_location_route_plan"
+                android:background="@drawable/walk"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/activity_car_location_found_car"
+                android:background="@drawable/found_car_on"
+                />
+
+                <ImageButton
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/activity_car_location_found_car_close"
+                    android:background="@drawable/found_car_off"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 
 
 </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

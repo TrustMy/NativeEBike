@@ -3,24 +3,32 @@ package com.trust.ebikeapp.tool.internet;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.telephony.gsm.GsmCellLocation;
 
+import com.amap.api.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.ErrorResultBean;
+import com.trust.ebikeapp.tool.bean.FoundCarBean;
+import com.trust.ebikeapp.tool.bean.IsTrackResultBean;
+import com.trust.ebikeapp.tool.bean.LocationResultBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
+import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
+import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 /**
  * Created by Trust on 2017/5/11.
  */
 public class PostResult extends Handler {
     private Gson gson;
-    private Handler handler;
-    public PostResult(Handler handler) {
+    private ResultCallBack callBack;
+    private CoordinateTransformation coordinateTransformation;
+    public PostResult(ResultCallBack callBack) {
         this.gson = new Gson();
-        this.handler = handler;
+        this.callBack = callBack;
+        coordinateTransformation = new CoordinateTransformation(Config.context);
     }
 
     @Override
@@ -31,8 +39,27 @@ public class PostResult extends Handler {
                     loginResult((String)msg.obj,Config.login);
                 }
                 break;
+
             case Config.lock:
                 L.d("msg:"+msg.obj);
+                break;
+
+            case Config.location:
+                if( checkMsgStatus(msg,Config.location)){
+                    locationResult((String)msg.obj,Config.location);
+                }
+                break;
+
+            case Config.isTrack:
+                if( checkMsgStatus(msg,Config.isTrack)){
+                    isTrackResult((String)msg.obj,Config.isTrack);
+                }
+                break;
+
+            case Config.foundCar:
+                if( checkMsgStatus(msg,Config.foundCar)){
+                    foundCarResult((String)msg.obj,Config.foundCar);
+                }
                 break;
         }
     }
@@ -41,22 +68,27 @@ public class PostResult extends Handler {
         if(msg.arg1 == Config.SUCCESS){
             return  true;
         }else{
-           sendMessage(msg.obj,Config.ERROR,type);
+
             return false;
         }
     }
 
+   public void result(Object obj ,int type , int status){
+       callBack.CallBeck(obj,type,status);
+   }
 
-    private void sendMessage(Object msg, int status,int type){
-            Message message = Message.obtain();
-            message.what = type;
-            message.arg1 = status;
-            message.obj = msg;
-            handler.sendMessage(message);
-    }
+   public String getErrorMsg(String obj){
+       ErrorResultBean errorBean = gson.fromJson(obj,ErrorResultBean.class);
+       return errorBean.getErr();
+   }
 
-    private void loginResult(String msg, int type) {
-        LoginResultBean bean = gson.fromJson(msg,LoginResultBean.class);
+    /**
+     * 登录
+     * @param obj
+     * @param type
+     */
+    private void loginResult(String obj, int type) {
+        LoginResultBean bean = gson.fromJson(obj,LoginResultBean.class);
         if(bean.getStatus()){
             SharedPreferences.Editor editor = Config.context.getSharedPreferences("UserMsg",
                     Context.MODE_PRIVATE).edit();
@@ -72,12 +104,73 @@ public class PostResult extends Handler {
 
             Config.termId = bean.getContent().getTermId();
 
-            sendMessage(null,Config.SUCCESS,type);
+            result(null,type,Config.SUCCESS);
         }else{
-            sendMessage("error",Config.ERROR,type);
+            result( getErrorMsg(obj), type, Config.ERROR);
         }
     }
 
+    /**
+     * 车辆位置
+     * @param obj
+     * @param type
+     */
+    private void locationResult(String obj, int type) {
+        LocationResultBean bean = gson.fromJson(obj, LocationResultBean.class);
+        if (bean.getStatus()) {
+            if (bean.getContent().getLat() != 0) {
+                String typeTilte = null;
+                if (bean.getContent().getType() == 0) {
+                    typeTilte = "GPS定位";
+                } else {
+                    typeTilte = "基站定位";
+                }
+                    LatLng date = coordinateTransformation.transformation(new LatLng(bean.
+                            getContent().getLat(), bean.getContent().getLng()));
+
+                    CarLoationMessage locationMessagne = new CarLoationMessage(date.latitude,
+                            date.longitude, bean.getContent().getGpsTime(), typeTilte,
+                            bean.getContent().getType());
+
+                    result(locationMessagne, type, Config.SUCCESS);
+
+            } else {
+                result( getErrorMsg(obj), type, Config.ERROR);
+            }
+        }
+    }
+
+    /**
+     * 打开/关闭实时追踪
+     * @param obj
+     * @param type
+     */
+    private void isTrackResult(String obj, int type) {
+        IsTrackResultBean bean = gson.fromJson(obj,IsTrackResultBean.class);
+        if(bean.getStatus()){
+            result(bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 寻车
+     * @param obj
+     * @param type
+     */
+    private void foundCarResult(String obj, int type) {
+        FoundCarBean bean = gson.fromJson(obj,FoundCarBean.class);
+        if(bean.getStatus()){
+            if(bean.getContent().getResult() == 0){
+                result(null, type, Config.SUCCESS);
+            }else{
+                L.e("bean.getContent().getResult():"+bean.getContent().getResult());
+            }
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
 
 
 }

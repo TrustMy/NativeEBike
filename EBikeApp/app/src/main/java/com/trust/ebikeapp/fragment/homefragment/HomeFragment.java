@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.activity.carhistroy.CarHistroyActivity;
 import com.trust.ebikeapp.activity.carstatus.CarStatusActivity;
 import com.trust.ebikeapp.activity.help.HelpActivity;
@@ -201,7 +202,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 map.put("appSN", (TimeTool.getSystemTimeDate()/1000)+"");
                 map.put("lock",true);
 
-                post.Request(Config.Lock,map,Config.lock,Config.needAdd);
+//                post.Request(Config.Lock,map,Config.lock,Config.needAdd);
                 break;
             case R.id.home_car_history:
                 clickFortificationBtn = false;
@@ -217,6 +218,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 break;
             case R.id.home_alarm:
                 clickFortificationBtn = false;
+                intent.setClass(context, AlarmActivity.class);
                 break;
             case R.id.home_help:
                 clickFortificationBtn = false;

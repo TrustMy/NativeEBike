@@ -94,8 +94,10 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+
+
     @Override
-    public void Result(Object obj, int type) {
+    public void resultCallBeack(Object obj, int type, int status) {
         if(type == Config.login){
             startActivity(new Intent(context,MainActivity.class));
         }

@@ -12,6 +12,7 @@ import android.widget.Switch;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.internet.Post;
+import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,13 +24,13 @@ import io.reactivex.functions.Consumer;
  */
 public class BaseActivity extends AppCompatActivity {
     protected Post post;
-    public Handler baseHandler = new Handler(){
+
+    public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
-        public void handleMessage(Message msg) {
-            Result(msg.obj,msg.what);
+        public void CallBeck(Object obj, int type, int status) {
+            resultCallBeack(obj,type,status);
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +41,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void init() {
-        post = new Post(baseHandler);
+        post = new Post(resultCallBack);
     }
 
     //网络请求回调
-    public void Result(Object obj , int type) {
+
+    public void resultCallBeack(Object obj,int type,int status){
+
     }
 
 
