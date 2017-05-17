@@ -11,6 +11,7 @@ import android.widget.Switch;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
@@ -24,7 +25,7 @@ import io.reactivex.functions.Consumer;
  */
 public class BaseActivity extends AppCompatActivity {
     protected Post post;
-
+    public static Activity activity ;
     public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
         public void CallBeck(Object obj, int type, int status) {
@@ -35,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lgin);
-
+        activity = this;
         init();
 
     }
@@ -64,6 +65,7 @@ public class BaseActivity extends AppCompatActivity {
     public void clickResult(View v){
 
     }
+
     public void  onClickFinsh(final View v, final Activity activity){
         RxView.clicks(v).throttleFirst(5, TimeUnit.SECONDS).
                 subscribe(new Consumer<Object>() {
@@ -78,7 +80,13 @@ public class BaseActivity extends AppCompatActivity {
                 activity.finish();
     }
 
+    public void showDialog(){
+        DialogTool.waitDialog(this);
+    }
 
+    public void dissDialog(){
+        DialogTool.dialog.dismiss();
+    }
 
 
 }

@@ -9,7 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.activity.BaseActivity;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 /**
@@ -17,9 +24,9 @@ import com.trust.ebikeapp.R;
  */
 
 public class DialogTool {
-    static Dialog dialog;
 
-    static View view;
+    public static Dialog dialog;
+
 
 
     public DialogTool() {
@@ -34,25 +41,27 @@ public class DialogTool {
     /**
      * 订单dialog
      * @param context
-     * @param layout
-     * @param bitmap
-     * @param time
-     */
-    public static void showDialog(Activity context, int layout, Bitmap bitmap, String time){
 
-        if(dialog  == null){
-            view = LayoutInflater.from(context).inflate(layout,null);
+     */
+    public static void waitDialog(Activity context){
+            View view = LayoutInflater.from(context).inflate(R.layout.wait_login_dialog,null);
+            ImageView img = (ImageView) view.findViewById(R.id.wait_log_img);
 
             dialog = new Dialog(context, R.style.customDialog);
-
-        }
-
-        dialog.setContentView(view);
-//        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        if(!context.isFinishing()){
+            Glide.with(context).load(R.drawable.wait_log).
+                placeholder(R.drawable.wait_logo_first)
+                .error(R.drawable.wait_logo_first).
+                diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .crossFade(1000).bitmapTransform(
+                new RoundedCornersTransformation(context,30,0,
+                        RoundedCornersTransformation.
+                                CornerType.ALL)).into(img);
+            dialog.setContentView(view);
+//          dialog.setCancelable(true);
+            dialog.setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
+            if(!context.isFinishing()){
             dialog.show();
-        }
+            }
 
 
     }

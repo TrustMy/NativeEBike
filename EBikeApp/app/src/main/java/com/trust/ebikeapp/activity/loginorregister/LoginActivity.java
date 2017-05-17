@@ -4,19 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.activity.bind.CarBindActivity;
+import com.trust.ebikeapp.activity.changpwd.ChangPwdActivity;
+import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.Utils.MD5Utils;
+import com.trust.ebikeapp.tool.dialog.DialogTool;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -28,6 +35,7 @@ public class LoginActivity extends BaseActivity {
     private EditText userEd,pwdEd;
     private LinearLayout registerBtn;
     private CheckBox checkBox;
+    private TextView changPwdTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +67,10 @@ public class LoginActivity extends BaseActivity {
         userEd = (EditText) findViewById(R.id.login_user);
         pwdEd = (EditText) findViewById(R.id.login_pwd);
         registerBtn = (LinearLayout) findViewById(R.id.login_register);
+        changPwdTv = (TextView) findViewById(R.id.login_chang_pwd);
         onClick(registerBtn);
         onClick(login);
-
+        onClick(changPwdTv);
         checkBox = (CheckBox) findViewById(R.id.login_check_box);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -75,11 +84,18 @@ public class LoginActivity extends BaseActivity {
     public void clickResult(View v) {
         switch (v.getId()){
             case R.id.login_login:
-                long user = Long.parseLong(userEd.getText().toString().trim());
+                String users = userEd.getText().toString().trim();
+                if(users.equals("")){
+                    T.showToast(context, "用户名不能为空!");
+                    return ;
+                }
+                long user = Long.parseLong(users);
                 String pwd = MD5Utils.encrypt(pwdEd.getText().toString().trim());
                 if (user == 0 || pwd.equals("")) {
                     T.showToast(context, "密码或用户名有误!");
                 } else {
+                    DialogTool.waitDialog(this);
+
                     Config.phone = user;
                     Config.pwd = pwdEd.getText().toString().trim();
                     Map<String, Object> map = new WeakHashMap<>();
@@ -87,9 +103,16 @@ public class LoginActivity extends BaseActivity {
                     map.put("pw", pwd);
                     post.Request(Config.Login,map,Config.login,Config.noAdd);
                 }
+
+
                 break;
             case R.id.login_register:
                 startActivity(new Intent(context,RegisterActivity.class));
+                break;
+
+            case R.id.login_chang_pwd:
+                startActivity(new Intent(context,ChangPwdActivity.class));
+
                 break;
         }
     }
@@ -98,8 +121,21 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void resultCallBeack(Object obj, int type, int status) {
+        DialogTool.dialog.dismiss();
         if(type == Config.login){
-            startActivity(new Intent(context,MainActivity.class));
+            long termId = (long) obj;
+            if(termId == 0){
+                startActivity(new Intent(context,CarBindActivity.class));
+            }else{
+                startActivity(new Intent(context,MainActivity.class));
+            }
         }
     }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            L.e("a success");
+        }
+    };
 }

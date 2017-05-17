@@ -84,6 +84,7 @@ public class CarLocationActivity extends BaseActivity {
     public void clickResult(View v) {
         isRoute = false;
         Map<String, Object> map = new WeakHashMap<>();
+        showDialog();
         switch (v.getId()){
 
             case R.id.activity_car_location_track:
@@ -185,8 +186,9 @@ public class CarLocationActivity extends BaseActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }else{
-//                LatLonPoint endDate = new LatLonPoint(carLoationMessage.getLat(),carLoationMessage.
-//                        getLon());
+                LatLonPoint startDate = new LatLonPoint(carLoationMessage.getLat(),carLoationMessage.
+                        getLon());
+                routePlanning = new GPSRoutePlanning(startDate,mDate,aMap);
 
             }
 
@@ -208,7 +210,7 @@ public class CarLocationActivity extends BaseActivity {
 
     @Override
     public void resultCallBeack(Object obj, int type, int status) {
-
+        dissDialog();
         if(status == Config.SUCCESS){
             switch (type){
 

@@ -91,7 +91,7 @@ public class Post {
                     sendMessage(json,Config.SUCCESS,type);
                 }else
                 {
-
+                    L.e("error code :"+response.code());
 
                 }
 

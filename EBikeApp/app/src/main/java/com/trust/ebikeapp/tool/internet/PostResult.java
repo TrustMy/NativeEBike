@@ -9,12 +9,16 @@ import com.amap.api.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.bean.BindCarBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.ChangPwdBean;
 import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.bean.FoundCarBean;
+import com.trust.ebikeapp.tool.bean.GetCheckNumBean;
 import com.trust.ebikeapp.tool.bean.IsTrackResultBean;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
+import com.trust.ebikeapp.tool.bean.RegisterRestultBean;
 import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
@@ -40,8 +44,10 @@ public class PostResult extends Handler {
                 }
                 break;
 
-            case Config.lock:
-                L.d("msg:"+msg.obj);
+            case Config.register:
+                if( checkMsgStatus(msg,Config.register)){
+                    registerResult((String)msg.obj,Config.register);
+                }
                 break;
 
             case Config.location:
@@ -61,8 +67,28 @@ public class PostResult extends Handler {
                     foundCarResult((String)msg.obj,Config.foundCar);
                 }
                 break;
+
+            case Config.getCheckNum:
+                if( checkMsgStatus(msg,Config.getCheckNum)){
+                    getCheckNumCarResult((String)msg.obj,Config.getCheckNum);
+                }
+                break;
+
+            case Config.bindCar:
+                if( checkMsgStatus(msg,Config.bindCar)){
+                    bindCarResult((String)msg.obj,Config.bindCar);
+                }
+                break;
+
+            case Config.changPwd:
+                if( checkMsgStatus(msg,Config.changPwd)){
+                    changPwdResult((String)msg.obj,Config.changPwd);
+                }
+                break;
         }
     }
+
+
 
     public boolean checkMsgStatus(Message msg , int type){
         if(msg.arg1 == Config.SUCCESS){
@@ -83,12 +109,41 @@ public class PostResult extends Handler {
    }
 
     /**
+     * 注册
+     * @param obj
+     * @param type
+     */
+    private void registerResult(String obj, int type) {
+        RegisterRestultBean bean = gson.fromJson(obj,RegisterRestultBean.class);
+        if(bean.getStatus()){
+            result(null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 获取验证码
+     * @param obj
+     * @param type
+     */
+    private void getCheckNumCarResult(String obj, int type) {
+        GetCheckNumBean bean = gson.fromJson(obj,GetCheckNumBean.class);
+        if(bean.getStatus()){
+            result(bean.getCode(), type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
      * 登录
      * @param obj
      * @param type
      */
     private void loginResult(String obj, int type) {
         LoginResultBean bean = gson.fromJson(obj,LoginResultBean.class);
+
         if(bean.getStatus()){
             SharedPreferences.Editor editor = Config.context.getSharedPreferences("UserMsg",
                     Context.MODE_PRIVATE).edit();
@@ -104,7 +159,7 @@ public class PostResult extends Handler {
 
             Config.termId = bean.getContent().getTermId();
 
-            result(null,type,Config.SUCCESS);
+            result(bean.getContent().getTermId(),type,Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
@@ -172,5 +227,32 @@ public class PostResult extends Handler {
         }
     }
 
+    /**
+     * 绑定车辆
+     * @param obj
+     * @param type
+     */
+    private void bindCarResult(String obj, int type) {
+        BindCarBean bean = gson.fromJson(obj,BindCarBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 修改密码
+     * @param obj
+     * @param type
+     */
+    private void changPwdResult(String obj, int type) {
+        ChangPwdBean bean = gson.fromJson(obj,ChangPwdBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
 
 }

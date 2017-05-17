@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\workSpace\\NativeEBike\\android_6day\\app\\build\\intermediates\\res\\merged\\debug\\layout\\connect_layout.xml",
+        "source": "D:\\workSpace\\NativeEBike\\android_6day\\app\\src\\main\\res\\layout\\connect_layout.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\NativeEBike\\android_6day\\app\\build\\intermediates\\res\\merged\\debug\\layout\\buttonmenu_layout.xml",
+        "source": "D:\\workSpace\\NativeEBike\\android_6day\\app\\src\\main\\res\\layout\\buttonmenu_layout.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\NativeEBike\\android_6day\\app\\build\\intermediates\\res\\merged\\debug\\layout\\carmenu_layout.xml",
+        "source": "D:\\workSpace\\NativeEBike\\android_6day\\app\\src\\main\\res\\layout\\carmenu_layout.xml"
+    }
+]

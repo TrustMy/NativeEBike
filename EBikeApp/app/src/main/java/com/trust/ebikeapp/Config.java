@@ -48,14 +48,22 @@ public class Config extends Application {
     public final static int location = 0x004;
     public final static int isTrack = 0x005;
     public final static int foundCar = 0x006;
+    public final static int getCheckNum = 0x007;
+    public final static int bindCar = 0x008;
+    public final static int changPwd = 0x009;
 
-    //url
-    public static final String Server = "http://192.168.1.134:8080/";
+    //url'
+    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
+//    public static final String Server = "http://192.168.1.134:8080/";
 //    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
+    public static final String Register = "register/";
     public static final String Login = "rest/user/login/";
     public static final String car_location_url = "rest/gps/latest/";
     public static final String car_time_tracking_lcation_url = "rest/cmd/track/";//实时追踪
     public static final String car_buzzer = "rest/cmd/buzzer/";//found car
+    public static final String get_check_num = "register/applySmsCode/";//获取验证码
+    public static final String bind_car = "rest/user/bind/";//车辆绑定
+    public static final String chang_pwd = "register/setNewPwd/";//修改密码
     @Override
     public void onCreate() {
         super.onCreate();

@@ -11,36 +11,44 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/register_finsh"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     </LinearLayout>
 
+
+    <ImageView
+        android:src="@drawable/e_bike_loging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_marginTopPercent = "4%"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_heightPercent = "5%"
+        app:layout_heightPercent = "6%"
         app:layout_widthPercent="80%"
+        android:background="@drawable/loging_ed_bg"
         >
 
 
         <TextView
             android:textColor="@color/colorWhite"
-            android:drawableLeft="@mipmap/ic_launcher"
             android:gravity="center"
             android:text="手机号:"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_heightPercent = "100%"
-            app:layout_widthPercent="35%"
+            android:layout_marginLeft="14dp"
             />
 
         <EditText
@@ -61,20 +69,21 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_heightPercent = "5%"
+        app:layout_heightPercent = "6%"
         app:layout_widthPercent="80%"
+        app:layout_marginTopPercent = "2%"
+        android:background="@drawable/loging_ed_bg"
         >
 
 
         <TextView
             android:textColor="@color/colorWhite"
-            android:drawableLeft="@mipmap/ic_launcher"
             android:gravity="center"
             android:text="密码:"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_heightPercent = "100%"
-            app:layout_widthPercent="35%"
+            android:layout_marginLeft="14dp"
             />
 
         <EditText
@@ -95,20 +104,21 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_heightPercent = "5%"
+        app:layout_heightPercent = "6%"
         app:layout_widthPercent="80%"
+        app:layout_marginTopPercent = "2%"
+        android:background="@drawable/loging_ed_bg"
         >
 
 
         <TextView
             android:textColor="@color/colorWhite"
-            android:drawableLeft="@mipmap/ic_launcher"
             android:gravity="center"
             android:text="邮箱:"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_heightPercent = "100%"
-            app:layout_widthPercent="35%"
+            android:layout_marginLeft="14dp"
             />
 
         <EditText
@@ -130,20 +140,21 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_heightPercent = "5%"
+        app:layout_heightPercent = "6%"
         app:layout_widthPercent="80%"
+        app:layout_marginTopPercent = "2%"
+        android:background="@drawable/loging_ed_bg"
         >
 
 
         <TextView
             android:textColor="@color/colorWhite"
-            android:drawableLeft="@mipmap/ic_launcher"
             android:gravity="center"
             android:text="密令:"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_heightPercent = "100%"
-            app:layout_widthPercent="35%"
+            android:layout_marginLeft="14dp"
             />
 
         <EditText
@@ -161,10 +172,12 @@
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_marginTopPercent = "3%"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_heightPercent = "5%"
+        app:layout_heightPercent = "6%"
         app:layout_widthPercent="80%"
+        android:background="@drawable/register_check_num_ed_bg"
         >
 
 
@@ -182,21 +195,27 @@
             />
 
         <Button
+            android:id="@+id/register_checknum_btn"
+            android:textColor="@color/colorWhite"
             android:text="获取验证码"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/register_check_num_btn_bg"
             app:layout_heightPercent = "100%"
             app:layout_widthPercent="40%" />
 
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <Button
+
+        app:layout_marginTopPercent = "6%"
         android:id="@+id/register_sumbit"
         android:text="注册"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent = "7%"
         app:layout_widthPercent="80%"
+        android:background="@drawable/register_btn_bg"
         />
 
 

@@ -40,7 +40,9 @@
         <activity android:name=".activity.carstatus.CarStatusActivity" />
         <activity android:name=".activity.carhistroy.CarHistroyActivity" />
         <activity android:name=".activity.carhistroy.ChooseTimeActivity" />
-        <activity android:name=".activity.alarm.AlarmActivity"></activity>
+        <activity android:name=".activity.alarm.AlarmActivity" />
+        <activity android:name=".activity.bind.CarBindActivity" />
+        <activity android:name=".activity.changpwd.ChangPwdActivity"></activity>
     </application>
 
 </manifest>
