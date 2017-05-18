@@ -62,6 +62,8 @@ public class CarLocationActivity extends BaseActivity {
     private void initDate() {
         positioning = new Positioning(positionCallBack);
 
+        showDialog();
+        carLocation();
     }
 
     private void initView() {
@@ -206,40 +208,30 @@ public class CarLocationActivity extends BaseActivity {
         }
     };
 
-
-
     @Override
-    public void resultCallBeack(Object obj, int type, int status) {
-        dissDialog();
-        if(status == Config.SUCCESS){
-            switch (type){
+    public void successCallBeack(Object obj, int type) {
+        switch (type){
+            case Config.location:
+                CarLoationMessage carLoationMessage = (CarLoationMessage) obj;
+                if(!isRoute){
+                    Maker.showMaker(aMap,carLoationMessage);
 
-                case Config.location:
-                    CarLoationMessage carLoationMessage = (CarLoationMessage) obj;
-                    if(!isRoute){
-                        Maker.showMaker(aMap,carLoationMessage);
+                }else{
+                    //路径规划
+                    route(carLoationMessage);
+                }
+                break;
 
-                    }else{
-                        //路径规划
-                        route(carLoationMessage);
-                    }
-                    break;
+            case Config.isTrack:
+                L.d("isTrack"+obj.toString());
+                break;
 
-                case Config.isTrack:
-                    L.d("isTrack"+obj.toString());
-                    break;
+            case Config.foundCar:
+                L.d("foundCar:"+obj.toString());
+                break;
 
-                case Config.foundCar:
-                    L.d("foundCar:"+obj.toString());
-                    break;
-
-            }
-
-        }else{
-            L.e(obj.toString());
         }
     }
-
 
 
     //-------------------------------------------------------------------------------------

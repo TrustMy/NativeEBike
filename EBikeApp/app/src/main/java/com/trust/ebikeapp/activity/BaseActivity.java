@@ -1,6 +1,7 @@
 package com.trust.ebikeapp.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,11 +11,14 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.annotations.NonNull;
@@ -45,12 +49,30 @@ public class BaseActivity extends AppCompatActivity {
         post = new Post(resultCallBack);
     }
 
+
+    public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
+        showDialog();
+        post.Request(url,map,type,isNeed);
+    }
+
+
     //网络请求回调
 
     public void resultCallBeack(Object obj,int type,int status){
+        dissDialog();
+        if(status == Config.SUCCESS){
+            successCallBeack(obj,type);
+        }else{
+            errorCallBeack(obj,type);
+        }
+    }
+    public void successCallBeack(Object obj,int type){
 
     }
 
+    public void errorCallBeack(Object obj,int type){
+        showErrorToast(Config.context,obj.toString(),3);
+    }
 
     public void  onClick(final View v){
         RxView.clicks(v).throttleFirst(5, TimeUnit.SECONDS).
@@ -88,5 +110,10 @@ public class BaseActivity extends AppCompatActivity {
         DialogTool.dialog.dismiss();
     }
 
-
+    public void showWaitToast(Context context,String msg,int time){
+        T.waitToast(context,msg,time*1000);
+    }
+    public void showErrorToast(Context context,String msg,int time){
+        T.errorToast(context,msg,time*1000);
+    }
 }

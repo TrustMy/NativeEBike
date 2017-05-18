@@ -70,17 +70,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"></LinearLayout>
 
-    <LinearLayout
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:background="#1e455c"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent = "10%"
         app:layout_widthPercent="100%"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="center_vertical"
         >
 
         <TextView
+            app:layout_marginLeftPercent = "14%"
             android:textColor="@color/colorWhite"
             android:text="2017-5-11 ~ 2017-5-15"
             android:layout_width="wrap_content"
@@ -88,14 +89,17 @@
 
 
         <Button
+            app:layout_marginLeftPercent = "10%"
             android:onClick="chooseTime"
             android:id="@+id/activity_car_histroy_select_histroy"
             android:textColor="@color/colorWhite"
             android:text="查询更多"
+            android:background="@drawable/selec_move_btn_bg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_heightPercent = "50%"/>
 
-    </LinearLayout>
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <TextView
         android:id="@+id/test"
@@ -105,6 +109,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_car_histroy_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 
 

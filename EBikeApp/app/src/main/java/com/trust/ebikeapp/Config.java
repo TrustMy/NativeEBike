@@ -51,6 +51,7 @@ public class Config extends Application {
     public final static int getCheckNum = 0x007;
     public final static int bindCar = 0x008;
     public final static int changPwd = 0x009;
+    public final static int carStroke = 0x010;
 
     //url'
     public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -64,6 +65,8 @@ public class Config extends Application {
     public static final String get_check_num = "register/applySmsCode/";//获取验证码
     public static final String bind_car = "rest/user/bind/";//车辆绑定
     public static final String chang_pwd = "register/setNewPwd/";//修改密码
+
+    public static final String car_stroke = "rest/trips/period/";//根据时间段分页获取行程列表
     @Override
     public void onCreate() {
         super.onCreate();

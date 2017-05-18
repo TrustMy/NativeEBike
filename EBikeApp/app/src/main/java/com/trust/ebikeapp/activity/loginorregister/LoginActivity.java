@@ -94,6 +94,7 @@ public class LoginActivity extends BaseActivity {
                 if (user == 0 || pwd.equals("")) {
                     T.showToast(context, "密码或用户名有误!");
                 } else {
+                    showWaitToast(context,"正在登陆,请稍后...",2);
                     DialogTool.waitDialog(this);
 
                     Config.phone = user;
@@ -118,10 +119,8 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-
     @Override
-    public void resultCallBeack(Object obj, int type, int status) {
-        DialogTool.dialog.dismiss();
+    public void successCallBeack(Object obj, int type) {
         if(type == Config.login){
             long termId = (long) obj;
             if(termId == 0){
@@ -132,10 +131,5 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            L.e("a success");
-        }
-    };
+
 }

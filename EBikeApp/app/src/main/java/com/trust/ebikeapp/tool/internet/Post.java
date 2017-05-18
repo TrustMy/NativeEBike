@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -73,7 +74,11 @@ public class Post {
             @Override
             public void onFailure(Call call, IOException e) {
                 L.e("onFailure:"+e.toString());
-                sendMessage("error : "+e.toString(),Config.ERROR,type);
+                Map<String,Object> map = new WeakHashMap<>();
+                map.put("status",false);
+                map.put("err","与服务器连接超时!");
+                JSONObject json = new JSONObject(map);
+                sendMessage(json.toString(),Config.ERROR,type);
             }
 
             @Override
@@ -81,7 +86,7 @@ public class Post {
 
                 String json = response.body().string();
 
-                L.i("response:"+response.toString());
+                L.i("json:"+json);
 
                 if(response.code() == 200)
                 {

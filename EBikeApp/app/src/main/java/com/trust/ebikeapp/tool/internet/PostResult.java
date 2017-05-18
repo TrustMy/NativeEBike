@@ -11,6 +11,7 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.bean.BindCarBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.CarStrokeBean;
 import com.trust.ebikeapp.tool.bean.ChangPwdBean;
 import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.bean.FoundCarBean;
@@ -85,8 +86,15 @@ public class PostResult extends Handler {
                     changPwdResult((String)msg.obj,Config.changPwd);
                 }
                 break;
+
+            case Config.carStroke:
+                if( checkMsgStatus(msg,Config.carStroke)){
+                    carStrokeResult((String)msg.obj,Config.carStroke);
+                }
+                break;
         }
     }
+
 
 
 
@@ -94,7 +102,7 @@ public class PostResult extends Handler {
         if(msg.arg1 == Config.SUCCESS){
             return  true;
         }else{
-
+            result( getErrorMsg(msg.obj.toString()), type, Config.ERROR);
             return false;
         }
     }
@@ -250,6 +258,21 @@ public class PostResult extends Handler {
         ChangPwdBean bean = gson.fromJson(obj,ChangPwdBean.class);
         if(bean.getStatus()){
             result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     *分页拉取 行程列表
+     * @param obj
+     * @param type
+     */
+
+    private void carStrokeResult(String obj, int type) {
+        CarStrokeBean bean = gson.fromJson(obj,CarStrokeBean.class);
+        if(bean.getStatus()){
+            result(bean.getContent().getTrips(), type, Config.ERROR);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
