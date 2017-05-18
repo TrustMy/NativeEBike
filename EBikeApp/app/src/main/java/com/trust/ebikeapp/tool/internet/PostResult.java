@@ -272,7 +272,7 @@ public class PostResult extends Handler {
     private void carStrokeResult(String obj, int type) {
         CarStrokeBean bean = gson.fromJson(obj,CarStrokeBean.class);
         if(bean.getStatus()){
-            result(bean.getContent().getTrips(), type, Config.ERROR);
+            result(bean.getContent().getTrips(), type, Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }

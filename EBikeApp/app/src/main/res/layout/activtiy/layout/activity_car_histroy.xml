@@ -102,6 +102,7 @@
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/test"
         app:layout_marginTopPercent = "10%"
         android:gravity="center"
@@ -112,6 +113,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_car_histroy_recyclerview"
         android:layout_width="match_parent"
+        app:layout_widthPercent = "100%"
+        app:layout_heightPercent = "50%"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 
