@@ -17,11 +17,15 @@ import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.bean.FoundCarBean;
 import com.trust.ebikeapp.tool.bean.GetCheckNumBean;
 import com.trust.ebikeapp.tool.bean.IsTrackResultBean;
+import com.trust.ebikeapp.tool.bean.LocationAddressBean;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
 import com.trust.ebikeapp.tool.bean.RegisterRestultBean;
+import com.trust.ebikeapp.tool.gps.ConversionLocation;
 import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
+
+import java.util.List;
 
 /**
  * Created by Trust on 2017/5/11.
@@ -30,6 +34,7 @@ public class PostResult extends Handler {
     private Gson gson;
     private ResultCallBack callBack;
     private CoordinateTransformation coordinateTransformation;
+    private ConversionLocation conversionLocation;
     public PostResult(ResultCallBack callBack) {
         this.gson = new Gson();
         this.callBack = callBack;
@@ -179,6 +184,7 @@ public class PostResult extends Handler {
      * @param type
      */
     private void locationResult(String obj, int type) {
+        L.d("locationResult:"+obj);
         LocationResultBean bean = gson.fromJson(obj, LocationResultBean.class);
         if (bean.getStatus()) {
             if (bean.getContent().getLat() != 0) {
@@ -272,10 +278,24 @@ public class PostResult extends Handler {
     private void carStrokeResult(String obj, int type) {
         CarStrokeBean bean = gson.fromJson(obj,CarStrokeBean.class);
         if(bean.getStatus()){
-            result(bean.getContent().getTrips(), type, Config.SUCCESS);
+//            result(bean.getContent().getTrips(), type, Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
     }
+
+    /**
+     * 获取转换之后位置信息的接口
+     */
+    public interface gpsLocationAddress{
+        void addressCallBack(List<LocationAddressBean> bean);
+    }
+
+    public gpsLocationAddress addressCallBack = new gpsLocationAddress() {
+        @Override
+        public void addressCallBack(List<LocationAddressBean> bean) {
+            L.d("success addressCallBack");
+        }
+    };
 
 }

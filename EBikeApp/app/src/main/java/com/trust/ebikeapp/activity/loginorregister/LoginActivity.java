@@ -24,6 +24,7 @@ import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.Utils.MD5Utils;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
+import com.trust.ebikeapp.tool.gps.ConversionLocation;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -45,6 +46,8 @@ public class LoginActivity extends BaseActivity {
         initView();
 
         init();
+
+
 
     }
     public void init(){

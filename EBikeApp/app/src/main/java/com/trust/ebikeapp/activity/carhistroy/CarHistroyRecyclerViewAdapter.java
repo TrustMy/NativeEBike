@@ -21,6 +21,10 @@ public class CarHistroyRecyclerViewAdapter extends RecyclerView.Adapter<CarHistr
        this.context = context;
     }
 
+    public void setMl(List<CarStrokeBean.ContentBean.TripsBean> ml) {
+        this.ml = ml;
+    }
+
     @Override
     public ViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.car_histroy_item, null);
@@ -36,7 +40,7 @@ public class CarHistroyRecyclerViewAdapter extends RecyclerView.Adapter<CarHistr
 
     @Override
     public int getItemCount() {
-        return ml != null ? ml.size() : 10;
+        return ml != null ? ml.size() : 0;
     }
 
     class ViewHodler extends RecyclerView.ViewHolder{

@@ -18,6 +18,7 @@ import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarStrokeBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -52,6 +53,16 @@ public class CarHistroyActivity extends BaseActivity {
             @Override
             public void onLoadMore(int currentPage) {
                 showWaitToast(context,"asdasda",3);
+                 List<CarStrokeBean.ContentBean.TripsBean> ml = new ArrayList<CarStrokeBean.ContentBean.TripsBean>();
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                ml.add(new CarStrokeBean.ContentBean.TripsBean());
+                recyclerAdapter.setMl(ml);
+                recyclerAdapter.notifyDataSetChanged();
+
             }
         });
         recyclerView.setAdapter(recyclerAdapter);
@@ -84,6 +95,8 @@ public class CarHistroyActivity extends BaseActivity {
             showWaitToast(context,"已经是最后一页数据了!",1);
         }else{
             showWaitToast(context,"加载成功",1);
+            recyclerAdapter.setMl(ml);
+            recyclerAdapter.notifyDataSetChanged();
         }
     }
 

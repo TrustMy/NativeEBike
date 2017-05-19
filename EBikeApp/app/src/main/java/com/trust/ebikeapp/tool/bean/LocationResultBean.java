@@ -6,9 +6,8 @@ package com.trust.ebikeapp.tool.bean;
 
 public class LocationResultBean {
 
-
     /**
-     * content : {"acc":1,"rssi":24,"address":"上海市闸北区大宁路街道江场路出口(南北高架路出口北向);南北高架路共和新路出口与南北高架路路口西26米","lng":121.445251,"alt":0,"gpsSpeed":0,"gpsTime":1488165995000,"type":1,"voltage":28.1,"termId":860337030343524,"fix":0,"engine":4,"station":6324,"course":0,"block":62449,"lat":31.29512}
+     * content : {"gpsTime":1484119922000,"engine":4,"station":6324,"block":62449,"lng":121.44519,"type":1,"acc":1,"termId":350000000000001,"course":180,"address":"上海市闸北区大宁路街道江场路出口(南北高架路出口北向);共和新路与南北高架路共和新路入口路口西南36米","voltage":23.1,"fix":1,"alt":25.3,"gpsSpeed":45.2,"rssi":19,"lat":31.295294}
      * status : true
      */
 
@@ -33,83 +32,43 @@ public class LocationResultBean {
 
     public static class ContentBean {
         /**
-         * acc : 1
-         * rssi : 24
-         * address : 上海市闸北区大宁路街道江场路出口(南北高架路出口北向);南北高架路共和新路出口与南北高架路路口西26米
-         * lng : 121.445251
-         * alt : 0
-         * gpsSpeed : 0
-         * gpsTime : 1488165995000
-         * type : 1
-         * voltage : 28.1
-         * termId : 860337030343524
-         * fix : 0
+         * gpsTime : 1484119922000
          * engine : 4
          * station : 6324
-         * course : 0
          * block : 62449
-         * lat : 31.29512
+         * lng : 121.44519
+         * type : 1
+         * acc : 1
+         * termId : 350000000000001
+         * course : 180
+         * address : 上海市闸北区大宁路街道江场路出口(南北高架路出口北向);共和新路与南北高架路共和新路入口路口西南36米
+         * voltage : 23.1
+         * fix : 1
+         * alt : 25.3
+         * gpsSpeed : 45.2
+         * rssi : 19
+         * lat : 31.295294
          */
 
-        private int acc;
-        private int rssi;
-        private String address;
-        private double lng;
-        private int alt;
-        private int gpsSpeed;
         private long gpsTime;
-        private int type;
-        private double voltage;
-        private long termId;
-        private int fix;
         private int engine;
         private int station;
-        private int course;
         private int block;
+        private double lng;
+        private int type;
+        private int acc;
+        private long termId;
+        private int course;
+        private String address;
+        private double voltage;
+        private int fix;
+        private double alt;
+        private double gpsSpeed;
+        private int rssi;
         private double lat;
-
-        public void setAcc(int acc) {
-            this.acc = acc;
-        }
-
-        public void setRssi(int rssi) {
-            this.rssi = rssi;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public void setLng(double lng) {
-            this.lng = lng;
-        }
-
-        public void setAlt(int alt) {
-            this.alt = alt;
-        }
-
-        public void setGpsSpeed(int gpsSpeed) {
-            this.gpsSpeed = gpsSpeed;
-        }
 
         public void setGpsTime(long gpsTime) {
             this.gpsTime = gpsTime;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public void setVoltage(double voltage) {
-            this.voltage = voltage;
-        }
-
-        public void setTermId(long termId) {
-            this.termId = termId;
-        }
-
-        public void setFix(int fix) {
-            this.fix = fix;
         }
 
         public void setEngine(int engine) {
@@ -120,60 +79,60 @@ public class LocationResultBean {
             this.station = station;
         }
 
+        public void setBlock(int block) {
+            this.block = block;
+        }
+
+        public void setLng(double lng) {
+            this.lng = lng;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public void setAcc(int acc) {
+            this.acc = acc;
+        }
+
+        public void setTermId(long termId) {
+            this.termId = termId;
+        }
+
         public void setCourse(int course) {
             this.course = course;
         }
 
-        public void setBlock(int block) {
-            this.block = block;
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public void setVoltage(double voltage) {
+            this.voltage = voltage;
+        }
+
+        public void setFix(int fix) {
+            this.fix = fix;
+        }
+
+        public void setAlt(double alt) {
+            this.alt = alt;
+        }
+
+        public void setGpsSpeed(double gpsSpeed) {
+            this.gpsSpeed = gpsSpeed;
+        }
+
+        public void setRssi(int rssi) {
+            this.rssi = rssi;
         }
 
         public void setLat(double lat) {
             this.lat = lat;
         }
 
-        public int getAcc() {
-            return acc;
-        }
-
-        public int getRssi() {
-            return rssi;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public double getLng() {
-            return lng;
-        }
-
-        public int getAlt() {
-            return alt;
-        }
-
-        public int getGpsSpeed() {
-            return gpsSpeed;
-        }
-
         public long getGpsTime() {
             return gpsTime;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public double getVoltage() {
-            return voltage;
-        }
-
-        public long getTermId() {
-            return termId;
-        }
-
-        public int getFix() {
-            return fix;
         }
 
         public int getEngine() {
@@ -184,12 +143,52 @@ public class LocationResultBean {
             return station;
         }
 
+        public int getBlock() {
+            return block;
+        }
+
+        public double getLng() {
+            return lng;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public int getAcc() {
+            return acc;
+        }
+
+        public long getTermId() {
+            return termId;
+        }
+
         public int getCourse() {
             return course;
         }
 
-        public int getBlock() {
-            return block;
+        public String getAddress() {
+            return address;
+        }
+
+        public double getVoltage() {
+            return voltage;
+        }
+
+        public int getFix() {
+            return fix;
+        }
+
+        public double getAlt() {
+            return alt;
+        }
+
+        public double getGpsSpeed() {
+            return gpsSpeed;
+        }
+
+        public int getRssi() {
+            return rssi;
         }
 
         public double getLat() {
