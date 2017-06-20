@@ -74,9 +74,7 @@ public class Positioning {
                 L.d("定位成功");
             } else {
                 L.e("定位失败:"+aMapLocation.getErrorCode());
-
             }
-
         }
     };
 }

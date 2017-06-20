@@ -11,8 +11,7 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.T;
-import com.trust.ebikeapp.tool.Utils.MD5Utils;
-import com.trust.ebikeapp.tool.dialog.DialogTool;
+import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
 import java.util.WeakHashMap;

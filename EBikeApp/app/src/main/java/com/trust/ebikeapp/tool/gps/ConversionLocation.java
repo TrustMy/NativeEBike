@@ -35,7 +35,8 @@ public class ConversionLocation implements Runnable{
     private PostResult.gpsLocationAddress addressCallBack;
     private boolean onStatus = false,offStatus = false;
 
-
+    private String err = "获取位置失败!";
+    List<LocationAddressBean> mls = new ArrayList<>();
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -45,17 +46,20 @@ public class ConversionLocation implements Runnable{
                     onStatus = true;
                     break;
                 case 1://终点
-                    offStatus = false;
+                    offStatus = true;
                     break;
             }
 
-            if(onStatus && offStatus &&onList.size() == offList.size() ){
-                List<LocationAddressBean> ml = new ArrayList<>();
-                for (int i = 0; i < onList.size(); i++) {
-                    ml.add(new LocationAddressBean(onList.get(i),offList.get(i)));
-                }
-                addressCallBack.addressCallBack(ml);
+            if(onStatus && offStatus && onList.size() == offList.size() ){
 
+                for (int i = 0; i < onList.size(); i++) {
+                    mls.add(new LocationAddressBean(onList.get(i),offList.get(i)));
+                }
+                addressCallBack.addressCallBack(mls);
+                onStatus = false;
+                offStatus = false;
+            }else{
+                L.e("onStatus:"+onStatus+"|offStatus:"+offStatus+"|onList.size():"+onList.size()+"|offList.size():"+offList.size());
             }
 
         }
@@ -71,6 +75,8 @@ public class ConversionLocation implements Runnable{
         geocodeSearch =  new GeocodeSearch(Config.context);
         geocodeSearch.setOnGeocodeSearchListener(onGeocodeSearchListener);
 
+
+        batchConversion(ml);
     }
 
     private GeocodeSearch.OnGeocodeSearchListener   onGeocodeSearchListener = new GeocodeSearch.OnGeocodeSearchListener() {
@@ -105,23 +111,24 @@ public class ConversionLocation implements Runnable{
                     RegeocodeQuery query = new RegeocodeQuery(point, 200,
                             GeocodeSearch.GPS);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
                     RegeocodeAddress result = geocodeSearch.getFromLocation(query);// 设置同步逆地理编码请求
-                    if(result != null && result.getFormatAddress() != null){
+                    if(result != null && result.getFormatAddress() != null && !result.getFormatAddress().equals("")){
 
                         String address = result.getFormatAddress()+"附近";
 
                         onList.add(address);
+                    }else{
+                        onList.add(err);
                     }
 
                 } catch (AMapException e) {
                     e.printStackTrace();
                     L.e(e.toString());
-                    onList.add("获取位置失败!");
+                    onList.add(err);
                 }
 
             }
 
             handler.sendEmptyMessage(0);
-
 
 
 
@@ -152,6 +159,7 @@ public class ConversionLocation implements Runnable{
 
         }else{
             L.e("ml == null || ml == 0");
+            addressCallBack.addressCallBack(mls);
         }
     }
 

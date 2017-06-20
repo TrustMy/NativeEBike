@@ -1,5 +1,7 @@
 package com.trust.ebikeapp.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,9 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.annotations.NonNull;
@@ -22,11 +28,19 @@ import io.reactivex.functions.Consumer;
  * Created by Trust on 2017/5/12.
  */
 public class BaseFragment extends Fragment {
+    private Activity context;
+
+    @Override
+    public void onAttach(Activity activity) {
+        context = activity;
+        super.onAttach(activity);
+    }
+
     public Post post;
     public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
         public void CallBeck(Object obj, int type, int status) {
-
+            resultCallBeack(obj,type,status);
         }
     };
 
@@ -62,4 +76,47 @@ public class BaseFragment extends Fragment {
     public void extFragmet(){
         getFragmentManager().popBackStack();
     }
+
+    public void requestCallBeack(String url, Map<String,Object> map, int type, boolean isNeed){
+        showDialog();
+        post.Request(url,map,type,isNeed);
+    }
+
+
+    //网络请求回调
+
+    public void resultCallBeack(Object obj,int type,int status){
+        dissDialog();
+        if(status == Config.SUCCESS){
+            successCallBeack(obj,type);
+        }else{
+            errorCallBeack(obj,type);
+        }
+    }
+    public void successCallBeack(Object obj,int type){
+
+    }
+
+    public void errorCallBeack(Object obj,int type){
+        showErrorToast(Config.context,obj.toString(),3);
+    }
+
+
+
+    public void showDialog(){
+        DialogTool.waitDialog(context);
+    }
+
+    public void dissDialog(){
+        DialogTool.dialog.dismiss();
+    }
+
+    public void showWaitToast(Context context, String msg, int time){
+        T.waitToast(context,msg,time*1000);
+    }
+    public void showErrorToast(Context context,String msg,int time){
+        T.errorToast(context,msg,time*1000);
+    }
+
+
 }

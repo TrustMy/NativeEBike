@@ -9,8 +9,11 @@ import com.amap.api.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.bean.AlarmBean;
 import com.trust.ebikeapp.tool.bean.BindCarBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.CarStatusBean;
+import com.trust.ebikeapp.tool.bean.CarStrokeAndAddress;
 import com.trust.ebikeapp.tool.bean.CarStrokeBean;
 import com.trust.ebikeapp.tool.bean.ChangPwdBean;
 import com.trust.ebikeapp.tool.bean.ErrorResultBean;
@@ -19,13 +22,17 @@ import com.trust.ebikeapp.tool.bean.GetCheckNumBean;
 import com.trust.ebikeapp.tool.bean.IsTrackResultBean;
 import com.trust.ebikeapp.tool.bean.LocationAddressBean;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
+import com.trust.ebikeapp.tool.bean.LockBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
 import com.trust.ebikeapp.tool.bean.RegisterRestultBean;
+import com.trust.ebikeapp.tool.bean.VehicleTrajectoryBean;
 import com.trust.ebikeapp.tool.gps.ConversionLocation;
 import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Trust on 2017/5/11.
@@ -35,6 +42,10 @@ public class PostResult extends Handler {
     private ResultCallBack callBack;
     private CoordinateTransformation coordinateTransformation;
     private ConversionLocation conversionLocation;
+
+    CarStrokeBean carStrokeBean;
+
+    protected static ExecutorService threadPool = Executors.newCachedThreadPool();
     public PostResult(ResultCallBack callBack) {
         this.gson = new Gson();
         this.callBack = callBack;
@@ -95,6 +106,30 @@ public class PostResult extends Handler {
             case Config.carStroke:
                 if( checkMsgStatus(msg,Config.carStroke)){
                     carStrokeResult((String)msg.obj,Config.carStroke);
+                }
+                break;
+
+            case Config.carHistoryLocation:
+                if( checkMsgStatus(msg,Config.carHistoryLocation)){
+                    carHistoryLocationResult((String)msg.obj,Config.carHistoryLocation);
+                }
+                break;
+
+            case Config.lock:
+                if( checkMsgStatus(msg,Config.lock)){
+                    carLockResult((String)msg.obj,Config.lock);
+                }
+                break;
+
+            case Config.carAlarm:
+                if( checkMsgStatus(msg,Config.carAlarm)){
+                    carAlarmResult((String)msg.obj,Config.carAlarm);
+                }
+                break;
+
+            case Config.carStatus:
+                if( checkMsgStatus(msg,Config.carStatus)){
+                    carStatusResult((String)msg.obj,Config.carStatus);
                 }
                 break;
         }
@@ -177,6 +212,22 @@ public class PostResult extends Handler {
             result( getErrorMsg(obj), type, Config.ERROR);
         }
     }
+
+    /**
+     * 查询车辆状态
+     * @param obj
+     * @param type
+     */
+    private void carStatusResult(String obj, int type) {
+        CarStatusBean bean = gson.fromJson(obj,CarStatusBean.class);
+        if(bean.getStatus()){
+            result(bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
 
     /**
      * 车辆位置
@@ -270,15 +321,47 @@ public class PostResult extends Handler {
     }
 
     /**
+     * 车辆设防
+     * @param obj
+     * @param type
+     */
+    private void carLockResult(String obj, int type) {
+        LockBean bean = gson.fromJson(obj,LockBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 分页拉取报警信息
+     * @param obj
+     * @param type
+     */
+
+    private void carAlarmResult(String obj, int type) {
+        AlarmBean bean = gson.fromJson(obj,AlarmBean.class);
+        if(bean.getStatus()){
+            result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
+    /**
      *分页拉取 行程列表
      * @param obj
      * @param type
      */
 
     private void carStrokeResult(String obj, int type) {
-        CarStrokeBean bean = gson.fromJson(obj,CarStrokeBean.class);
-        if(bean.getStatus()){
+        carStrokeBean = gson.fromJson(obj,CarStrokeBean.class);
+        if(carStrokeBean.getStatus()){
 //            result(bean.getContent().getTrips(), type, Config.SUCCESS);
+            conversionLocation = new ConversionLocation(carStrokeBean.getContent().getTrips(),addressCallBack);
+            threadPool.execute(conversionLocation);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
@@ -294,8 +377,30 @@ public class PostResult extends Handler {
     public gpsLocationAddress addressCallBack = new gpsLocationAddress() {
         @Override
         public void addressCallBack(List<LocationAddressBean> bean) {
-            L.d("success addressCallBack");
+            L.d("success addressCallBack   bean.size():"+bean.size());
+            CarStrokeAndAddress carStrokeAndAddress = new CarStrokeAndAddress
+                    (carStrokeBean.getContent().getTrips(),bean);
+
+            result(carStrokeAndAddress, Config.carStroke, Config.SUCCESS);
         }
     };
+
+
+    /**
+     * 通过指定时间获取轨迹
+     * @param obj
+     * @param type
+     */
+    private void carHistoryLocationResult(String obj, int type) {
+        L.d("json:"+obj);
+
+        VehicleTrajectoryBean bean = gson.fromJson(obj,VehicleTrajectoryBean.class);
+        if(bean.getStatus()){
+            result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+
+    }
 
 }

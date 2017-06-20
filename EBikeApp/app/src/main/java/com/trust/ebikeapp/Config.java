@@ -52,11 +52,14 @@ public class Config extends Application {
     public final static int bindCar = 0x008;
     public final static int changPwd = 0x009;
     public final static int carStroke = 0x010;
+    public final static int carHistoryLocation = 0x011;//通过时间获取车辆轨迹
+    public final static int carAlarm = 0x012;//通过时间分页获取报警信息
+    public final static int carStatus = 0x013;///查询车辆状态
 
     //url'
-    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
+//    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
 //    public static final String Server = "http://192.168.1.134:8080/";
-//    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
+    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
     public static final String Register = "register/";
     public static final String Login = "rest/user/login/";
     public static final String car_location_url = "rest/gps/latest/";
@@ -67,6 +70,12 @@ public class Config extends Application {
     public static final String chang_pwd = "register/setNewPwd/";//修改密码
 
     public static final String car_stroke = "rest/trips/period/";//根据时间段分页获取行程列表
+    public static final String car_alarm = "rest/ alarms/period/";//更具时间段分页获取报警信息
+    public static final String car_history_location_url = "rest/gps/period/"; //获取车辆历史轨迹
+    public static final String car_lock_url = "rest/cmd/lock/";//车辆设防
+
+    public static final String car_status = "rest/cmd/queryStatus/";//查询车辆状态
+
     @Override
     public void onCreate() {
         super.onCreate();

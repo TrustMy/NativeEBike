@@ -1,4 +1,4 @@
-package com.trust.ebikeapp.tool.Utils;
+package com.trust.ebikeapp.tool.utils;
 
 import java.security.MessageDigest;
 

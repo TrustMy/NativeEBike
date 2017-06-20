@@ -13,6 +13,9 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimaryDark">@color/colorStatusBar</item>
 
+
+
+
     </style>
 
 

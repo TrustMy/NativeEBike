@@ -2,7 +2,6 @@ package com.trust.ebikeapp.activity.carhistroy;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -13,34 +12,39 @@ import android.widget.TextView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
-import com.trust.ebikeapp.tool.EndlessRecyclerOnScrollListener;
+import com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
+import com.trust.ebikeapp.tool.bean.CarStrokeAndAddress;
+import com.trust.ebikeapp.tool.bean.HistroyGpsBean;
+import com.trust.ebikeapp.tool.trustinterface.EndlessRecyclerOnScrollListener;
 import com.trust.ebikeapp.tool.bean.CarStrokeBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 public class CarHistroyActivity extends BaseActivity {
     private Context context = CarHistroyActivity.this;
     private int pageIndex = 0,pageSize = 10;
     private RecyclerView recyclerView;
     private CarHistroyRecyclerViewAdapter recyclerAdapter;
+    private TextView  messageTv ,timeTv;
 
+    private String message;
+
+    private CarStrokeAndAddress carStrokeAndAddress;
+    private int requestCode = 1;
+
+    private long whenTime = TimeTool.getSystemTimeDate();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_histroy);
-        init();
         initView();
+        init(whenTime,whenTime);
     }
 
     private void initView() {
@@ -52,34 +56,39 @@ public class CarHistroyActivity extends BaseActivity {
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                showWaitToast(context,"asdasda",3);
-                 List<CarStrokeBean.ContentBean.TripsBean> ml = new ArrayList<CarStrokeBean.ContentBean.TripsBean>();
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                ml.add(new CarStrokeBean.ContentBean.TripsBean());
-                recyclerAdapter.setMl(ml);
-                recyclerAdapter.notifyDataSetChanged();
+
 
             }
         });
         recyclerView.setAdapter(recyclerAdapter);
 
+        recyclerAdapter.click  = new CarHistroyRecyclerViewAdapter.onClick() {
+            @Override
+            public void clickCallBack(View v, HistroyGpsBean bean) {
+                L.d("bean getFireOnTime:"+bean.getFireOnTime()+"|bean getFireOnTime"+bean.
+                        getFireOffTime()+"|onName:"+bean.getOnName()+"|offName:"+bean.getOffName());
+                Intent intent = new Intent(context, VehicleTrajectoryActivity.class);
+                intent.putExtra("gpsMessage", (Serializable) bean);
+                startActivity(intent);
+            }
+        };
 
 
+        messageTv = (TextView) findViewById(R.id.car_hirstory_msg);
+        timeTv = (TextView) findViewById(R.id.activity_car_histroy_time);
+        String time = TimeTool.getTime(whenTime);
+        timeTv.setText(time+" ~ "+time);
 
     }
 
 
 
 
-    private void init() {
+    private void init(long onFire,long offFire) {
         Map<String ,Object> map = new WeakHashMap<>();
         map.put("termId",Config.termId);
-        map.put("startTime", 1487174400000L);
-        map.put("endTime", 1487347200000L);
+        map.put("startTime", onFire);
+        map.put("endTime", offFire);
         map.put("pageIndex", pageIndex);
         map.put("pageSize", pageSize);
 
@@ -89,20 +98,59 @@ public class CarHistroyActivity extends BaseActivity {
 
     @Override
     public void successCallBeack(Object obj, int type) {
-        pageIndex++;
-        List<CarStrokeBean.ContentBean.TripsBean> ml = (List<CarStrokeBean.ContentBean.TripsBean>) obj;
-        if(ml.size() == 0){
-            showWaitToast(context,"已经是最后一页数据了!",1);
+
+        CarStrokeAndAddress ml = (CarStrokeAndAddress) obj;
+
+        if(ml.getTripsBeenList().size() == 0){
+            if(messageTv.getVisibility() == View.GONE && carStrokeAndAddress.getAddressList().size() != 0){
+                showWaitToast(context,"已经是最后一页数据了!",1);
+            }else{
+                messageTv.setVisibility(View.VISIBLE);
+            }
         }else{
+            pageIndex++;
+            messageTv.setVisibility(View.GONE);
             showWaitToast(context,"加载成功",1);
-            recyclerAdapter.setMl(ml);
+            if(carStrokeAndAddress != null){
+                carStrokeAndAddress.getTripsBeenList().addAll(ml.getTripsBeenList());
+                carStrokeAndAddress.getAddressList().addAll(ml.getAddressList());
+            }else{
+                carStrokeAndAddress = ml;
+            }
+
+            recyclerAdapter.setMl(carStrokeAndAddress);
             recyclerAdapter.notifyDataSetChanged();
         }
     }
 
     public void chooseTime(View v){
-        startActivity(new Intent(context,ChooseTimeActivity.class));
+
+        startActivityForResult(new Intent(context,ChooseTimeActivity.class),requestCode);
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == this.requestCode){
+            String fireOnTime = data.getStringExtra("fireOnTime");
+            String fireOffTime = data.getStringExtra("fireOffTime");
+            long fireOnTimeDate = data.getLongExtra("fireOnTimeDate",0);
+            long fireOffTimeDate = data.getLongExtra("fireOffTimeDate",0);
+            if(fireOffTime != null && !fireOnTime.equals("")){
+                timeTv.setText(fireOnTime+" ~ "+fireOffTime);
+                if(fireOffTimeDate != 0){
+                    init(fireOnTimeDate,fireOffTimeDate);
 
+                }else{
+                    L.e("fireOffTimeDate: = 0");
+                }
+
+            }else{
+                L.e("fireOffTime == null");
+            }
+
+
+
+        }
+    }
 }

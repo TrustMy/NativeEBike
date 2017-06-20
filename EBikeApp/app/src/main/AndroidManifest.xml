@@ -42,7 +42,8 @@
         <activity android:name=".activity.carhistroy.ChooseTimeActivity" />
         <activity android:name=".activity.alarm.AlarmActivity" />
         <activity android:name=".activity.bind.CarBindActivity" />
-        <activity android:name=".activity.changpwd.ChangPwdActivity"></activity>
+        <activity android:name=".activity.changpwd.ChangPwdActivity" />
+        <activity android:name=".activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity"></activity>
     </application>
 
 </manifest>

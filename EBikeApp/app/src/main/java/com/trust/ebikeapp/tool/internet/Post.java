@@ -92,12 +92,17 @@ public class Post {
                 {
                     if(type == Config.login){
                         Config.token = response.header("Token");
+                        L.d("token:"+Config.token);
                     }
                     sendMessage(json,Config.SUCCESS,type);
                 }else
                 {
                     L.e("error code :"+response.code());
-
+                    Map<String,Object> map = new WeakHashMap<>();
+                    map.put("status",false);
+                    map.put("err",response.code());
+                    JSONObject jsons = new JSONObject(map);
+                    sendMessage(jsons.toString(),Config.ERROR,type);
                 }
 
 

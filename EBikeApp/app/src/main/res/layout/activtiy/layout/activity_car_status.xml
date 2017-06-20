@@ -29,6 +29,7 @@
 
 
         <ImageButton
+            android:onClick="reload"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@null"
@@ -46,29 +47,46 @@
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent = "70%"
         android:gravity="center"
-        app:layout_widthPercent="100%"
-        >
+        app:layout_heightPercent="70%"
+        app:layout_widthPercent="100%">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
-        <ImageView
-            android:src="@drawable/watch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/carstatus_voltage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/watch0" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/carstatus_electract_num"
+                    android:text="0"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="%"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <TextView
-                android:text="0"
+                android:textColor="@color/colorWhite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="电池点亮"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="电池电量" />
         </LinearLayout>
 
     </android.support.percent.PercentRelativeLayout>
@@ -91,6 +109,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/carstatus_voltage_num"
                     android:src="@drawable/electricity1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -117,9 +136,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@drawable/electricity_on"
+                    android:id="@+id/carstatus_voltage_status"
+                    android:src="@drawable/electricity_off"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:layout_centerInParent="true"
@@ -144,6 +167,7 @@
                 android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/carstatus_status"
                 android:src="@drawable/warning_off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

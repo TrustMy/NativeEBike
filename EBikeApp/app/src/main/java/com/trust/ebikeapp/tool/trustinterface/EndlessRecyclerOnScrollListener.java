@@ -1,4 +1,4 @@
-package com.trust.ebikeapp.tool;
+package com.trust.ebikeapp.tool.trustinterface;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

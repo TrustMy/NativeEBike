@@ -68,6 +68,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:textColor="#000000"
             android:gravity="center"
             android:textSize="24sp"
             android:text="开始日期:"
@@ -75,6 +76,7 @@
             android:layout_height="match_parent" />
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/choose_time_starttv"
             android:gravity="center"
             android:textSize="24sp"
@@ -99,6 +101,7 @@
             android:gravity="center"
             android:textSize="24sp"
             android:text="结束日期:"
+            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
@@ -107,6 +110,7 @@
             android:gravity="center"
             android:textSize="24sp"
             android:text="2017-05-15"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

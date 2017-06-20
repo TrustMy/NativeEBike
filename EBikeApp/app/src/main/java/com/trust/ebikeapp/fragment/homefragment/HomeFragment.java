@@ -11,8 +11,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
@@ -24,6 +27,7 @@ import com.trust.ebikeapp.fragment.BaseFragment;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
+import com.trust.ebikeapp.tool.bean.CarStatusBean;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -42,7 +46,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private ViewPager viewPager;
     private HomeViewPagerAdapter viewPagerAdapter;
 
-    private LinearLayout fortificationBtn,carHistroyBtn,locationBtn,carStatusBtn,alarmBtn,
+    private RelativeLayout alarmNumLayout;
+    private TextView alarmNum;
+
+    private ImageButton fortificationBtn,carHistroyBtn,locationBtn,carStatusBtn,alarmBtn,
     helpBtn;
 
     private boolean clickFortificationBtn = false;
@@ -127,8 +134,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             //把指示作用的原点图片加入底部的视图中
             paint.addView(imgPaint[i]);
         }
-
-
+        long appSN = TimeTool.getSystemTimeDate();
+        Map<String,Object>map = new WeakHashMap<>();
+        map.put("termId",Config.termId);
+        map.put("userCellPhone",Config.phone);
+        map.put("appSN",appSN/1000);
+        requestCallBeack(Config.car_status,map,Config.carStatus,Config.needAdd);
 
 
 
@@ -148,19 +159,22 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(this);
 
-        fortificationBtn = (LinearLayout) v.findViewById(R.id.home_fortification);
+        fortificationBtn = (ImageButton) v.findViewById(R.id.home_fortification);
         onClick(fortificationBtn);
-        carHistroyBtn = (LinearLayout) v.findViewById(R.id.home_car_history);
+        carHistroyBtn = (ImageButton) v.findViewById(R.id.home_car_history);
         onClick(carHistroyBtn);
-        locationBtn = (LinearLayout) v.findViewById(R.id.home_location);
+        locationBtn = (ImageButton) v.findViewById(R.id.home_location);
         onClick(locationBtn);
-        carStatusBtn = (LinearLayout) v.findViewById(R.id.home_car_status);
+        carStatusBtn = (ImageButton) v.findViewById(R.id.home_car_status);
         onClick(carStatusBtn);
-        alarmBtn = (LinearLayout) v.findViewById(R.id.home_alarm);
+        alarmBtn = (ImageButton) v.findViewById(R.id.home_alarm);
         onClick(alarmBtn);
-        helpBtn = (LinearLayout) v.findViewById(R.id.home_help);
+        helpBtn = (ImageButton) v.findViewById(R.id.home_help);
         onClick(helpBtn);
 
+
+        alarmNumLayout = (RelativeLayout) v.findViewById(R.id.homefragment_alarm_num_layout);
+        alarmNum = (TextView) v.findViewById(R.id.homefragment_alarm_num);
     }
 
     @Override
@@ -197,12 +211,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             case R.id.home_fortification:
                 clickFortificationBtn = true;
                 Map<String,Object> map = new WeakHashMap<>();
-                map.put("termId",Config.termId+"");
-                map.put("userCellPhone",Config.phone+"");
-                map.put("appSN", (TimeTool.getSystemTimeDate()/1000)+"");
+                map.put("termId",Config.termId);
+                map.put("userCellPhone",Config.phone);
+                map.put("appSN", (TimeTool.getSystemTimeDate()/1000));
                 map.put("lock",true);
-
-//                post.Request(Config.Lock,map,Config.lock,Config.needAdd);
+                requestCallBeack(Config.car_lock_url,map,Config.lock,Config.needAdd);
                 break;
             case R.id.home_car_history:
                 clickFortificationBtn = false;
@@ -230,5 +243,24 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
+    @Override
+    public void successCallBeack(Object obj, int type) {
+        switch (type){
+            case Config.carStatus:
+                carStatus(obj);
+                break;
+        }
+    }
 
+    private void carStatus(Object obj) {
+        CarStatusBean bean = (CarStatusBean) obj;
+
+        if(bean.getTotleAlarm() == 0){
+            alarmNumLayout.setVisibility(View.GONE);
+        }else{
+            alarmNumLayout.setVisibility(View.VISIBLE);
+            alarmNum.setText(bean.getTotleAlarm()+"");
+        }
+
+    }
 }

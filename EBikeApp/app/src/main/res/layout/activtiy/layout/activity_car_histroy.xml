@@ -81,6 +81,7 @@
         >
 
         <TextView
+            android:id="@+id/activity_car_histroy_time"
             app:layout_marginLeftPercent = "14%"
             android:textColor="@color/colorWhite"
             android:text="2017-5-11 ~ 2017-5-15"
@@ -102,10 +103,11 @@
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <TextView
-        android:visibility="gone"
-        android:id="@+id/test"
+        android:visibility="visible"
+        android:id="@+id/car_hirstory_msg"
         app:layout_marginTopPercent = "10%"
         android:gravity="center"
+        android:textColor="#000000"
         android:text="该时间段内没有行程"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

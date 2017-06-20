@@ -1,11 +1,14 @@
 package com.trust.ebikeapp.activity.carhistroy;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.L;
@@ -19,6 +22,10 @@ public class ChooseTimeActivity extends BaseActivity {
     private TextView startTv,endTv;
     private long startTime,endTime;
     private long day = 86400000,lastWeek = 604800000;
+    private String timeOn ,timeOff;
+    private Context context = ChooseTimeActivity.this;
+
+    private long mTime = TimeTool.getSystemTimeDate();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +53,13 @@ public class ChooseTimeActivity extends BaseActivity {
         endTv = (TextView) findViewById(R.id.choose_time_endtv);
         onClick(startTv);
         onClick(endTv);
+
+        String time = TimeTool.getTime(mTime);
+        startTv.setText(time);
+        endTv.setText(time);
+
+
+
     }
 
     @Override
@@ -56,9 +70,22 @@ public class ChooseTimeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.choose_time_determine:
-                startTime = TimeTool.getTime(startTv.getText().toString());
-                endTime = TimeTool.getTime(endTv.getText().toString());
-                L.d("startTime:"+startTime+"|endTime"+endTime);
+
+                if(Math.abs(TimeTool.getTime(timeOff) - TimeTool.getTime(timeOn)) > lastWeek){
+                    showErrorToast(context,"时间不能超过七天!",1);
+                }else{
+                    startTime = TimeTool.getTime(startTv.getText().toString());
+                    endTime = TimeTool.getTime(endTv.getText().toString());
+                    L.d("startTime:"+startTime+"|endTime"+endTime);
+                    Intent intent = new Intent(context,CarHistroyActivity.class);
+                    intent.putExtra("fireOnTimeDate",startTime);
+                    intent.putExtra("fireOffTimeDate",endTime);
+                    intent.putExtra("fireOnTime",startTv.getText().toString());
+                    intent.putExtra("fireOffTime",endTv.getText().toString());
+                    setResult(1,intent);
+                    finish();
+                }
+
                 break;
 
             case R.id.yesterday_btn:
@@ -130,6 +157,9 @@ public class ChooseTimeActivity extends BaseActivity {
 
                         startTv.setText(startTime);
                         endTv.setText(endTime);
+
+                        timeOn = startTime.toString();
+                        timeOff = endTime.toString();
 
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE),

@@ -3,6 +3,7 @@ package com.trust.ebikeapp.activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.trust.ebikeapp.R;
@@ -14,19 +15,20 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private FragmentTransaction transaction;
     private Fragment homeFragment ,carStatusFragment,myFragment;
     private RadioGroup radioGroup;
+    private RadioButton homeBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initFargment();
         initView();
+        initFargment();
     }
 
     private void initView() {
         radioGroup = (RadioGroup) findViewById(R.id.main_radiogroup);
         radioGroup.setOnCheckedChangeListener(this);
-
+        homeBtn = (RadioButton) findViewById(R.id.radio_home);
     }
 
     private void initFargment() {
@@ -36,6 +38,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.homefragment_fragment,homeFragment);
         transaction.commit();
+
+        homeBtn.setChecked(true);
     }
 
     @Override

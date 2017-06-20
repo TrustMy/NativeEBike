@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.trust.ebikeapp.activity.alarm.AlarmActivity">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_car_location_toolbar"
         android:layout_width="0dp"
@@ -134,6 +135,7 @@
         >
 
         <TextView
+            android:id="@+id/alarm_activity_time"
             android:textColor="@color/colorWhite"
             android:text="2017-5-11 ~ 2017-5-15"
             android:layout_width="wrap_content"
@@ -155,7 +157,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_heightPercent = "10%"
-
         android:orientation="horizontal">
 
         <TextView
@@ -195,12 +196,19 @@
 
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/alarm_activity_nothing"
         app:layout_marginTopPercent = "10%"
         android:gravity="center"
         android:text="该时间段内无数据"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/alarm_activity_recycler_view"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
 
 
 
