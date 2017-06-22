@@ -29,13 +29,11 @@ public class Config extends Application {
     public static int startInterval = 5;
     public static int endInterval = 0;
 
-    public static long appSN = TimeTool.getSystemTimeDate()/1000;
 
     //寻车配置
     public static int startFoundCar = 1;
     public static int endFoundCar = 0;
-    public static boolean startFoundCarStatus = true;
-    public static boolean endFoundCarStatus = false;
+
 
     //结果状态
     public final static int SUCCESS = 0;
@@ -55,6 +53,9 @@ public class Config extends Application {
     public final static int carHistoryLocation = 0x011;//通过时间获取车辆轨迹
     public final static int carAlarm = 0x012;//通过时间分页获取报警信息
     public final static int carStatus = 0x013;///查询车辆状态
+    public final static int alarmStatus = 0x014;//处理全部报警状态
+    public final static int trickLocation = 0x015;//实时追踪划线
+    public final static int locationTime = 0x016;//计时;
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -75,6 +76,8 @@ public class Config extends Application {
     public static final String car_lock_url = "rest/cmd/lock/";//车辆设防
 
     public static final String car_status = "rest/cmd/queryStatus/";//查询车辆状态
+
+    public static final String alarm_status = "rest/ alarms/updateAll/";//处理全部报警状态
 
     @Override
     public void onCreate() {

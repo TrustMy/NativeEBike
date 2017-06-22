@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.activity.carhistroy.CarHistroyActivity;
@@ -52,7 +53,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private ImageButton fortificationBtn,carHistroyBtn,locationBtn,carStatusBtn,alarmBtn,
     helpBtn;
 
-    private boolean clickFortificationBtn = false;
+    private TextView fortificationTv;
+
+    private boolean clickFortificationBtn = false;//防止点击设防按钮跳转页面
+    private boolean fortificationStatus = false;//设防按钮状态
 
     @Override
     public void onAttach(Activity activity) {
@@ -175,6 +179,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
         alarmNumLayout = (RelativeLayout) v.findViewById(R.id.homefragment_alarm_num_layout);
         alarmNum = (TextView) v.findViewById(R.id.homefragment_alarm_num);
+
+        fortificationTv = (TextView) v.findViewById(R.id.home_fortification_tv);
     }
 
     @Override
@@ -210,12 +216,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         switch (v.getId()){
             case R.id.home_fortification:
                 clickFortificationBtn = true;
-                Map<String,Object> map = new WeakHashMap<>();
-                map.put("termId",Config.termId);
-                map.put("userCellPhone",Config.phone);
-                map.put("appSN", (TimeTool.getSystemTimeDate()/1000));
-                map.put("lock",true);
-                requestCallBeack(Config.car_lock_url,map,Config.lock,Config.needAdd);
+                doLock();
                 break;
             case R.id.home_car_history:
                 clickFortificationBtn = false;
@@ -243,11 +244,33 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
+    private void doLock() {
+        Map<String,Object> map = new WeakHashMap<>();
+        map.put("termId", Config.termId);
+        map.put("userCellPhone",Config.phone);
+        map.put("appSN", (TimeTool.getSystemTimeDate()/1000));
+        map.put("lock",fortificationStatus);
+        requestCallBeack(Config.car_lock_url,map,Config.lock,Config.needAdd);
+    }
+
     @Override
     public void successCallBeack(Object obj, int type) {
         switch (type){
             case Config.carStatus:
                 carStatus(obj);
+                break;
+            case Config.lock:
+                if(fortificationStatus){
+                    fortificationStatus = false;
+                    showWaitToast(context,"设防成功!",1);
+                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
+                    fortificationTv.setText("解防");
+                }else{
+                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
+                    fortificationTv.setText("设防");
+                    fortificationStatus = true;
+                    showWaitToast(context,"解防成功!",1);
+                }
                 break;
         }
     }
@@ -260,6 +283,17 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }else{
             alarmNumLayout.setVisibility(View.VISIBLE);
             alarmNum.setText(bean.getTotleAlarm()+"");
+        }
+
+        //0解防 1设防
+        if(bean.getContent().getLockStatus() == 0){
+            fortificationStatus = false;
+            fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
+            fortificationTv.setText("解防");
+        }else{
+            fortificationStatus = true;
+            fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
+            fortificationTv.setText("设防");
         }
 
     }

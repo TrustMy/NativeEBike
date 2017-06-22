@@ -68,6 +68,23 @@
 
 
     </com.amap.api.maps.MapView>
+        <com.robinhood.ticker.TickerView
+            android:id="@+id/activity_car_location_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginTopPercent = "2%"
+            app:layout_marginLeftPercent = "4%"
+            app:ticker_animationDuration="500"
+            android:textSize="34sp"
+            android:shadowDx="7"
+            android:shadowDy="4"
+            android:shadowColor = "#b67800"
+            android:textColor="#ffa800"
+            android:shadowRadius="10"
+            app:layout_widthPercent = "28%"
+            app:layout_heightPercent = "16%"
+            android:textAppearance="@style/TickerTextAppearance"
+            />
 
         <LinearLayout
             app:layout_marginTopPercent = "15%"
@@ -84,7 +101,7 @@
                 <ImageButton
                     android:layout_height="wrap_content"
                     android:id="@+id/activity_car_location_track"
-                    android:background="@drawable/track_on"
+                    android:background="@drawable/location_trick_off_btn_bg"
                     android:layout_width="wrap_content" />
 
                 <ImageButton
@@ -100,7 +117,7 @@
             <ImageButton
                 android:layout_margin="10dp"
                 android:id="@+id/activity_car_location_car_location"
-                android:background="@drawable/location_on"
+                android:background="@drawable/location_btn_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
@@ -108,7 +125,7 @@
             <ImageButton
                 android:layout_margin="10dp"
                 android:id="@+id/activity_car_location_route_plan"
-                android:background="@drawable/walk"
+                android:background="@drawable/location_route_plan_btn_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
@@ -123,17 +140,8 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/activity_car_location_found_car"
-                android:background="@drawable/found_car_on"
+                android:background="@drawable/location_found_car_btn_bg"
                 />
-
-                <ImageButton
-                    android:visibility="gone"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/activity_car_location_found_car_close"
-                    android:background="@drawable/found_car_off"
-                    />
-
 
             </LinearLayout>
 

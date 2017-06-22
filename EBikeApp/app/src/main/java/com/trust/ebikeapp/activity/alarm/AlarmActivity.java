@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
@@ -29,9 +30,12 @@ public class AlarmActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private AlarmRecyclerViewAdapter adapter;
     private TextView nothingTv,timeTv;
-    private long ontime = TimeTool.getSystemTimeDate(),offTime;
+    private long ontime = TimeTool.getSystemTimeDate();
+    private long startTime,endTime;
     private int requestCode = 1;
     private List<AlarmBean.ContentBean.AlarmsBean> beanList = new ArrayList<>();
+    private Button readBtn,noReadBtn;
+    private int status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,6 @@ public class AlarmActivity extends BaseActivity {
         timeTv = (TextView) findViewById(R.id.alarm_activity_time);
         nothingTv = (TextView) findViewById(R.id.alarm_activity_nothing);
 
-
         recyclerView = (RecyclerView) findViewById(R.id.alarm_activity_recycler_view);
         adapter = new AlarmRecyclerViewAdapter(context);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -54,6 +57,11 @@ public class AlarmActivity extends BaseActivity {
 
         String time = TimeTool.getTime(ontime);
         timeTv.setText(time+" ~ "+time);
+
+        readBtn = (Button) findViewById(R.id.alarm_activity_read_alarm_status);
+        noReadBtn = (Button) findViewById(R.id.alarm_activity_no_read_alarm_status);
+        onClick(readBtn);
+        onClick(noReadBtn);
     }
 
     private void initDate(long onFire,long offFire) {
@@ -100,6 +108,18 @@ public class AlarmActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
+        }else if(type == Config.alarmStatus){
+
+            if(pageIndex != 0){
+                -- pageIndex ;
+            }
+            beanList.clear();
+            if (startTime == 0) {
+                initDate(ontime,ontime);
+            }else{
+                initDate(startTime,endTime);
+            }
+            showWaitToast(context,"选择成功",1);
         }
     }
 
@@ -115,7 +135,9 @@ public class AlarmActivity extends BaseActivity {
                 if(fireOffTime != null && !fireOnTime.equals("")){
                     if(fireOffTimeDate != 0){
                         beanList.clear();
-                        initDate(fireOnTimeDate,fireOffTimeDate);
+                        startTime = fireOnTimeDate;
+                        endTime = fireOffTimeDate;
+                        initDate(startTime,endTime);
                         timeTv.setText(fireOnTime+" ~ "+fireOffTime);
                     }else{
                         L.e("fireOffTimeDate: = 0");
@@ -127,5 +149,22 @@ public class AlarmActivity extends BaseActivity {
             }
 
         }
+    }
+
+
+    @Override
+    public void clickResult(View v) {
+        switch (v.getId()){
+            case R.id.alarm_activity_read_alarm_status:
+                status = 1;
+                break;
+            case R.id.alarm_activity_no_read_alarm_status:
+                status = 0;
+                break;
+        }
+        Map<String,Object> map = new WeakHashMap<>();
+        map.put("termId",Config.termId);
+        map.put("status",status);
+        requestCallBeack(Config.alarm_status,map,Config.alarmStatus,Config.needAdd);
     }
 }

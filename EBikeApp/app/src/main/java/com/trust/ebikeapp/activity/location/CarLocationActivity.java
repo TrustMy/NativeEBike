@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,17 +15,25 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
+import com.robinhood.ticker.TickerUtils;
+import com.robinhood.ticker.TickerView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
-import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.LocationResultBean;
+import com.trust.ebikeapp.tool.gps.DrawLiner;
 import com.trust.ebikeapp.tool.gps.GPSRoutePlanning;
 import com.trust.ebikeapp.tool.gps.Maker;
 import com.trust.ebikeapp.tool.gps.Positioning;
+import com.trust.ebikeapp.tool.internet.PostTrack;
 import com.trust.ebikeapp.tool.trustinterface.PositionCallBack;
+import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -32,13 +42,81 @@ public class CarLocationActivity extends BaseActivity {
     private AMap aMap;
     private Activity activity = CarLocationActivity.this;
     private Context context = CarLocationActivity.this;
-    private ImageButton trackBtn,locationBtn,routePlanBtn,foundCarBtn,closeTrackBtn,
-    closeFoundCarBtn;
-    private boolean isTrack = false , isRoute = false;
+    private ImageButton trackBtn,locationBtn,routePlanBtn,foundCarBtn;
+    private boolean isTrack = false , isRoute = false , isFound = false;
 
     private LatLonPoint mDate;
     private Positioning positioning;
     private GPSRoutePlanning routePlanning;
+    private int count = 0;
+    private DrawLiner drawLiner;
+    private List<LatLng> latLngs;
+
+    private TickerView locationTimeTv;
+
+    private int sumSecond = 300,minute,second;
+
+    public ResultCallBack resultCallBack = new ResultCallBack() {
+        @Override
+        public void CallBeck(Object obj, int type, int status) {
+            if(status == Config.SUCCESS){
+                successCallBeackLocation(obj,type);
+            }else{
+                showErrorToast(context,obj.toString(),1);
+            }
+        }
+    };
+
+    /**
+     * 实时追踪请求坐标成功回调
+     * @param object
+     * @param type
+     */
+    public void successCallBeackLocation(Object object , int type){
+            if(type == Config.trickLocation){
+
+                LocationResultBean bean = (LocationResultBean) object;
+                if(bean.getContent().getLat() != 0.0 && bean.getContent().getType() != 1){
+                    doTrickLine(bean);
+
+                }else{
+                    showErrorToast(context,"车辆定位无效,请将车辆挪到空旷地带!",1);
+                }
+            }
+    }
+
+
+    /**
+     * 循环请求 轨迹
+     */
+    private Handler trickHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case Config.trickLocation:
+                    count++;
+
+                    if(count <= 20){
+                        PostTrack postTrack = new PostTrack(resultCallBack);
+                        Map<String, Object> map = new WeakHashMap<>();
+                        map.put("termId", Config.termId);
+                        postTrack.Request(Config.car_location_url,map,Config.trickLocation,Config.needAdd);
+                        trickHandler.sendEmptyMessageDelayed(Config.trickLocation,1000 * 15);
+                    }else{
+                        trickHandler.removeMessages(Config.trickLocation);
+                        count = 0;
+                        closeTrick();
+                    }
+                    break;
+                case Config.locationTime:
+                    showTime();
+                    break;
+            }
+
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +139,8 @@ public class CarLocationActivity extends BaseActivity {
 
     private void initDate() {
         positioning = new Positioning(positionCallBack);
-
-        showDialog();
+        drawLiner = new DrawLiner(context);
+        latLngs = new ArrayList<>();
         carLocation();
     }
 
@@ -71,26 +149,27 @@ public class CarLocationActivity extends BaseActivity {
         locationBtn = (ImageButton) findViewById(R.id.activity_car_location_car_location);
         routePlanBtn = (ImageButton) findViewById(R.id.activity_car_location_route_plan);
         foundCarBtn = (ImageButton) findViewById(R.id.activity_car_location_found_car);
-        closeTrackBtn = (ImageButton) findViewById(R.id.activity_car_location_track_close);
-        closeFoundCarBtn = (ImageButton) findViewById(R.id.
-                activity_car_location_found_car_close);
+
         onClick(trackBtn);
         onClick(locationBtn);
         onClick(routePlanBtn);
         onClick(foundCarBtn);
-        onClick(closeTrackBtn);
-        onClick(closeFoundCarBtn);
+
+
+        locationTimeTv = (TickerView) findViewById(R.id.activity_car_location_time);
+        locationTimeTv.setCharacterList(TickerUtils.getDefaultListForUSCurrency());
+
     }
 
     @Override
     public void clickResult(View v) {
         isRoute = false;
         Map<String, Object> map = new WeakHashMap<>();
-        showDialog();
+        long appSn = TimeTool.getSystemTimeDate()/1000;
         switch (v.getId()){
 
             case R.id.activity_car_location_track:
-                isTrack(map,Config.startInterval,Config.startDurationtime);
+                isTrack(map,appSn);
 
                 break;
 
@@ -104,19 +183,13 @@ public class CarLocationActivity extends BaseActivity {
                 break;
 
             case R.id.activity_car_location_found_car:
-
-                foundCar(map,Config.startFoundCarStatus);
+                foundCar(map,appSn);
                 break;
 
 
-            case R.id.activity_car_location_track_close:
-                isTrack(map,Config.endInterval,Config.endDurationtime);
-                break;
-
-
-            case R.id.activity_car_location_found_car_close:
-                foundCar(map,Config.endFoundCarStatus);
-                break;
+//            case R.id.activity_car_location_track_close:
+//                isTrack(map,appSn);
+//                break;
 
         }
     }
@@ -127,37 +200,53 @@ public class CarLocationActivity extends BaseActivity {
     private void carLocation() {
         Map<String, Object> map = new WeakHashMap<>();
         map.put("termId", Config.termId);
-        post.Request(Config.car_location_url,map,Config.location,Config.needAdd);
+        requestCallBeack(Config.car_location_url,map,Config.location,Config.needAdd);
     }
 
 
     /**
      * 打开/关闭实时追踪
      * @param map
-     * @param interval
-     * @param durationtime
      */
-    private void isTrack(Map<String, Object> map ,int interval,int durationtime) {
+    private void isTrack(Map<String, Object> map ,long appSn) {
+        int interval;int durationtime;
+        if(isTrack){
+            //结束实时追踪
+            interval = Config.endInterval;
+            durationtime = Config.endDurationtime;
+        }else{
+            //开始实时追踪
+            interval = Config.startInterval;
+            durationtime = Config.startDurationtime;
+        }
+
         map.put("termId", Config.termId);
         map.put("userCellPhone",Config.phone);
-        map.put("appSN", Config.appSN);
+        map.put("appSN", appSn);
         map.put("interval", interval);
         map.put("duration", durationtime);
-        post.Request(Config.car_time_tracking_lcation_url,map,Config.isTrack,
+
+        requestCallBeack(Config.car_time_tracking_lcation_url,map,Config.isTrack,
                 Config.needAdd);
     }
 
     /**
      * 寻车
      * @param map
-     * @param status
+     *
      */
-    private void foundCar(Map<String, Object> map,boolean status) {
+    private void foundCar(Map<String, Object> map,long appSN) {
         map.put("termId", Config.termId);
         map.put("userCellPhone", Config.phone);
-        map.put("appSN", Config.appSN);
-        map.put("on", status);
-        post.Request(Config.car_buzzer,map,Config.foundCar,Config.needAdd);
+        map.put("appSN", appSN);
+        if(isFound){
+            //结束
+            map.put("on", false);
+        }else{
+           //开始寻车
+            map.put("on", true);
+        }
+        requestCallBeack(Config.car_buzzer,map,Config.foundCar,Config.needAdd);
     }
 
     /**
@@ -210,11 +299,12 @@ public class CarLocationActivity extends BaseActivity {
 
     @Override
     public void successCallBeack(Object obj, int type) {
+        aMap.clear();
         switch (type){
             case Config.location:
                 CarLoationMessage carLoationMessage = (CarLoationMessage) obj;
                 if(!isRoute){
-                    Maker.showMaker(aMap,carLoationMessage);
+                    Maker.showMakerGif(aMap,carLoationMessage);
 
                 }else{
                     //路径规划
@@ -223,15 +313,74 @@ public class CarLocationActivity extends BaseActivity {
                 break;
 
             case Config.isTrack:
-                L.d("isTrack"+obj.toString());
+                if (isTrack) {
+                    closeTrick();
+                    locationTimeTv.setVisibility(View.GONE);
+                }else{
+                    locationTimeTv.setVisibility(View.VISIBLE);
+                    isTrack = true;
+                    trackBtn.setBackgroundResource(R.drawable.location_trick_on_btn_bg);
+                    trickHandler.sendEmptyMessage(Config.trickLocation);
+                    //开始
+                    trickHandler.sendEmptyMessage(Config.locationTime);
+                }
                 break;
 
             case Config.foundCar:
-                L.d("foundCar:"+obj.toString());
+                if(isFound){
+                    isFound = false;
+                    foundCarBtn.setBackgroundResource(R.drawable.location_found_car_btn_bg);
+                }else{
+                    isFound = true;
+                    foundCarBtn.setBackgroundResource(R.drawable.location_trick_on_btn_bg);
+                }
                 break;
 
         }
     }
+
+
+    /**
+     * 切换关闭状态配置
+     */
+    private void closeTrick() {
+        isTrack = false;
+        trackBtn.setBackgroundResource(R.drawable.location_trick_off_btn_bg);
+        latLngs.clear();
+        trickHandler.removeMessages(Config.trickLocation);
+    }
+
+    /**
+     * 划线
+     * @param bean
+     */
+    private void doTrickLine(LocationResultBean bean) {
+        latLngs.add(new LatLng(bean.getContent().getLat(),bean.getContent().getLng()));
+        drawLiner.drawTrickLine(aMap,latLngs);
+    }
+
+    private void showTime() {
+        minute = sumSecond%3600/60;
+        second = sumSecond%60;
+
+        sumSecond--;
+        if(second == 0 && minute == 0){
+            trickHandler.removeMessages(Config.locationTime);
+
+        }else{
+            trickHandler.sendEmptyMessageDelayed(Config.locationTime,1000);
+        }
+
+
+        if(second < 10){
+            locationTimeTv.setText("0"+minute+":0"+second);
+
+        }else{
+
+            locationTimeTv.setText("0"+minute+":"+second);
+        }
+    }
+
 
 
     //-------------------------------------------------------------------------------------
@@ -263,9 +412,12 @@ public class CarLocationActivity extends BaseActivity {
         super.onResume();
 
        mapView.onResume();
+
     }
 
     public void ext(View v){
         onClickFinsh(activity);
     }
+
+
 }

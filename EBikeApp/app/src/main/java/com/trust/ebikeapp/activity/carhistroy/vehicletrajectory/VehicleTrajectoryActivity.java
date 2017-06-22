@@ -64,8 +64,7 @@ public class VehicleTrajectoryActivity extends BaseActivity {
         map.put("termId", Config.termId);
         map.put("startTime", gpsMessage.getFireOnTime());
         map.put("endTime", gpsMessage.getFireOffTime());
-        post.Request(Config.car_history_location_url,map,Config.carHistoryLocation,Config.needAdd);
-
+        requestCallBeack(Config.car_history_location_url,map,Config.carHistoryLocation,Config.needAdd);
         startName = gpsMessage.getOnName();
         endName = gpsMessage.getOffName();
     }

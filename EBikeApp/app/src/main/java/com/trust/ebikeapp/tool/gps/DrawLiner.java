@@ -54,15 +54,20 @@ public class DrawLiner {
         if(latLngs.size() != 0){
             addResIcon(latLngs.get(0),"起点",R.drawable.fire_on,"",START);
             addResIcon(latLngs.get(latLngs.size()-1),"终点",R.drawable.fire_off,"",END);
-            aMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                    new LatLng(latLngs.get(0).latitude, latLngs.get(0).longitude),//新的中心点坐标
-                    500, //新的缩放级别
-                    0, //俯仰角0°~45°（垂直与地图时为0）
-                    0  ////偏航角 0~360° (正北方为0)
-            )));
+            centerMaker(aMap, latLngs.get(0).latitude,latLngs.get(0).longitude);
 
         }
     }
+
+    private void centerMaker(AMap aMap, double lat,double lng) {
+        aMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                new LatLng(lat, lng),//新的中心点坐标
+                500, //新的缩放级别
+                0, //俯仰角0°~45°（垂直与地图时为0）
+                0  ////偏航角 0~360° (正北方为0)
+        )));
+    }
+
     private String titleMessage, bodyMessage;
     View infoWindow = null;
     AMap Amap;
@@ -119,5 +124,13 @@ public class DrawLiner {
         }
     };
 
+
+    public void drawTrickLine(AMap aMap,List<LatLng> latLngs){
+        aMap.clear();
+        aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(30).color(Color.parseColor("#020176")).
+                setCustomTextureList(texTuresList));
+        Maker.showMaker(aMap,latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude);
+
+    }
 
 }

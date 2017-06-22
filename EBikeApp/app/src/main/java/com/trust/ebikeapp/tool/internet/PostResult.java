@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
+import com.trust.ebikeapp.tool.bean.AlarmStatusBean;
 import com.trust.ebikeapp.tool.bean.BindCarBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
 import com.trust.ebikeapp.tool.bean.CarStatusBean;
@@ -130,6 +131,18 @@ public class PostResult extends Handler {
             case Config.carStatus:
                 if( checkMsgStatus(msg,Config.carStatus)){
                     carStatusResult((String)msg.obj,Config.carStatus);
+                }
+                break;
+
+            case Config.alarmStatus:
+                if( checkMsgStatus(msg,Config.alarmStatus)){
+                    alarmStatusResult((String)msg.obj,Config.alarmStatus);
+                }
+                break;
+
+            case Config.trickLocation:
+                if( checkMsgStatus(msg,Config.trickLocation)){
+                    trickLocationResult((String)msg.obj,Config.trickLocation);
                 }
                 break;
         }
@@ -260,6 +273,10 @@ public class PostResult extends Handler {
         }
     }
 
+
+
+
+
     /**
      * 打开/关闭实时追踪
      * @param obj
@@ -267,6 +284,21 @@ public class PostResult extends Handler {
      */
     private void isTrackResult(String obj, int type) {
         IsTrackResultBean bean = gson.fromJson(obj,IsTrackResultBean.class);
+        if(bean.getStatus()){
+            result(bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
+    /**
+     * 实时追踪划线
+     * @param obj
+     * @param type
+     */
+    private void trickLocationResult(String obj, int type) {
+        LocationResultBean bean = gson.fromJson(obj, LocationResultBean.class);
         if(bean.getStatus()){
             result(bean, type, Config.SUCCESS);
         }else{
@@ -283,7 +315,7 @@ public class PostResult extends Handler {
         FoundCarBean bean = gson.fromJson(obj,FoundCarBean.class);
         if(bean.getStatus()){
             if(bean.getContent().getResult() == 0){
-                result(null, type, Config.SUCCESS);
+                result(bean, type, Config.SUCCESS);
             }else{
                 L.e("bean.getContent().getResult():"+bean.getContent().getResult());
             }
@@ -342,6 +374,20 @@ public class PostResult extends Handler {
 
     private void carAlarmResult(String obj, int type) {
         AlarmBean bean = gson.fromJson(obj,AlarmBean.class);
+        if(bean.getStatus()){
+            result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 处理全部报警状态
+     * @param obj
+     * @param type
+     */
+    private void alarmStatusResult(String obj, int type) {
+        AlarmStatusBean bean = gson.fromJson(obj,AlarmStatusBean.class);
         if(bean.getStatus()){
             result( bean, type, Config.SUCCESS);
         }else{

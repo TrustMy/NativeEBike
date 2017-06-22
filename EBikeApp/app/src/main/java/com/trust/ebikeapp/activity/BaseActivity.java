@@ -60,12 +60,12 @@ public class BaseActivity extends AppCompatActivity {
 
     public void resultCallBeack(Object obj,int type,int status){
 
+        dissDialog();
         if(status == Config.SUCCESS){
             successCallBeack(obj,type);
         }else{
             errorCallBeack(obj,type);
         }
-        dissDialog();
     }
     public void successCallBeack(Object obj,int type){
 
