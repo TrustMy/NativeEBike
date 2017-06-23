@@ -103,8 +103,6 @@ public class CarLocationActivity extends BaseActivity {
                         postTrack.Request(Config.car_location_url,map,Config.trickLocation,Config.needAdd);
                         trickHandler.sendEmptyMessageDelayed(Config.trickLocation,1000 * 15);
                     }else{
-                        trickHandler.removeMessages(Config.trickLocation);
-                        count = 0;
                         closeTrick();
                     }
                     break;
@@ -317,13 +315,14 @@ public class CarLocationActivity extends BaseActivity {
                     closeTrick();
                     locationTimeTv.setVisibility(View.GONE);
                 }else{
-                    locationTimeTv.setVisibility(View.VISIBLE);
                     isTrack = true;
                     trackBtn.setBackgroundResource(R.drawable.location_trick_on_btn_bg);
                     trickHandler.sendEmptyMessage(Config.trickLocation);
                     //开始
                     trickHandler.sendEmptyMessage(Config.locationTime);
+                    locationTimeTv.setVisibility(View.VISIBLE);
                 }
+
                 break;
 
             case Config.foundCar:
@@ -348,6 +347,10 @@ public class CarLocationActivity extends BaseActivity {
         trackBtn.setBackgroundResource(R.drawable.location_trick_off_btn_bg);
         latLngs.clear();
         trickHandler.removeMessages(Config.trickLocation);
+        trickHandler.removeMessages(Config.locationTime);
+        count = 0;
+        sumSecond = 300;
+        locationTimeTv.setText("05:00");
     }
 
     /**
@@ -412,6 +415,10 @@ public class CarLocationActivity extends BaseActivity {
         super.onResume();
 
        mapView.onResume();
+
+        if(sumSecond == 0){
+            locationTimeTv.setVisibility(View.GONE);
+        }
 
     }
 

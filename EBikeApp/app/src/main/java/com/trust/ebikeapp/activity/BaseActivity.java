@@ -117,4 +117,10 @@ public class BaseActivity extends AppCompatActivity {
     public void showErrorToast(Context context,String msg,int time){
         T.errorToast(context,msg,time*1000);
     }
+
+    public void finsh(Activity activity){
+        if (activity != null) {
+            activity.finish();
+        }
+    }
 }

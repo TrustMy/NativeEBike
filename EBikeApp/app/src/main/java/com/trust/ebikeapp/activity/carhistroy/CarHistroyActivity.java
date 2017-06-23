@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
@@ -39,6 +40,8 @@ public class CarHistroyActivity extends BaseActivity {
     private int requestCode = 1;
 
     private long whenTime = TimeTool.getSystemTimeDate();
+
+    private ImageButton bachBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,8 @@ public class CarHistroyActivity extends BaseActivity {
         String time = TimeTool.getTime(whenTime);
         timeTv.setText(time+" ~ "+time);
 
+        bachBtn = (ImageButton) findViewById(R.id.car_hirstory_back);
+        onClick(bachBtn);
     }
 
 
@@ -124,14 +129,17 @@ public class CarHistroyActivity extends BaseActivity {
     }
 
     public void chooseTime(View v){
+        Intent intent = new Intent(context,ChooseTimeActivity.class);
+        intent.putExtra("title","查询历史信息");
 
-        startActivityForResult(new Intent(context,ChooseTimeActivity.class),requestCode);
+        startActivityForResult(intent,requestCode);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == this.requestCode){
+            if(data != null){
             String fireOnTime = data.getStringExtra("fireOnTime");
             String fireOffTime = data.getStringExtra("fireOffTime");
             long fireOnTimeDate = data.getLongExtra("fireOnTimeDate",0);
@@ -149,8 +157,17 @@ public class CarHistroyActivity extends BaseActivity {
                 L.e("fireOffTime == null");
             }
 
+            }
 
+        }
+    }
 
+    @Override
+    public void clickResult(View v) {
+        switch (v.getId()){
+            case R.id.car_hirstory_back:
+                finsh(this);
+                break;
         }
     }
 }

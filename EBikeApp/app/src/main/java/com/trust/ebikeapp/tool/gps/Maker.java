@@ -70,7 +70,7 @@ public class Maker {
         markerOptions.position(data);
         markerOptions.title(message.getType());
         markerOptions.snippet(TimeTool.getTime(message.getGpsTime()));
-        markerOptions.period(4);
+        markerOptions.period(3);
 
         aMap.addMarker(markerOptions).showInfoWindow();
         aMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(

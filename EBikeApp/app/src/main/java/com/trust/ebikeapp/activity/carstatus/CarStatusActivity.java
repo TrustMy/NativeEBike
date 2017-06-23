@@ -3,6 +3,7 @@ package com.trust.ebikeapp.activity.carstatus;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import java.util.WeakHashMap;
 
 public class CarStatusActivity extends BaseActivity {
     private ImageView voltageImg , voltageStatusImg;
+    private ImageButton backBtn;
     private Context context = CarStatusActivity.this;
     private TextView electractNum;
     private int [] Id = {R.drawable.watch0,R.drawable.watch1,R.drawable.watch2,R.drawable.watch3,
@@ -37,6 +39,9 @@ public class CarStatusActivity extends BaseActivity {
         voltageImg = (ImageView) findViewById(R.id.carstatus_voltage);
         voltageStatusImg = (ImageView) findViewById(R.id.carstatus_voltage_status);
         electractNum = (TextView) findViewById(R.id.carstatus_electract_num);
+
+        backBtn = (ImageButton) findViewById(R.id.carstatus_back);
+        onClick(backBtn);
     }
 
     private void initDate() {
@@ -97,5 +102,14 @@ public class CarStatusActivity extends BaseActivity {
 
     public void reload(View v){
         initDate();
+    }
+
+    @Override
+    public void clickResult(View v) {
+        switch (v.getId()){
+            case R.id.carstatus_back:
+                finsh(this);
+                break;
+        }
     }
 }

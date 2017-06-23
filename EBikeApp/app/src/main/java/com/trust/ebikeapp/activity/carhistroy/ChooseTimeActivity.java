@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
@@ -24,8 +25,9 @@ public class ChooseTimeActivity extends BaseActivity {
     private long day = 86400000,lastWeek = 604800000;
     private String timeOn ,timeOff;
     private Context context = ChooseTimeActivity.this;
-
+    private TextView title;
     private long mTime = TimeTool.getSystemTimeDate();
+    private ImageButton backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,15 @@ public class ChooseTimeActivity extends BaseActivity {
 
 
         intView();
+        initDate();
+    }
+
+    private void initDate() {
+        String titleMsg = getIntent().getStringExtra("title");
+        if (titleMsg != null) {
+            title.setText(titleMsg);
+        }
+
     }
 
     private void intView() {
@@ -58,8 +69,10 @@ public class ChooseTimeActivity extends BaseActivity {
         startTv.setText(time);
         endTv.setText(time);
 
+        title = (TextView) findViewById(R.id.choose_time_title);
 
-
+        backBtn = (ImageButton) findViewById(R.id.choose_time_back);
+        onClick(backBtn);
     }
 
     @Override
@@ -116,6 +129,10 @@ public class ChooseTimeActivity extends BaseActivity {
             case R.id.choose_time_starttv:
             case R.id.choose_time_endtv:
                 showChooseTime();
+                break;
+
+            case R.id.choose_time_back:
+                finsh(this);
                 break;
         }
 

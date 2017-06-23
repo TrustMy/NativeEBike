@@ -6,36 +6,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#1e455c"
     tools:context="com.trust.ebikeapp.activity.alarm.AlarmActivity">
 
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_car_location_toolbar"
+        android:background="#5a8a94"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent = "10%"
-        app:layout_widthPercent="100%"
-        android:background="#5a8a94"
-        >
+        app:contentInsetStart="0dp"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="100%">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageButton
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:onClick="ext"
-                android:src="@drawable/back"
+                android:id="@+id/alarm_activity_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:src="@drawable/back" />
 
             <TextView
-                android:layout_centerInParent="true"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:text="报警记录"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="报警记录"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
 
 
             <LinearLayout
@@ -47,12 +52,12 @@
 
                 <Button
                     android:id="@+id/activity_blue_device_disconnect"
-                    android:visibility="gone"
-                    android:textColor="#ffffff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@null"
                     android:text="disconnect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#ffffff"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -73,49 +78,65 @@
             android:layout_height="0dp"
             android:orientation="horizontal"
             app:layout_widthPercent="90%"
-            app:layout_heightPercent = "100%">
+            app:layout_heightPercent = "60%">
 
-            <LinearLayout
+            <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/alarm_activity_read_btn_bg"
                 android:orientation="horizontal">
 
 
                 <ImageView
                     android:background="@drawable/read_on"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:layout_widthPercent="14%"
+                    app:layout_heightPercent = "70%"
+                    app:layout_marginRightPercent="2%"
+                    />
 
 
                 <Button
                     android:id="@+id/alarm_activity_read_alarm_status"
                     android:text="全部标记已读"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorWhite"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"/>
+            </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
-            <LinearLayout
+            <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/alarm_activity_no_read_btn_bg"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:background="@drawable/read_off"
+                    android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/read_off"
+                    app:layout_widthPercent="14%"
+                    app:layout_heightPercent = "70%"
+                    app:layout_marginRightPercent="2%"/>
 
 
                 <Button
+                    android:textColor="@color/colorWhite"
                     android:id="@+id/alarm_activity_no_read_alarm_status"
                     android:text="全部标记未读"
+                    android:textSize="18sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="#00000000" />
 
-            </LinearLayout>
+            </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
 
@@ -126,39 +147,44 @@
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
-    <LinearLayout
-        android:background="#1e455c"
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent = "10%"
-        app:layout_widthPercent="100%"
-        android:orientation="horizontal"
+        android:background="#1e455c"
         android:gravity="center"
-        >
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%">
 
         <TextView
+            android:textSize="16sp"
             android:id="@+id/alarm_activity_time"
-            android:textColor="@color/colorWhite"
-            android:text="2017-5-11 ~ 2017-5-15"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="2017-5-11 ~ 2017-5-15"
+            android:textColor="@color/colorWhite" />
 
 
         <Button
-            android:onClick="chooseTime"
             android:id="@+id/activity_car_histroy_select_histroy"
-            android:textColor="@color/colorWhite"
-            android:text="查询更多"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_move_btn_bg"
+            android:onClick="chooseTime"
+            android:text="查询更多"
+            android:textColor="@color/colorWhite"
+            app:layout_heightPercent = "50%"
+            app:layout_widthPercent = "30%"
+            app:layout_marginLeftPercent = "10%"/>
 
-    </LinearLayout>
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent = "10%"
+        app:layout_heightPercent = "6%"
+        android:background="#ffffff"
         android:orientation="horizontal">
 
         <TextView
@@ -166,7 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="时间"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@color/colorWhite"
             android:background="#082f45"
 
@@ -174,7 +200,7 @@
         <TextView
             android:gravity="center"
             android:text="地址"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -186,7 +212,7 @@
         <TextView
             android:gravity="center"
             android:text="类别"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@color/colorWhite"
             android:background="#082f45"
             android:layout_width="wrap_content"
@@ -201,6 +227,7 @@
         android:id="@+id/alarm_activity_nothing"
         app:layout_marginTopPercent = "10%"
         android:gravity="center"
+        android:textColor="@color/colorWhite"
         android:text="该时间段内无数据"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

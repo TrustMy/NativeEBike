@@ -11,6 +11,7 @@
         android:id="@+id/activity_choose_time_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:contentInsetStart="0dp"
         app:layout_heightPercent = "10%"
         app:layout_widthPercent="100%"
         android:background="@color/colorCarHistroyBg"
@@ -20,14 +21,16 @@
             android:layout_height="match_parent">
 
             <ImageButton
+                android:id="@+id/choose_time_back"
                 android:layout_centerVertical="true"
                 android:background="@null"
-                android:onClick="ext"
+
                 android:src="@drawable/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/choose_time_title"
                 android:layout_centerInParent="true"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
@@ -58,13 +61,14 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <LinearLayout
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         app:layout_marginTopPercent = "5%"
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_widthPercent = "90%"
+        app:layout_widthPercent = "80%"
         app:layout_heightPercent = "10%"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -76,25 +80,30 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:textColor="#000000"
             android:id="@+id/choose_time_starttv"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="2017-05-09"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/choose_ed_bg"
+            android:gravity="center"
+            android:text="2017-05-09"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_heightPercent="60%" />
 
 
-    </LinearLayout>
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
-    <LinearLayout
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         app:layout_marginTopPercent = "5%"
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_widthPercent = "90%"
+        app:layout_widthPercent = "80%"
         app:layout_heightPercent = "10%"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -106,33 +115,45 @@
             android:layout_height="match_parent" />
 
         <TextView
+
             android:id="@+id/choose_time_endtv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/choose_ed_bg"
             android:gravity="center"
-            android:textSize="24sp"
             android:text="2017-05-15"
             android:textColor="#000000"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:textSize="16sp"
+            app:layout_heightPercent="60%" />
 
 
-    </LinearLayout>
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <LinearLayout
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_widthPercent = "90%"
+        app:layout_marginTopPercent = "4%"
+        app:layout_widthPercent = "80%"
         android:orientation="horizontal"
         app:layout_heightPercent = "10%">
 
         <Button
+            android:layout_margin="6dp"
+            android:background="@drawable/choose_time_btn_bg"
             android:id="@+id/today_btn"
             android:text="今天"
             android:layout_width="0dp"
+            android:textColor="@color/colorWhite"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
         <Button
+            android:layout_margin="6dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/choose_time_btn_bg"
             android:id="@+id/yesterday_btn"
             android:text="昨天"
             android:layout_width="0dp"
@@ -140,8 +161,11 @@
             android:layout_weight="1"/>
 
         <Button
+            android:layout_margin="6dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/choose_time_btn_bg"
             android:id="@+id/last_week_btn"
-            android:text="近七天"
+            android:text="一周"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
@@ -155,18 +179,21 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_widthPercent = "90%"
+        app:layout_widthPercent = "80%"
         android:orientation="horizontal"
-        app:layout_heightPercent = "10%">
+        app:layout_heightPercent = "7%"
+        app:layout_marginTopPercent = "8%">
 
         <Button
             android:id="@+id/choose_time_cancel"
             android:text="取消"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/choose_cancel_btn_bg"/>
 
         <Button
+            android:background="@drawable/choose_determine_btn_bg"
             android:id="@+id/choose_time_determine"
             android:text="确定"
             android:layout_width="0dp"

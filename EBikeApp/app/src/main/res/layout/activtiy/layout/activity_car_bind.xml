@@ -30,12 +30,12 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_centerInParent="true"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:text="用车绑定"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="车辆绑定"
+                android:textColor="#ffffff"
+                android:textSize="22sp" /> />
 
 
             <LinearLayout

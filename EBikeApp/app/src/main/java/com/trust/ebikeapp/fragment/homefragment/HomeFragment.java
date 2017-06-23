@@ -263,11 +263,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if(fortificationStatus){
                     fortificationStatus = false;
                     showWaitToast(context,"设防成功!",1);
-                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
-                    fortificationTv.setText("解防");
-                }else{
+
                     fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
                     fortificationTv.setText("设防");
+                }else{
+                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
+                    fortificationTv.setText("解防");
                     fortificationStatus = true;
                     showWaitToast(context,"解防成功!",1);
                 }

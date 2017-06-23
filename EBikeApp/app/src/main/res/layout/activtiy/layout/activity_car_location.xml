@@ -11,8 +11,10 @@
         android:id="@+id/activity_car_location_toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent = "10%"
+        app:layout_heightPercent = "8%"
         app:layout_widthPercent="100%"
+        app:title="@null"
+        app:contentInsetStart="0dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,17 +25,19 @@
                 android:background="@null"
                 android:onClick="ext"
                 android:src="@drawable/back"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_centerInParent="true"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:text="车辆位置"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="车辆位置"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

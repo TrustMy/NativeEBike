@@ -3,6 +3,9 @@ package com.trust.ebikeapp.activity.carhistroy.vehicletrajectory;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -41,12 +44,11 @@ public class VehicleTrajectoryActivity extends BaseActivity {
     private CoordinateTransformation coordinateTransFormation;
     private     List<LatLng> ml = new ArrayList<>();
     private String startName,endName;
+    private ImageButton backBtn,updateBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_trajectory);
-        initDate();
-
         mapView = (MapView) findViewById(R.id.vehicle_trajectory_activity_map_view);
         mapView.onCreate(savedInstanceState);
 
@@ -54,12 +56,29 @@ public class VehicleTrajectoryActivity extends BaseActivity {
             aMap = mapView.getMap();
         }
 
+        initView();
+        initDate();
 
+    }
+
+    private void initView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.vehicle_activity_toolbar);
+        setSupportActionBar(toolbar);
+        backBtn = (ImageButton) findViewById(R.id.vehicle_activity_back);
+        onClick(backBtn);
+        updateBtn = (ImageButton) findViewById(R.id.vehicle_activity_update);
+        onClick(updateBtn);
     }
 
     private void initDate() {
         coordinateTransFormation = new CoordinateTransformation(context);
         gpsMessage = (HistroyGpsBean) getIntent().getSerializableExtra("gpsMessage");
+        requestDate();
+    }
+
+    private void requestDate() {
+
+
         Map<String, Object> map = new WeakHashMap<String, Object>();
         map.put("termId", Config.termId);
         map.put("startTime", gpsMessage.getFireOnTime());
@@ -77,6 +96,8 @@ public class VehicleTrajectoryActivity extends BaseActivity {
             if(bean.getContent().getGps().size() == 0){
                 showErrorToast(context,"本次行程坐标无效!",3);
             }else{
+                aMap.clear();
+                ml.clear();
                 doGpsDate(bean.getContent().getGps());
             }
         }
@@ -154,4 +175,18 @@ public class VehicleTrajectoryActivity extends BaseActivity {
             drawLiner.draw(aMap,ml,startName,endName);
         }
     };
+
+    @Override
+    public void clickResult(View v) {
+        switch (v.getId()){
+            case R.id.vehicle_activity_back:
+                finsh(this);
+                break;
+
+            case R.id.vehicle_activity_update:
+                requestDate();
+                break;
+
+        }
+    }
 }

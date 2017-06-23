@@ -9,24 +9,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.loginorregister.RegisterActivity">
 
-    <LinearLayout
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal">
 
     <ImageView
+
         android:id="@+id/register_finsh"
         android:src="@drawable/ext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
     <ImageView
-        android:src="@drawable/e_bike_loging"
+        android:id="@+id/imageView4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/e_bike_loging" />
 
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout

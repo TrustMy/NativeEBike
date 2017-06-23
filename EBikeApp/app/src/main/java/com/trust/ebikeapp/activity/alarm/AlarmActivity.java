@@ -9,6 +9,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
@@ -36,6 +37,7 @@ public class AlarmActivity extends BaseActivity {
     private List<AlarmBean.ContentBean.AlarmsBean> beanList = new ArrayList<>();
     private Button readBtn,noReadBtn;
     private int status;
+    private ImageButton backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,9 @@ public class AlarmActivity extends BaseActivity {
         noReadBtn = (Button) findViewById(R.id.alarm_activity_no_read_alarm_status);
         onClick(readBtn);
         onClick(noReadBtn);
+
+        backBtn = (ImageButton) findViewById(R.id.alarm_activity_back);
+        onClick(backBtn);
     }
 
     private void initDate(long onFire,long offFire) {
@@ -85,7 +90,10 @@ public class AlarmActivity extends BaseActivity {
 
 
     public void chooseTime(View v){
-        startActivityForResult(new Intent(context,ChooseTimeActivity.class),requestCode);
+        Intent intent = new Intent(context,ChooseTimeActivity.class);
+        intent.putExtra("title","查询报警信息");
+
+        startActivityForResult(intent,requestCode);
     }
 
     @Override
@@ -157,13 +165,22 @@ public class AlarmActivity extends BaseActivity {
         switch (v.getId()){
             case R.id.alarm_activity_read_alarm_status:
                 status = 1;
+                requestDate();
                 break;
             case R.id.alarm_activity_no_read_alarm_status:
                 status = 0;
+                requestDate();
+                break;
+            case R.id.alarm_activity_back:
+                finsh(this);
                 break;
         }
+
+    }
+
+    private void requestDate() {
         Map<String,Object> map = new WeakHashMap<>();
-        map.put("termId",Config.termId);
+        map.put("termId", Config.termId);
         map.put("status",status);
         requestCallBeack(Config.alarm_status,map,Config.alarmStatus,Config.needAdd);
     }
