@@ -23,10 +23,15 @@ public class HomeViewPagerAdapter extends PagerAdapter {
     public HomeViewPagerAdapter(Activity context) {
         this.context = context;
 
-        for (int i = 0; i < 3; i++) {
-            ImageView s= new ImageView(context);
-            s.setImageResource(R.drawable.wind);
-            ml.add(s);
+
+    }
+
+    public void setArticles(List<HomeViewPagerBean> articles) {
+        this.articles = articles;
+        for (int i = 0; i < articles.size(); i++) {
+            ImageView img= new ImageView(context);
+            img.setBackgroundResource(articles.get(i).getImgId());
+            ml.add(img);
 
         }
 
@@ -43,7 +48,14 @@ public class HomeViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
+        View v = ml.get(position);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPagerAdapterOnClickListener.adapterOnClick(articles.get(position).getUrl());
+            }
+        });
         container.addView(ml.get(position));
         return ml.get(position);
     }
@@ -52,4 +64,10 @@ public class HomeViewPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(ml.get(position));
     }
+
+
+    interface ViewPagerAdapterOnClickListener{
+        void adapterOnClick(String url);
+    }
+    public ViewPagerAdapterOnClickListener viewPagerAdapterOnClickListener;
 }

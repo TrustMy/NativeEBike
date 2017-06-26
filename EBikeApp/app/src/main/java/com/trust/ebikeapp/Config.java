@@ -56,6 +56,7 @@ public class Config extends Application {
     public final static int alarmStatus = 0x014;//处理全部报警状态
     public final static int trickLocation = 0x015;//实时追踪划线
     public final static int locationTime = 0x016;//计时;
+    public final static int selfTest = 0x017;//车辆自检
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -78,7 +79,7 @@ public class Config extends Application {
     public static final String car_status = "rest/cmd/queryStatus/";//查询车辆状态
 
     public static final String alarm_status = "rest/ alarms/updateAll/";//处理全部报警状态
-
+    public static final String self_test = "rest/cmd/selfInspection/";//车辆自检;
     @Override
     public void onCreate() {
         super.onCreate();

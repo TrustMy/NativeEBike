@@ -18,7 +18,9 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.carhistroy.ChooseTimeActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
+import com.trust.ebikeapp.tool.bean.AlarmAddressAndroidBean;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
+import com.trust.ebikeapp.tool.bean.AlarmLocationAddressBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ public class AlarmActivity extends BaseActivity {
     private long startTime,endTime;
     private int requestCode = 1;
     private List<AlarmBean.ContentBean.AlarmsBean> beanList = new ArrayList<>();
+    private List<AlarmLocationAddressBean> addressList = new ArrayList();
     private Button readBtn,noReadBtn;
     private int status;
     private ImageButton backBtn;
@@ -99,10 +102,10 @@ public class AlarmActivity extends BaseActivity {
     @Override
     public void successCallBeack(Object obj, int type) {
         if(type == Config.carAlarm){
-            AlarmBean bean = (AlarmBean) obj;
+            AlarmAddressAndroidBean bean = (AlarmAddressAndroidBean) obj;
             if(bean != null){
-                if(bean.getContent().getAlarms().size() == 0){
-                    if(nothingTv.getVisibility() == View.GONE && bean.getContent().getAlarms().size() != 0){
+                if(bean.getAlarmsBeanList().size() == 0){
+                    if(nothingTv.getVisibility() == View.GONE && bean.getAlarmsBeanList().size() != 0){
                         showWaitToast(context,"已经是最后一页数据了!",1);
                     }else{
                         nothingTv.setVisibility(View.VISIBLE);
@@ -111,8 +114,9 @@ public class AlarmActivity extends BaseActivity {
                     nothingTv.setVisibility(View.GONE);
                     pageIndex++;
                     showWaitToast(context,"加载成功",1);
-                    beanList.addAll(bean.getContent().getAlarms());
-                    adapter.setMl(beanList);
+                    beanList.addAll(bean.getAlarmsBeanList());
+                    addressList.addAll(bean.getAlarmLocationAddressBeen());
+                    adapter.setMl(beanList,addressList);
                     adapter.notifyDataSetChanged();
                 }
             }

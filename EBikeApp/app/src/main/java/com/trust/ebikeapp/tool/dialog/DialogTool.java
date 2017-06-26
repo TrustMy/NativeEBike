@@ -91,4 +91,14 @@ public class DialogTool {
             }
         }
     };
+
+
+
+    public static void showBackDialog(Activity activity){
+        View view = LayoutInflater.from(activity).inflate(R.layout.wait_login_dialog,null);
+        dialog.setContentView(view);
+        if(!activity.isFinishing()){
+            dialog.show();
+        }
+    }
 }

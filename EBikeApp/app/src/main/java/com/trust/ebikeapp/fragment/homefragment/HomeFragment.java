@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -29,7 +30,10 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarStatusBean;
+import com.trust.ebikeapp.tool.bean.HomeViewPagerBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -58,6 +62,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private boolean clickFortificationBtn = false;//防止点击设防按钮跳转页面
     private boolean fortificationStatus = false;//设防按钮状态
 
+    private List<HomeViewPagerBean> ml = new ArrayList<>();
+
     @Override
     public void onAttach(Activity activity) {
         this.activity = activity;
@@ -73,11 +79,14 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     }
 
     //定时轮播图片，需要在主线程里面修改 UI
-    private Handler mHandler = new Handler() {
-        public void handlemessage(Message msg) {
+
+
+    public Handler  advertisingHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    L.d("shouda ole ");
+
                     if (msg.arg1 != 0) {
                         viewPager.setCurrentItem(msg.arg1);
                     } else {
@@ -86,13 +95,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                     }
 
 
-                    Message message = Message.obtain();
-                    message.what = 1;
-                    if (autoCurrIndex == 3 - 1) {
-                        autoCurrIndex = -1;
-                    }
-                    message.arg1 = autoCurrIndex + 1;
-                    mHandler.sendMessageDelayed(message,1000 * 5);
+                    startAdvertisingHandler();
                     break;
             }
         }
@@ -105,7 +108,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         v = LayoutInflater.from(context).inflate(R.layout.fragment_home,null);
         initView();
         initData();
+        startAdvertisingHandler();
 
+
+        return v;
+    }
+
+    private void startAdvertisingHandler() {
         // 设置自动轮播图片，5s后执行，周期是5s
 
         Message message = Message.obtain();
@@ -114,20 +123,18 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             autoCurrIndex = -1;
         }
         message.arg1 = autoCurrIndex + 1;
-//        mHandler.sendMessageDelayed(message,1000 * 5);
-        mHandler.sendMessage(message);
-        return v;
+        advertisingHandler.sendMessageDelayed(message,1000 * 3);
     }
 
     private void initData() {
         imgPaint = new ImageView[3];
         for (int i = 0; i < imgPaint.length; i++) {
             ImageView imageView = new ImageView(context);
-            /*
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(30, 30);
             params.setMargins(5, 0, 5, 0);
             imageView.setLayoutParams(params);
-            */
+
             if (i == 0) {
                 imageView.setBackgroundResource(R.drawable.paint_off);
             } else {
@@ -145,9 +152,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         map.put("appSN",appSN/1000);
         requestCallBeack(Config.car_status,map,Config.carStatus,Config.needAdd);
 
-
-
-
+        ml.add(new HomeViewPagerBean("www.wind.png",R.drawable.wind,"www.baidu1.com"));
+        ml.add(new HomeViewPagerBean("www.two.png",R.drawable.advertising_two,"www.baidu2.com"));
+        ml.add(new HomeViewPagerBean("www.there.png",R.drawable.advertising_there,"www.baidu3.com"));
+        viewPagerAdapter.setArticles(ml);
+        viewPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -162,6 +171,23 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         viewPager = (ViewPager) v.findViewById(R.id.homefragment_viewpager);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(this);
+        viewPagerAdapter.viewPagerAdapterOnClickListener = viewPagerAdapterOnClickListener;
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        L.d("ACTION_DOWN");
+                        advertisingHandler.removeMessages(1);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        L.d("ACTION_UP");
+                        startAdvertisingHandler();
+                        break;
+                }
+                return false;
+            }
+        });
 
         fortificationBtn = (ImageButton) v.findViewById(R.id.home_fortification);
         onClick(fortificationBtn);
@@ -297,5 +323,19 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             fortificationTv.setText("设防");
         }
 
+    }
+
+    HomeViewPagerAdapter.ViewPagerAdapterOnClickListener  viewPagerAdapterOnClickListener = new HomeViewPagerAdapter.ViewPagerAdapterOnClickListener() {
+        @Override
+        public void adapterOnClick(String url) {
+            showWaitToast(context,"你点击了广告url:"+url,3);
+        }
+    };
+
+
+    @Override
+    public void onDestroy() {
+        advertisingHandler.removeMessages(1);
+        super.onDestroy();
     }
 }

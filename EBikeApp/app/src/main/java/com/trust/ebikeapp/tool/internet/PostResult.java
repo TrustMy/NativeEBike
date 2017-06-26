@@ -9,7 +9,9 @@ import com.amap.api.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.bean.AlarmAddressAndroidBean;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
+import com.trust.ebikeapp.tool.bean.AlarmLocationAddressBean;
 import com.trust.ebikeapp.tool.bean.AlarmStatusBean;
 import com.trust.ebikeapp.tool.bean.BindCarBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
@@ -26,9 +28,11 @@ import com.trust.ebikeapp.tool.bean.LocationResultBean;
 import com.trust.ebikeapp.tool.bean.LockBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
 import com.trust.ebikeapp.tool.bean.RegisterRestultBean;
+import com.trust.ebikeapp.tool.bean.SelfTestBean;
 import com.trust.ebikeapp.tool.bean.VehicleTrajectoryBean;
 import com.trust.ebikeapp.tool.gps.ConversionLocation;
 import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
+import com.trust.ebikeapp.tool.gps.gpsconfig.ConversionLocationAddress;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.List;
@@ -43,8 +47,10 @@ public class PostResult extends Handler {
     private ResultCallBack callBack;
     private CoordinateTransformation coordinateTransformation;
     private ConversionLocation conversionLocation;
+    private ConversionLocationAddress conversionLocationAddress;
 
     CarStrokeBean carStrokeBean;
+    AlarmBean alarmBean;
 
     protected static ExecutorService threadPool = Executors.newCachedThreadPool();
     public PostResult(ResultCallBack callBack) {
@@ -143,6 +149,12 @@ public class PostResult extends Handler {
             case Config.trickLocation:
                 if( checkMsgStatus(msg,Config.trickLocation)){
                     trickLocationResult((String)msg.obj,Config.trickLocation);
+                }
+                break;
+
+            case Config.selfTest:
+                if( checkMsgStatus(msg,Config.selfTest)){
+                    selfTestResult((String)msg.obj,Config.selfTest);
                 }
                 break;
         }
@@ -374,8 +386,12 @@ public class PostResult extends Handler {
 
     private void carAlarmResult(String obj, int type) {
         AlarmBean bean = gson.fromJson(obj,AlarmBean.class);
+        alarmBean = bean;
         if(bean.getStatus()){
-            result( bean, type, Config.SUCCESS);
+            conversionLocationAddress = new ConversionLocationAddress(bean.getContent().getAlarms(),alarmAddressCallBack);
+            threadPool.execute(conversionLocationAddress);
+//            result( bean, type, Config.SUCCESS);
+
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
@@ -431,6 +447,19 @@ public class PostResult extends Handler {
         }
     };
 
+    public interface alarmLocationAddress{
+        void addressCallBack(List<AlarmLocationAddressBean> bean);
+    }
+
+    public alarmLocationAddress alarmAddressCallBack = new alarmLocationAddress() {
+        @Override
+        public void addressCallBack(List<AlarmLocationAddressBean> bean) {
+            AlarmAddressAndroidBean alarmAddressAndroidBean = new AlarmAddressAndroidBean(
+                    bean,alarmBean.getContent().getAlarms());
+            result(alarmAddressAndroidBean, Config.carAlarm, Config.SUCCESS);
+        }
+    };
+
 
     /**
      * 通过指定时间获取轨迹
@@ -447,6 +476,20 @@ public class PostResult extends Handler {
             result( getErrorMsg(obj), type, Config.ERROR);
         }
 
+    }
+
+    /**
+     * 车辆自检
+     * @param obj
+     * @param type
+     */
+    private void selfTestResult(String obj, int type) {
+        SelfTestBean bean = gson.fromJson(obj,SelfTestBean.class);
+        if(bean.getStatus()){
+            result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
     }
 
 }

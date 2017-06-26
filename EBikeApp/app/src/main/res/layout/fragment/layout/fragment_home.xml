@@ -7,33 +7,43 @@
     android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.loginorregister.LoginActivity">
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/homefragment_viewpager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_heightPercent = "30%"
-        app:layout_widthPercent="100%"
-        >
-
-    </android.support.v4.view.ViewPager>
-    <LinearLayout
-        android:id="@+id/homefragment_viewpager_paint"
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"></LinearLayout>
+        app:layout_heightPercent = "40%"
+        app:layout_widthPercent="100%"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/homefragment_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:layout_marginBottomPercent = "6%"
+            android:id="@+id/homefragment_viewpager_paint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"></LinearLayout>
+
+
+    </android.support.percent.PercentRelativeLayout>
+
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_heightPercent="70%"
+        app:layout_heightPercent="60%"
         app:layout_widthPercent="100%">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="40dp"
+            android:layout_margin="20dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -57,6 +67,7 @@
                         android:background="@drawable/home_fortification_btn_bg" />
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:id="@+id/home_fortification_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,6 +92,7 @@
                         android:background="@drawable/home_carhistroy_btn_bg" />
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="用车记录"
@@ -104,6 +116,7 @@
                         android:background="@drawable/home_location_btn_bg" />
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="位置服务"
@@ -135,6 +148,7 @@
                         android:background="@drawable/home_carstatus_btn_bg" />
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="车辆状态"
@@ -163,12 +177,12 @@
 
                         <RelativeLayout
                             android:id="@+id/homefragment_alarm_num_layout"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_alignEnd="@+id/home_alarm"
                             android:layout_alignRight="@+id/home_alarm"
                             android:layout_marginEnd="6dp"
                             android:layout_marginRight="9dp"
-                            app:layout_heightPercent="13%"
+                            app:layout_heightPercent="16%"
                             app:layout_widthPercent="20%">
 
                             <ImageView
@@ -193,6 +207,7 @@
                     </android.support.percent.PercentRelativeLayout>
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警记录"
@@ -215,6 +230,7 @@
                         android:background="@drawable/home_help_btn_bg" />
 
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="帮助和服务"

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
+import com.trust.ebikeapp.tool.bean.AlarmLocationAddressBean;
 
 
 import java.util.List;
@@ -19,10 +20,12 @@ import java.util.List;
 
 public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecyclerViewAdapter.ViewHodler> {
     private List<AlarmBean.ContentBean.AlarmsBean> ml ;
+    private List<AlarmLocationAddressBean> addressList;
     private Context context;
 
-    public void setMl(List<AlarmBean.ContentBean.AlarmsBean> ml) {
+    public void setMl(List<AlarmBean.ContentBean.AlarmsBean> ml,List<AlarmLocationAddressBean> addressList) {
         this.ml = ml;
+        this.addressList = addressList;
     }
 
     public AlarmRecyclerViewAdapter(Context context) {
@@ -38,8 +41,8 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
 
     @Override
     public void onBindViewHolder(ViewHodler holder, int position) {
-        holder.time.setText(TimeTool.getTime(ml.get(position).getGpsTime()));
-        holder.address.setText(ml.get(position).getLat()+"");
+        holder.time.setText(TimeTool.getTimeAll(ml.get(position).getGpsTime()));
+        holder.address.setText(addressList.get(position).getAddress());
         holder.type.setText(ml.get(position).getStatus()+"");
     }
 

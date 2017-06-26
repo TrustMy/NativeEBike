@@ -4,12 +4,23 @@ package com.trust.ebikeapp.tool.bean;
  * Created by Trust on 2017/5/11.
  */
 public class HomeViewPagerBean {
-    // 新闻的 id
-    private int index;
-    // 新闻里的图片 url
-    private String imageUrl;
+    private String imgUrl;//网络图片
+    private int imgId;//本地图片
+    private String url;//点击跳转的url
 
-    private int imgId;
+    public HomeViewPagerBean(String imgUrl, int imgId, String url) {
+        this.imgUrl = imgUrl;
+        this.imgId = imgId;
+        this.url = url;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public int getImgId() {
         return imgId;
@@ -19,25 +30,11 @@ public class HomeViewPagerBean {
         this.imgId = imgId;
     }
 
-    public HomeViewPagerBean(int index, String imageUrl , int imgId) {
-        this.index = index;
-        this.imageUrl = imageUrl;
-        this.imgId = imgId;
+    public String getUrl() {
+        return url;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

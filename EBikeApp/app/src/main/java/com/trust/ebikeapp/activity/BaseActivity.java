@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Switch;
 
@@ -30,6 +31,7 @@ import io.reactivex.functions.Consumer;
 public class BaseActivity extends AppCompatActivity {
     protected Post post;
     public static Activity activity ;
+    private Context context = BaseActivity.this;
     public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
         public void CallBeck(Object obj, int type, int status) {
@@ -123,4 +125,6 @@ public class BaseActivity extends AppCompatActivity {
             activity.finish();
         }
     }
+
+
 }

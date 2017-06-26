@@ -27,6 +27,12 @@ public class TimeTool {
         String GPSTime = formatter.format(dateTime);
         return GPSTime;
     }
+    public static String getTimeAll(long  time){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss");
+        Date dateTime = new Date(time);//获取当前时间
+        String GPSTime = formatter.format(dateTime);
+        return GPSTime;
+    }
 
     public static long getTime( String format) {
         try {

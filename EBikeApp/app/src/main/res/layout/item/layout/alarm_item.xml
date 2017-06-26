@@ -18,7 +18,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="2017-06-14\n15:30:36"
+            android:text="2017-06-14    15:30:36"
             android:textSize="12sp"
             android:textColor="@color/colorWhite"
             app:layout_widthPercent = "30%"/>
