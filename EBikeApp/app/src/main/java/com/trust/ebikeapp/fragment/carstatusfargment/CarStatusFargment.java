@@ -78,7 +78,7 @@ public class CarStatusFargment extends BaseFragment {
     public void successCallBeack(Object obj, int type) {
         switch (type){
             case Config.selfTest:
-                T.showToast(context,"自检成功!");
+                showWaitToast(context,"自检成功",1);
                 break;
         }
     }

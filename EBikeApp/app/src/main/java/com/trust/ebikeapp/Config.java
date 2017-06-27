@@ -2,6 +2,7 @@ package com.trust.ebikeapp;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.backup.FullBackupDataOutput;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -22,6 +23,9 @@ public class Config extends Application {
     public static long phone;
     public static String pwd;
     public static boolean checkBox = false;
+    public static String speed;
+    public static String nickname;
+    public static String emaill;
 
     //实时追踪的配置
     public static int startDurationtime = 300;
@@ -57,6 +61,11 @@ public class Config extends Application {
     public final static int trickLocation = 0x015;//实时追踪划线
     public final static int locationTime = 0x016;//计时;
     public final static int selfTest = 0x017;//车辆自检
+    public final static int unBindCar = 0x018;//解绑
+    public final static int speedLimit = 0x019;//限速
+    public final static int nickNameUpdate= 0x020;//修改昵称
+    public final static int offTheOilOrElectricity = 0x021;//断油或断电
+    public final static int carLight = 0x022;//开关车灯
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -70,16 +79,19 @@ public class Config extends Application {
     public static final String get_check_num = "register/applySmsCode/";//获取验证码
     public static final String bind_car = "rest/user/bind/";//车辆绑定
     public static final String chang_pwd = "register/setNewPwd/";//修改密码
-
     public static final String car_stroke = "rest/trips/period/";//根据时间段分页获取行程列表
     public static final String car_alarm = "rest/ alarms/period/";//更具时间段分页获取报警信息
     public static final String car_history_location_url = "rest/gps/period/"; //获取车辆历史轨迹
     public static final String car_lock_url = "rest/cmd/lock/";//车辆设防
-
     public static final String car_status = "rest/cmd/queryStatus/";//查询车辆状态
-
     public static final String alarm_status = "rest/ alarms/updateAll/";//处理全部报警状态
     public static final String self_test = "rest/cmd/selfInspection/";//车辆自检;
+    public static final String un_bind_car = "rest/user/unBind/";//解绑
+    public static final String speed_limit = "rest/cmd/limitSpeed/";//限速
+    public static final String nick_name_update = "rest/ user/updateUserNickName/";//修改昵称
+    public static final String off_the_oil_or_electricity = "rest/cmd/breakPower/";//断油/断电
+    public static final String car_light = "rest/cmd/controlLight/";//开关车灯
+
     @Override
     public void onCreate() {
         super.onCreate();

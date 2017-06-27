@@ -110,7 +110,7 @@ public class CarBindActivity extends BaseActivity {
     public void resultCallBeack(Object obj, int type, int status) {
         if(status == Config.SUCCESS){
             if(type == Config.getCheckNum){
-                T.showToast(this,"获取成功!");
+
                 checkNumEd.setText(obj.toString());
             }else if(type == Config.bindCar){
                 startActivity(new Intent(this, MainActivity.class));

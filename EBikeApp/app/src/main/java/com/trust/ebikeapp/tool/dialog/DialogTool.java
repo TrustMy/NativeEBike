@@ -26,7 +26,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
  * Created by Trust on 2017/4/9.
  */
 
-public class DialogTool {
+public class DialogTool  {
 
     public static Dialog dialog;
 
@@ -34,7 +34,10 @@ public class DialogTool {
 
     }
     public static  click onClick;
-      public interface click {
+
+
+
+    public interface click {
         void onClick();
     }
 
@@ -45,7 +48,7 @@ public class DialogTool {
 
      */
     public static void waitDialog(Activity activity){
-           context  = activity;
+
             View view = LayoutInflater.from(activity).inflate(R.layout.wait_login_dialog,null);
             ImageView img = (ImageView) view.findViewById(R.id.wait_log_img);
 
@@ -80,7 +83,7 @@ public class DialogTool {
 
     public static PhoneOnClick phoneOnClick;
 
-    public static  Activity context;
+
     public static Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -94,11 +97,31 @@ public class DialogTool {
 
 
 
-    public static void showBackDialog(Activity activity){
-        View view = LayoutInflater.from(activity).inflate(R.layout.wait_login_dialog,null);
+    public static void showBackDialog(final Activity activity){
+        View view = LayoutInflater.from(activity).inflate(R.layout.back_dialog,null);
+
+        final Dialog dialog = new Dialog(activity, R.style.customDialog);
+
+        Button determine = (Button) view.findViewById(R.id.back_dialog_determine);
+        Button cancel = (Button) view.findViewById(R.id.back_dialog_cancel);
+        determine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!activity.isFinishing()){
+                   activity.finish();
+                }
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         dialog.setContentView(view);
         if(!activity.isFinishing()){
             dialog.show();
         }
     }
+
 }

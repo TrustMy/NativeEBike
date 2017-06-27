@@ -39,22 +39,7 @@
                android:layout_marginRight="20dp"/>
 
 
-           <LinearLayout
-               android:layout_width="wrap_content"
-               android:layout_height="match_parent"
-               android:layout_alignParentRight="true"
-               android:orientation="horizontal">
 
-
-               <Button
-                   android:id="@+id/activity_blue_device_disconnect"
-                   android:visibility="gone"
-                   android:textColor="#ffffff"
-                   android:background="@null"
-                   android:text="disconnect"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
-           </LinearLayout>
 
        </RelativeLayout>
 
@@ -63,18 +48,27 @@
 
     <ImageView
         android:src="@drawable/user"
-        android:id="@+id/myfragment_user"
+        android:id="@+id/myfragment_user_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_marginTopPercent = "4%"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/myfragment_user_name"
+        android:text=""
+        android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 
     <ScrollView
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="20dp"
-        android:scrollbars="none"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:scrollbars="none"
 
         >
 
@@ -85,285 +79,322 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical"
+                android:id="@+id/myfragment_phone_update">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
                     android:drawableLeft="@drawable/iphone"
+                    android:drawablePadding="10dp"
                     android:text="手机"
-                    android:drawablePadding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:textSize="20sp"
+                    android:id="@+id/myfragment_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/colorWhite"
-                    android:text="13888888888"
-                    android:layout_width="wrap_content"
                     android:layout_toLeftOf="@+id/phone_intent"
-                    android:layout_height="wrap_content" />
+                    android:text="13888888888"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <ImageButton
-                    android:layout_centerVertical="true"
                     android:id="@+id/phone_intent"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/arrow_right"/>
-            <View
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"></View>
+                    android:src="@drawable/arrow_right" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#000000"></View>
             </RelativeLayout>
 
 
             <RelativeLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical"
+                android:id="@+id/myfragment_termid_update">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
                     android:drawableLeft="@drawable/icloud_down"
+                    android:drawablePadding="10dp"
                     android:text="车辆解绑"
-                    android:drawablePadding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:textSize="20sp"
+                    android:id="@+id/myfragment_termid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/colorWhite"
-                    android:text="888888888888888"
-                    android:layout_width="wrap_content"
                     android:layout_toLeftOf="@+id/car_unbundling"
-                    android:layout_height="wrap_content" />
+                    android:text="888888888888888"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <ImageButton
-                    android:layout_centerVertical="true"
                     android:id="@+id/car_unbundling"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/arrow_right"/>
+                    android:src="@drawable/arrow_right" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical"
+                android:id="@+id/myfragment_speed_update">
 
                 <TextView
-                    android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
-                    android:drawableLeft="@drawable/speed"
-                    android:text="限速\n(km/h)"
-                    android:drawablePadding="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/speed"
+                    android:drawablePadding="10dp"
+                    android:text="限速(km/h)"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:textSize="20sp"
+                    android:id="@+id/myfragment_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/colorWhite"
-                    android:text="0"
-                    android:layout_width="wrap_content"
                     android:layout_toLeftOf="@+id/chang_speed"
-                    android:layout_height="wrap_content" />
+                    android:text="0"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <ImageButton
-                    android:layout_centerVertical="true"
                     android:id="@+id/chang_speed"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/arrow_right"/>
+                    android:src="@drawable/arrow_right" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
                     android:drawableLeft="@drawable/oil"
+                    android:drawablePadding="10dp"
                     android:text="断油/电"
-                    android:drawablePadding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
 
                 <ImageButton
-                    android:layout_centerVertical="true"
-                    android:id="@+id/un_oil"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/myfragment_off_the_oil_or_electricity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/off"/>
+                    android:src="@drawable/off" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
                     android:drawableLeft="@drawable/iphone"
+                    android:drawablePadding="10dp"
                     android:text="车灯控制"
-                    android:drawablePadding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
                 <ImageButton
-                    android:layout_centerVertical="true"
-                    android:id="@+id/open_light"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/myfragment_car_light"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/off"/>
+                    android:src="@drawable/off" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
+                android:id="@+id/myfragment_pwd_update"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
                     android:drawableLeft="@drawable/key_btn"
+                    android:drawablePadding="10dp"
                     android:text="修改密码"
-                    android:drawablePadding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
 
                 <ImageButton
-                    android:layout_centerVertical="true"
                     android:id="@+id/chang_pwd"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/arrow_right"/>
+                    android:src="@drawable/arrow_right" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
+                android:id="@+id/myfragment_nickname_update"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
-                    android:drawableLeft="@drawable/user_icon"
-                    android:text="昵称"
-                    android:drawablePadding="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/user_icon"
+                    android:drawablePadding="10dp"
+                    android:text="昵称"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
+
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:text="xxxxxx"
+                    android:id="@+id/myfragment_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:layout_toLeftOf="@+id/myfragment_nickname_btn"/>
 
 
                 <ImageButton
-                    android:layout_centerVertical="true"
-                    android:id="@+id/user_name"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/myfragment_nickname_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@null"
-                    android:src="@drawable/arrow_right"/>
+                    android:src="@drawable/arrow_right" />
+
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center_vertical"
+                android:id="@+id/myfragment_email_update"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                >
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/colorWhite"
-                    android:drawableLeft="@drawable/email"
-                    android:text="电子邮件"
-                    android:drawablePadding="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/email"
+                    android:drawablePadding="10dp"
+                    android:text="电子邮件"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
 
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="www.xxx@qq.com"
+                    android:id="@+id/myfragment_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:layout_toLeftOf="@+id/myfragment_emaill_btn"/>
 
+
+                <ImageButton
+                    android:id="@+id/myfragment_emaill_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:src="@drawable/arrow_right" />
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="#000000"></View>
             </RelativeLayout>
-
-
 
 
         </LinearLayout>

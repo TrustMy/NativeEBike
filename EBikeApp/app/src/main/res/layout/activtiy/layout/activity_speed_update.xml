@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.trust.ebikeapp.activity.changpwd.ChangPwdActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_car_location_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorCarHistroyBg"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="100%">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:id="@+id/activity_speed_update_back"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="限速设置"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:textColor="#ffffff"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        android:orientation="horizontal"
+        app:layout_marginTopPercent = "10%"
+        app:layout_heightPercent = "6%"
+        >
+
+        <TextView
+            android:gravity="center"
+            android:text= "限速:"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <RadioGroup
+            android:id="@+id/activity_speed_update_radio_group"
+            app:layout_marginLeftPercent = "5%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/activty_speed_update_radio1"
+                android:text="30"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <RadioButton
+                android:id="@+id/activty_speed_update_radio2"
+                android:text="35"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+
+            <RadioButton
+                android:id="@+id/activty_speed_update_radio3"
+                android:text="40"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+        </RadioGroup>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        android:orientation="horizontal"
+        app:layout_marginTopPercent = "10%"
+        app:layout_heightPercent = "6%">
+
+        <Button
+            android:background="@drawable/bind_btn_off_bg"
+            android:id="@+id/activty_speed_update_cancel"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent = "50%"
+            />
+
+        <Button
+            android:id="@+id/activty_speed_update_determine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent = "50%"
+            android:background="@drawable/bind_btn_on_bg"
+            android:text="确定"
+            android:textColor="@color/colorWhite" />
+
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

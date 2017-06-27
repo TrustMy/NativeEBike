@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".activity.update.phone.PhoneUpdateActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_car_location_toolbar"
+        android:background="#5a8a94"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="100%">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/activity_phone_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="更换手机"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:textColor="#ffffff"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:src="@drawable/phone_update_iphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent = "10%"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        app:layout_heightPercent = "8%"
+        app:layout_marginTopPercent = "6%"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="18sp"
+                android:text="输入密码:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/activity_phone_pwd_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            app:layout_widthPercent = "90%"
+            android:background="#000000"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        app:layout_heightPercent = "8%"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="18sp"
+                android:text="新手机号:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/activity_phone_new_pwd_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            app:layout_widthPercent = "90%"
+            android:background="#000000"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        app:layout_heightPercent = "8%"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="18sp"
+                android:text="验证码:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/activity_phone_check_num_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:layout_widthPercent="54%"/>
+
+            <TextView
+                android:id="@+id/activity_phone_phone_get_check_num"
+                android:gravity="center"
+                android:textColor="@color/colorTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="10sp"
+                android:text="点击获取验证码"/>
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            app:layout_widthPercent = "90%"
+            android:background="#000000"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        android:orientation="horizontal"
+        app:layout_heightPercent = "7%"
+        app:layout_marginTopPercent = "8%">
+
+        <Button
+            android:id="@+id/activity_phone_cancel"
+            android:text="取消"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/choose_cancel_btn_bg"/>
+
+        <Button
+            android:background="@drawable/choose_determine_btn_bg"
+            android:id="@+id/activity_phone_determine"
+            android:text="确定"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

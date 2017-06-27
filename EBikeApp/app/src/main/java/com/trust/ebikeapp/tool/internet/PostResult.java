@@ -14,6 +14,7 @@ import com.trust.ebikeapp.tool.bean.AlarmBean;
 import com.trust.ebikeapp.tool.bean.AlarmLocationAddressBean;
 import com.trust.ebikeapp.tool.bean.AlarmStatusBean;
 import com.trust.ebikeapp.tool.bean.BindCarBean;
+import com.trust.ebikeapp.tool.bean.CarLightAndOilOrElectricityBean;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
 import com.trust.ebikeapp.tool.bean.CarStatusBean;
 import com.trust.ebikeapp.tool.bean.CarStrokeAndAddress;
@@ -27,8 +28,10 @@ import com.trust.ebikeapp.tool.bean.LocationAddressBean;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
 import com.trust.ebikeapp.tool.bean.LockBean;
 import com.trust.ebikeapp.tool.bean.LoginResultBean;
+import com.trust.ebikeapp.tool.bean.NickNameUpdateBean;
 import com.trust.ebikeapp.tool.bean.RegisterRestultBean;
 import com.trust.ebikeapp.tool.bean.SelfTestBean;
+import com.trust.ebikeapp.tool.bean.SpeedLimitBean;
 import com.trust.ebikeapp.tool.bean.VehicleTrajectoryBean;
 import com.trust.ebikeapp.tool.gps.ConversionLocation;
 import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
@@ -157,6 +160,36 @@ public class PostResult extends Handler {
                     selfTestResult((String)msg.obj,Config.selfTest);
                 }
                 break;
+
+            case Config.unBindCar:
+                if( checkMsgStatus(msg,Config.unBindCar)){
+                    unBindCarResult((String)msg.obj,Config.unBindCar);
+                }
+                break;
+
+            case Config.speedLimit:
+                if( checkMsgStatus(msg,Config.speedLimit)){
+                    speedLimitResult((String)msg.obj,Config.speedLimit);
+                }
+                break;
+
+            case Config.nickNameUpdate:
+                if( checkMsgStatus(msg,Config.nickNameUpdate)){
+                    nickNameUpdateResult((String)msg.obj,Config.nickNameUpdate);
+                }
+                break;
+
+            case Config.offTheOilOrElectricity:
+                if( checkMsgStatus(msg,Config.offTheOilOrElectricity)){
+                    carLightAndOilOrElectricityResult((String)msg.obj,Config.offTheOilOrElectricity);
+                }
+                break;
+
+            case Config.carLight:
+                if( checkMsgStatus(msg,Config.carLight)){
+                    carLightAndOilOrElectricityResult((String)msg.obj,Config.carLight);
+                }
+                break;
         }
     }
 
@@ -231,6 +264,9 @@ public class PostResult extends Handler {
             editor.commit();
 
             Config.termId = bean.getContent().getTermId();
+            Config.nickname = bean.getContent().getNickName();
+            Config.speed = bean.getContent().getSpeed();
+            Config.emaill = bean.getContent().getEmail();
 
             result(bean.getContent().getTermId(),type,Config.SUCCESS);
         }else{
@@ -351,6 +387,21 @@ public class PostResult extends Handler {
     }
 
     /**
+     * 解绑
+     * @param obj
+     * @param type
+     */
+    private void unBindCarResult(String obj, int type) {
+        BindCarBean bean = gson.fromJson(obj,BindCarBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
+    /**
      * 修改密码
      * @param obj
      * @param type
@@ -365,6 +416,35 @@ public class PostResult extends Handler {
     }
 
     /**
+     * 修改昵称
+     * @param obj
+     * @param type
+     */
+    private void nickNameUpdateResult(String obj, int type) {
+        NickNameUpdateBean bean = gson.fromJson(obj,NickNameUpdateBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 共用 断电 或 车灯
+     * @param obj
+     * @param type
+     */
+    private void carLightAndOilOrElectricityResult(String obj, int type) {
+        CarLightAndOilOrElectricityBean bean = gson.fromJson(obj,CarLightAndOilOrElectricityBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
+    /**
      * 车辆设防
      * @param obj
      * @param type
@@ -377,6 +457,22 @@ public class PostResult extends Handler {
             result( getErrorMsg(obj), type, Config.ERROR);
         }
     }
+
+    /**
+     * 限速
+     * @param obj
+     * @param type
+     */
+    private void speedLimitResult(String obj, int type) {
+        SpeedLimitBean bean = gson.fromJson(obj,SpeedLimitBean.class);
+        if(bean.getStatus()){
+            result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+
 
     /**
      * 分页拉取报警信息

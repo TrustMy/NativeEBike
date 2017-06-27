@@ -43,7 +43,11 @@
         <activity android:name=".activity.alarm.AlarmActivity" />
         <activity android:name=".activity.bind.CarBindActivity" />
         <activity android:name=".activity.changpwd.ChangPwdActivity" />
-        <activity android:name=".activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity"></activity>
+        <activity android:name=".activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity" />
+        <activity android:name=".activity.update.phone.PhoneUpdateActivity" />
+        <activity android:name=".activity.update.termid.TermIdUpdateActivity" />
+        <activity android:name=".activity.update.speed.SpeedUpdateActivity" />
+        <activity android:name=".activity.update.nickname.NickNameUpdateActivity"></activity>
     </application>
 
 </manifest>

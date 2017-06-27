@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <RelativeLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_dialog_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_widthPercent="40%">
 
-       <ImageView
-           android:src="@mipmap/ic_launcher"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
-       <TextView
-           android:text="确定退出?"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
-   </RelativeLayout>
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/happy"
+            app:layout_marginTopPercent="3%" />
+
+        <TextView
+            android:textColor="#153a45"
+            app:layout_marginTopPercent = "2%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定退出?" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="#000000">
+
+            <Button
+                android:id="@+id/back_dialog_determine"
+                android:textColor="#153a45"
+                android:background="@drawable/back_dialog_determine_btn_bg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="确定" />
+
+            <Button
+               android:id="@+id/back_dialog_cancel"
+                android:textColor="#153a45"
+                android:layout_marginLeft="1dp"
+                android:background="@drawable/back_dialog_cancel_btn_bg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="取消" />
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</LinearLayout>
