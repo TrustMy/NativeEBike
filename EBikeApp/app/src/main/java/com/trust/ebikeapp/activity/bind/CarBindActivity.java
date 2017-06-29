@@ -1,6 +1,7 @@
 package com.trust.ebikeapp.activity.bind;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
+import com.zxing.activity.CaptureActivity;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -25,6 +27,8 @@ public class CarBindActivity extends BaseActivity {
     private ImageView qrBtn;
     private Button cancelBtn,determineBtn;
     private TextView getCheckNumBtn;
+    private Context context = CarBindActivity.this;
+    private final int Scann = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +80,7 @@ public class CarBindActivity extends BaseActivity {
         Map<String,Object> map = new WeakHashMap<String,Object>();
         switch (v.getId()){
             case R.id.activity_car_bind_qr_code:
+                startActivityForResult(new Intent(context, CaptureActivity.class),Scann);
                 break;
             case R.id.activity_car_bind_get_check_num:
                 if (phone == 0) {
@@ -83,7 +88,7 @@ public class CarBindActivity extends BaseActivity {
                     return;
                 }else{
                     map.put("cp", phone);
-                    post.Request(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
+                    requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
                 }
                 break;
             case R.id.activity_car_bind_cancel:
@@ -97,7 +102,7 @@ public class CarBindActivity extends BaseActivity {
                     map.put("cp",phone);
                     map.put("termId",termId);
                     map.put("code",checkNum);
-                    post.Request(Config.bind_car,map,Config.bindCar,Config.needAdd);
+                    requestCallBeack(Config.bind_car,map,Config.bindCar,Config.needAdd);
                 }
 
                 break;
@@ -119,4 +124,20 @@ public class CarBindActivity extends BaseActivity {
             L.e("error："+obj.toString());
         }
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                case Scann:
+                    String resultq = data.getExtras().getString("result");
+                    deviceEd.setText(resultq);
+                    break;
+            }
+        }
+    }
+
+
 }

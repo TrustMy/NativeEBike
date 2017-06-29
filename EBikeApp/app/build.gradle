@@ -46,7 +46,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile 'com.robinhood.ticker:ticker:1.2.0'
-
     compile 'com.jakewharton:butterknife:6.1.0'
     testCompile 'junit:junit:4.12'
+    compile project(':erwmlib')
 }
