@@ -1,7 +1,9 @@
 package com.trust.ebikeapp.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,17 +11,26 @@ import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Switch;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.activity.alarm.AlarmActivity;
+import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
+import com.trust.ebikeapp.tool.push.PushTool;
+import com.trust.ebikeapp.tool.push.Utils;
+import com.trust.ebikeapp.tool.trustinterface.PushCallBack;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.annotations.NonNull;
@@ -38,17 +49,44 @@ public class BaseActivity extends AppCompatActivity {
             resultCallBeack(obj,type,status);
         }
     };
+
+    private PushCallBack pushCallBack = new PushCallBack() {
+        @Override
+        public void CallBack(String title, String msg) {
+            L.d("title :"+title+"|"+msg);
+            DialogTool.showAlarmError(activity,title,msg);
+            DialogTool.alarmErrorDialogCallBack = new DialogTool.AlarmErrorDialogCallBack() {
+                @Override
+                public void CallBack() {
+                    L.d("Config.loginStatus:"+Config.loginStatus);
+                    if(Config.loginStatus){
+                       startActivity(new Intent(activity, AlarmActivity.class));
+                    }else{
+                        showErrorToast(context,"请先登录,在查看详细信息!",3);
+                    }
+                }
+            };
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lgin);
         activity = this;
         init();
+        initPush();
+    }
+
+    private void initPush() {
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
+                Utils.getMetaValue(BaseActivity.this, "api_key"));
 
     }
 
     private void init() {
         post = new Post(resultCallBack);
+        PushTool.pushCallBack = pushCallBack;
     }
 
 
@@ -74,7 +112,11 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void errorCallBeack(Object obj,int type){
-        showErrorToast(Config.context,obj.toString(),3);
+        if(type == Config.trickLocation){
+            showErrorToast(Config.context,obj.toString(),3);
+        }else{
+            DialogTool.showError(this,obj.toString());
+        }
     }
 
     public void  onClick(final View v){
@@ -126,5 +168,29 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 申请验证码
+     */
+    protected void requestCheckNum() {
+        Map<String,Object> map =  new WeakHashMap<>();
+        map.put("cp", Config.phone);
+        requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
+    }
+
+    /**
+     * 检测 输入是否为空
+     * @param editText
+     * @param errorMsg
+     * @return
+     */
+    protected  String checkMessage(EditText editText,String errorMsg){
+        String msg = editText.getText().toString().trim();
+        if(!msg.equals("")){
+            return msg;
+        }else{
+            showErrorToast(context,errorMsg,1);
+            return null;
+        }
+    }
 
 }

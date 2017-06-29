@@ -27,6 +27,11 @@ public class Config extends Application {
     public static String nickname;
     public static String emaill;
 
+    public static String timeTypeYears = "yyyy-MM-dd";
+    public static String timeTypeMinutesAndSeconds = "HH:mm:ss";
+
+    public static boolean loginStatus = false;//登录状态
+
     //实时追踪的配置
     public static int startDurationtime = 300;
     public static int endDurationtime = 0;
@@ -52,7 +57,7 @@ public class Config extends Application {
     public final static int foundCar = 0x006;
     public final static int getCheckNum = 0x007;
     public final static int bindCar = 0x008;
-    public final static int changPwd = 0x009;
+    public final static int changPwd = 0x009;//修改密码
     public final static int carStroke = 0x010;
     public final static int carHistoryLocation = 0x011;//通过时间获取车辆轨迹
     public final static int carAlarm = 0x012;//通过时间分页获取报警信息
@@ -66,6 +71,7 @@ public class Config extends Application {
     public final static int nickNameUpdate= 0x020;//修改昵称
     public final static int offTheOilOrElectricity = 0x021;//断油或断电
     public final static int carLight = 0x022;//开关车灯
+    public final static int resetPwd = 0x023;//重置密码
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -78,7 +84,7 @@ public class Config extends Application {
     public static final String car_buzzer = "rest/cmd/buzzer/";//found car
     public static final String get_check_num = "register/applySmsCode/";//获取验证码
     public static final String bind_car = "rest/user/bind/";//车辆绑定
-    public static final String chang_pwd = "register/setNewPwd/";//修改密码
+    public static final String chang_pwd = "rest/user/resetPwd/";//修改密码
     public static final String car_stroke = "rest/trips/period/";//根据时间段分页获取行程列表
     public static final String car_alarm = "rest/ alarms/period/";//更具时间段分页获取报警信息
     public static final String car_history_location_url = "rest/gps/period/"; //获取车辆历史轨迹
@@ -91,6 +97,7 @@ public class Config extends Application {
     public static final String nick_name_update = "rest/ user/updateUserNickName/";//修改昵称
     public static final String off_the_oil_or_electricity = "rest/cmd/breakPower/";//断油/断电
     public static final String car_light = "rest/cmd/controlLight/";//开关车灯
+    public static final String reset_pwd = "register/setNewPwd/";//重置密码
 
     @Override
     public void onCreate() {

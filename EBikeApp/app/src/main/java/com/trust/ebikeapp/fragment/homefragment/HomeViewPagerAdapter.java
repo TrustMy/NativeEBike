@@ -2,10 +2,12 @@ package com.trust.ebikeapp.fragment.homefragment;
 
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.bean.HomeViewPagerBean;
 
@@ -30,7 +32,9 @@ public class HomeViewPagerAdapter extends PagerAdapter {
         this.articles = articles;
         for (int i = 0; i < articles.size(); i++) {
             ImageView img= new ImageView(context);
-            img.setBackgroundResource(articles.get(i).getImgId());
+//            img.setBackgroundResource(articles.get(i).getImgId());
+            img.setScaleType(ImageView.ScaleType.FIT_XY);//铺满屏幕
+            Glide.with(context).load(articles.get(i).getImgId()).into(img);
             ml.add(img);
 
         }

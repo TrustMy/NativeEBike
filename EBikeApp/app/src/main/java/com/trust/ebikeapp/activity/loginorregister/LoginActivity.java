@@ -17,7 +17,7 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.bind.CarBindActivity;
-import com.trust.ebikeapp.activity.changpwd.ChangPwdActivity;
+import com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
@@ -52,9 +52,9 @@ public class LoginActivity extends BaseActivity {
         long phone = editor.getLong("phone",0);
         if(phone != 0){
             checkBox.setChecked(true);
-            String pwd = editor.getString("pwd",null);
+            Config.pwd   = editor.getString("pwd",null);
             userEd.setText(phone+"");
-            pwdEd.setText(pwd);
+            pwdEd.setText(Config.pwd );
         }
 
 
@@ -111,7 +111,7 @@ public class LoginActivity extends BaseActivity {
                 break;
 
             case R.id.login_chang_pwd:
-                startActivity(new Intent(context,ChangPwdActivity.class));
+                startActivity(new Intent(context,ResetPwdActivity.class));
 
                 break;
         }
@@ -123,8 +123,10 @@ public class LoginActivity extends BaseActivity {
         if(type == Config.login){
             long termId = (long) obj;
             if(termId == 0){
+
                 startActivity(new Intent(context,CarBindActivity.class));
             }else{
+
                 startActivity(new Intent(context,MainActivity.class));
             }
         }

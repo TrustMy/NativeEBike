@@ -232,12 +232,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/alarm_activity_recycler_view"
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/alarm_activity_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_below="@+id/alarm_activity_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/activity_alarm_histroy_load_date_layout"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_alarm_histroy_load_date"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="点击加载"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+    </ScrollView>
 
 
 

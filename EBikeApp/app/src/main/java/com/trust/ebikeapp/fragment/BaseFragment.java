@@ -98,7 +98,16 @@ public class BaseFragment extends Fragment {
     }
 
     public void errorCallBeack(Object obj,int type){
-        showErrorToast(Config.context,obj.toString(),3);
+        if(type == Config.trickLocation){
+            showErrorToast(Config.context,obj.toString(),3);
+        }else{
+            DialogTool.showError(context,obj.toString());
+        }
+            doError(type);
+    }
+
+    protected void doError(int type){
+
     }
 
 

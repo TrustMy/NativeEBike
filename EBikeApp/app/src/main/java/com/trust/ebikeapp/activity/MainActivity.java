@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.fragment.carstatusfargment.CarStatusFargment;
 import com.trust.ebikeapp.fragment.homefragment.HomeFragment;
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         initView();
         initFargment();
+
+        Config.loginStatus = true;
     }
 
     private void initView() {

@@ -48,6 +48,9 @@ public class ConversionLocation implements Runnable{
                 case 1://终点
                     offStatus = true;
                     break;
+                case 2:
+                    addressCallBack.addressCallBack(mls);
+                    break;
             }
 
             if(onStatus && offStatus && onList.size() == offList.size() ){
@@ -159,7 +162,8 @@ public class ConversionLocation implements Runnable{
 
         }else{
             L.e("ml == null || ml == 0");
-            addressCallBack.addressCallBack(mls);
+            handler.sendEmptyMessage(2);
+
         }
     }
 

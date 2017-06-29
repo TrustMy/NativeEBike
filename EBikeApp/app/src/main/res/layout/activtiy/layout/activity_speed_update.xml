@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.trust.ebikeapp.activity.changpwd.ChangPwdActivity">
+    tools:context="com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_car_location_toolbar"
@@ -14,6 +14,7 @@
         android:layout_height="0dp"
         android:background="@color/colorCarHistroyBg"
         app:layout_heightPercent="8%"
+        app:contentInsetStart="0dp"
         app:layout_widthPercent="100%">
 
         <RelativeLayout

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_dialog_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_widthPercent="40%">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sad"
+            app:layout_marginTopPercent="3%" />
+
+        <TextView
+            android:id="@+id/error_dialog_msg"
+            android:textColor="#153a45"
+            app:layout_marginTopPercent = "2%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxx异常!" />
+
+        <View
+            app:layout_marginTopPercent = "2%"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+
+            >
+
+            <Button
+                android:id="@+id/error_dialog_determine"
+                android:textColor="#153a45"
+                android:background="#00000000"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="确定" />
+
+
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+</LinearLayout>

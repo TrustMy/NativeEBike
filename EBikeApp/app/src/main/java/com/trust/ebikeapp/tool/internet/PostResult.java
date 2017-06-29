@@ -190,6 +190,12 @@ public class PostResult extends Handler {
                     carLightAndOilOrElectricityResult((String)msg.obj,Config.carLight);
                 }
                 break;
+
+            case Config.resetPwd:
+                if( checkMsgStatus(msg,Config.resetPwd)){
+                    resetPwdResult((String)msg.obj,Config.resetPwd);
+                }
+                break;
         }
     }
 
@@ -452,7 +458,7 @@ public class PostResult extends Handler {
     private void carLockResult(String obj, int type) {
         LockBean bean = gson.fromJson(obj,LockBean.class);
         if(bean.getStatus()){
-            result( null, type, Config.SUCCESS);
+            result( bean, type, Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
@@ -502,6 +508,20 @@ public class PostResult extends Handler {
         AlarmStatusBean bean = gson.fromJson(obj,AlarmStatusBean.class);
         if(bean.getStatus()){
             result( bean, type, Config.SUCCESS);
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
+        }
+    }
+
+    /**
+     * 重置密码
+     * @param obj
+     * @param type
+     */
+    private void resetPwdResult(String obj, int type) {
+        NickNameUpdateBean bean = gson.fromJson(obj,NickNameUpdateBean.class);
+        if(bean.getStatus()){
+            result( null, type, Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }

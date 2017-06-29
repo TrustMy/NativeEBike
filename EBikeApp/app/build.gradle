@@ -34,6 +34,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/AMap3DMap_5.0.0_AMapNavi_5.0.1_AMapSearch_5.0.0_AMapLocation_3.4.0_20170427.jar')
+    compile files('libs/pushservice-5.7.0.95.jar')
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:percent:25.3.0'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
@@ -45,5 +46,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile 'com.robinhood.ticker:ticker:1.2.0'
+
+    compile 'com.jakewharton:butterknife:6.1.0'
     testCompile 'junit:junit:4.12'
 }

@@ -65,11 +65,7 @@ public class PhoneUpdateActivity extends BaseActivity {
         }
     }
 
-    private void requestCheckNum() {
-        Map<String,Object> map =  new WeakHashMap<>();
-        map.put("cp", Config.phone);
-        requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
-    }
+
 
     private void request() {
 

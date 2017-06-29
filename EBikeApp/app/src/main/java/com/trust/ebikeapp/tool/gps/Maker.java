@@ -27,7 +27,7 @@ public class Maker {
         LatLng data = new LatLng(message.getLat(),message.getLon());
         map.addMarker(new MarkerOptions().
                 position(data).
-                title(message.getType()).snippet(TimeTool.getTime(message.getGpsTime()))).showInfoWindow();
+                title(message.getType()).snippet(TimeTool.getTimeAll(message.getGpsTime()))).showInfoWindow();
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
                 new LatLng(data.latitude,data.longitude),//新的中心点坐标
@@ -69,7 +69,7 @@ public class Maker {
         markerOptions.icons(ml);
         markerOptions.position(data);
         markerOptions.title(message.getType());
-        markerOptions.snippet(TimeTool.getTime(message.getGpsTime()));
+        markerOptions.snippet(TimeTool.getTimeAll(message.getGpsTime()));
         markerOptions.period(3);
 
         aMap.addMarker(markerOptions).showInfoWindow();

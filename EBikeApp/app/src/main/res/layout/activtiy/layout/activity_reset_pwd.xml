@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_car_location_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorCarHistroyBg"
+        app:layout_heightPercent="8%"
+        app:contentInsetStart="0dp"
+        app:layout_widthPercent="100%">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/activity_reset_pwd_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="找回密码"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/activity_blue_device_disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="disconnect"
+                    android:textColor="#ffffff"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/lock"
+        app:layout_marginTopPercent="6%" />
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "6%"
+        app:layout_marginTopPercent = "7%"
+        app:layout_widthPercent="80%"
+        >
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="手机号:"
+
+                />
+
+            <EditText
+                android:id="@+id/activity_reset_pwd_phone"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="70%" />
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+        <View
+            android:background="#0d0d0d"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "6%"
+        app:layout_marginTopPercent = "3%"
+        app:layout_widthPercent="80%"
+        >
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:text="验证码:" />
+
+            <EditText
+                android:id="@+id/activity_reset_pwd_check_num"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_heightPercent = "100%"
+                app:layout_widthPercent="58%"
+                android:background="@null"
+                />
+
+            <TextView
+                android:id="@+id/activity_reset_pwd_get_check_num"
+                android:gravity="center"
+                android:textColor="@color/colorTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="10sp"
+                android:text="点击获取验证码"/>
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        <View
+            android:background="#0d0d0d"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "6%"
+        app:layout_marginTopPercent = "3%"
+        app:layout_widthPercent="80%"
+        >
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="新密码:"
+
+                />
+
+            <EditText
+                android:id="@+id/activity_reset_pwd_new_pwd"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="70%" />
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+        <View
+            android:background="#0d0d0d"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_heightPercent = "6%"
+        app:layout_marginTopPercent = "3%"
+        app:layout_widthPercent="80%"
+        >
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="确认新密码:"
+
+                />
+
+            <EditText
+                android:id="@+id/activity_reset_pwd_new_two_pwd"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="70%" />
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+        <View
+            android:background="#0d0d0d"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+
+    <Button
+        android:id="@+id/activity_never"
+        app:layout_marginLeftPercent = "10%"
+        android:textColor="@color/colorTextColor"
+        android:text="无法找回密码?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"/>
+
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent = "80%"
+        android:orientation="horizontal"
+        app:layout_marginTopPercent = "5%"
+        app:layout_heightPercent = "6%">
+
+        <Button
+            android:background="@drawable/bind_btn_off_bg"
+            android:id="@+id/activity_reset_pwd_cancel"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent = "50%"
+            />
+
+        <Button
+            android:id="@+id/activity_reset_pwd_determine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent = "50%"
+            android:background="@drawable/bind_btn_on_bg"
+            android:text="确定"
+            android:textColor="@color/colorWhite" />
+
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+
+
+
+
+</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>

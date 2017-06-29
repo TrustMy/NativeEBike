@@ -108,6 +108,7 @@ public class DialogTool  {
             @Override
             public void onClick(View view) {
                 if(!activity.isFinishing()){
+                    Config.loginStatus = false;
                    activity.finish();
                 }
             }
@@ -124,4 +125,49 @@ public class DialogTool  {
         }
     }
 
+
+    public static void showError(final Activity activity,String msg){
+        final Dialog dialog = new Dialog(activity, R.style.customDialog);
+        View view = LayoutInflater.from(activity).inflate(R.layout.error_dialog,null);
+        Button determine = (Button) view.findViewById(R.id.error_dialog_determine);
+        determine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    dialog.dismiss();
+            }
+        });
+        TextView msgTv = (TextView) view.findViewById(R.id.error_dialog_msg);
+        msgTv.setText(msg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(view);
+        if(!activity.isFinishing()){
+            dialog.show();
+        }
+    }
+
+    public static void showAlarmError(Activity activity,String type , String msg){
+        final Dialog dialog = new Dialog(activity, R.style.customDialog);
+        View view = LayoutInflater.from(activity).inflate(R.layout.error_alarm_dialog,null);
+        TextView titleTv = (TextView) view.findViewById(R.id.error_alarm_dialog_type);
+        TextView msgTv = (TextView) view.findViewById(R.id.error_alarm_dialog_msg);
+        titleTv.setText(type);
+        Button determine = (Button) view.findViewById(R.id.error_alarm_dialog_determine);
+        determine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                alarmErrorDialogCallBack.CallBack();
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(view);
+        if(!activity.isFinishing()){
+            dialog.show();
+        }
+    }
+
+     public interface  AlarmErrorDialogCallBack{
+        void CallBack();
+    }
+    public static AlarmErrorDialogCallBack  alarmErrorDialogCallBack;
 }

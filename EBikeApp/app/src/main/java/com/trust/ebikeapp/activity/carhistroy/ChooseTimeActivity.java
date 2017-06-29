@@ -65,7 +65,7 @@ public class ChooseTimeActivity extends BaseActivity {
         onClick(startTv);
         onClick(endTv);
 
-        String time = TimeTool.getTime(mTime);
+        String time = TimeTool.getTime(mTime,Config.timeTypeYears);
         startTv.setText(time);
         endTv.setText(time);
 
@@ -106,13 +106,13 @@ public class ChooseTimeActivity extends BaseActivity {
                 long time  = TimeTool.getSystemTimeDate();
                 if(time != 0){
                      time = time - day;
-                    String yesterday = TimeTool.getTime(time);
+                    String yesterday = TimeTool.getTime(time,Config.timeTypeYears);
                     startTv.setText(yesterday);
                     endTv.setText(TimeTool.getSystemTime());
                 }
                 break;
             case R.id.today_btn:
-                String today = TimeTool.getTime(System.currentTimeMillis());
+                String today = TimeTool.getTime(System.currentTimeMillis(),Config.timeTypeYears);
                 startTv.setText(today);
                 endTv.setText(TimeTool.getSystemTime());
                 break;
@@ -120,7 +120,7 @@ public class ChooseTimeActivity extends BaseActivity {
                 long time1  = TimeTool.getSystemTimeDate();
                 if(time1 != 0){
                     time1 = time1 - lastWeek;
-                    String lastWeek = TimeTool.getTime(time1);
+                    String lastWeek = TimeTool.getTime(time1,Config.timeTypeYears);
                     startTv.setText(lastWeek);
                     endTv.setText(TimeTool.getSystemTime());
                 }

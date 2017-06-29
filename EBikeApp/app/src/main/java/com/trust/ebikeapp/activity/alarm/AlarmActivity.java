@@ -2,7 +2,6 @@ package com.trust.ebikeapp.activity.alarm;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -10,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
@@ -27,26 +27,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class AlarmActivity extends BaseActivity {
+    @InjectView(R.id.activity_alarm_histroy_load_date)
+    TextView loadDateBtn;
+    @InjectView(R.id.activity_alarm_histroy_load_date_layout)
+    LinearLayout activityAlarmHistroyLoadDateLayout;
+
     private Context context = AlarmActivity.this;
-    private int pageIndex = 0,pageSize = 10;
+    private int pageIndex = 0, pageSize = 10;
     private RecyclerView recyclerView;
     private AlarmRecyclerViewAdapter adapter;
-    private TextView nothingTv,timeTv;
+    private TextView nothingTv, timeTv;
     private long ontime = TimeTool.getSystemTimeDate();
-    private long startTime,endTime;
+    private long startTime, endTime;
     private int requestCode = 1;
     private List<AlarmBean.ContentBean.AlarmsBean> beanList = new ArrayList<>();
     private List<AlarmLocationAddressBean> addressList = new ArrayList();
-    private Button readBtn,noReadBtn;
+    private Button readBtn, noReadBtn;
     private int status;
     private ImageButton backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_activity);
+        ButterKnife.inject(this);
         initView();
-        initDate(ontime,ontime);
+        initDate(ontime, ontime);
     }
 
     private void initView() {
@@ -58,10 +68,12 @@ public class AlarmActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        adapter.setAlarmRecyclerAdapterClickListener = alarmRecyclerAdapterClickListener;
         recyclerView.setAdapter(adapter);
 
-        String time = TimeTool.getTime(ontime);
-        timeTv.setText(time+" ~ "+time);
+
+        String time = TimeTool.getTime(ontime, Config.timeTypeYears);
+        timeTv.setText(time + " ~ " + time);
 
         readBtn = (Button) findViewById(R.id.alarm_activity_read_alarm_status);
         noReadBtn = (Button) findViewById(R.id.alarm_activity_no_read_alarm_status);
@@ -70,9 +82,10 @@ public class AlarmActivity extends BaseActivity {
 
         backBtn = (ImageButton) findViewById(R.id.alarm_activity_back);
         onClick(backBtn);
+        onClick(loadDateBtn);
     }
 
-    private void initDate(long onFire,long offFire) {
+    private void initDate(long onFire, long offFire) {
 //        List<String> ml = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
 //            ml.add("this is test :"+i);
@@ -81,81 +94,85 @@ public class AlarmActivity extends BaseActivity {
 //        adapter.notifyDataSetChanged();
 
 
-        Map<String ,Object> map = new WeakHashMap<>();
+        Map<String, Object> map = new WeakHashMap<>();
         map.put("termId", Config.termId);
         map.put("startTime", onFire);
         map.put("endTime", offFire);
         map.put("pageIndex", pageIndex);
         map.put("pageSize", pageSize);
-        requestCallBeack(Config.car_alarm,map,Config.carAlarm,Config.needAdd);
+        requestCallBeack(Config.car_alarm, map, Config.carAlarm, Config.needAdd);
 
     }
 
 
-    public void chooseTime(View v){
-        Intent intent = new Intent(context,ChooseTimeActivity.class);
-        intent.putExtra("title","查询报警信息");
+    public void chooseTime(View v) {
+        Intent intent = new Intent(context, ChooseTimeActivity.class);
+        intent.putExtra("title", "查询报警信息");
 
-        startActivityForResult(intent,requestCode);
+        startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void successCallBeack(Object obj, int type) {
-        if(type == Config.carAlarm){
+        if (type == Config.carAlarm) {
             AlarmAddressAndroidBean bean = (AlarmAddressAndroidBean) obj;
-            if(bean != null){
-                if(bean.getAlarmsBeanList().size() == 0){
-                    if(nothingTv.getVisibility() == View.GONE && bean.getAlarmsBeanList().size() != 0){
-                        showWaitToast(context,"已经是最后一页数据了!",1);
-                    }else{
+            if (bean != null) {
+                if (bean.getAlarmsBeanList().size() == 0) {
+                    if (beanList.size() != 0) {
+                        loadDateBtn.setText("已经是最后一条数据了!");
+                        activityAlarmHistroyLoadDateLayout.setVisibility(View.VISIBLE);
+                    } else {
                         nothingTv.setVisibility(View.VISIBLE);
+                        activityAlarmHistroyLoadDateLayout.setVisibility(View.GONE);
                     }
-                }else{
+                } else {
                     nothingTv.setVisibility(View.GONE);
                     pageIndex++;
-                    showWaitToast(context,"加载成功",1);
+                    showWaitToast(context, "加载成功", 1);
                     beanList.addAll(bean.getAlarmsBeanList());
                     addressList.addAll(bean.getAlarmLocationAddressBeen());
-                    adapter.setMl(beanList,addressList);
+                    adapter.setMl(beanList, addressList);
                     adapter.notifyDataSetChanged();
+                    loadDateBtn.setText("点击加载");
+                    activityAlarmHistroyLoadDateLayout.setVisibility(View.VISIBLE);
                 }
             }
-        }else if(type == Config.alarmStatus){
+        } else if (type == Config.alarmStatus) {
 
-            if(pageIndex != 0){
-                -- pageIndex ;
+            if (pageIndex != 0) {
+                pageIndex = 0;
             }
             beanList.clear();
             if (startTime == 0) {
-                initDate(ontime,ontime);
-            }else{
-                initDate(startTime,endTime);
+                initDate(ontime, ontime);
+            } else {
+                initDate(startTime, endTime);
             }
-            showWaitToast(context,"选择成功",1);
+            showWaitToast(context, "选择成功", 1);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == this.requestCode){
-            if(data != null){
+        if (requestCode == this.requestCode) {
+            if (data != null) {
                 String fireOnTime = data.getStringExtra("fireOnTime");
                 String fireOffTime = data.getStringExtra("fireOffTime");
-                long fireOnTimeDate = data.getLongExtra("fireOnTimeDate",0);
-                long fireOffTimeDate = data.getLongExtra("fireOffTimeDate",0);
+                long fireOnTimeDate = data.getLongExtra("fireOnTimeDate", 0);
+                long fireOffTimeDate = data.getLongExtra("fireOffTimeDate", 0);
 
-                if(fireOffTime != null && !fireOnTime.equals("")){
-                    if(fireOffTimeDate != 0){
+                if (fireOffTime != null && !fireOnTime.equals("")) {
+                    if (fireOffTimeDate != 0) {
                         beanList.clear();
                         startTime = fireOnTimeDate;
                         endTime = fireOffTimeDate;
-                        initDate(startTime,endTime);
-                        timeTv.setText(fireOnTime+" ~ "+fireOffTime);
-                    }else{
+                        initDate(startTime, endTime);
+                        timeTv.setText(fireOnTime + " ~ " + fireOffTime);
+                    } else {
                         L.e("fireOffTimeDate: = 0");
 
-                }
-                }else{
+                    }
+                } else {
                     L.e("fireOffTime == null");
                 }
             }
@@ -166,7 +183,7 @@ public class AlarmActivity extends BaseActivity {
 
     @Override
     public void clickResult(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.alarm_activity_read_alarm_status:
                 status = 1;
                 requestDate();
@@ -178,14 +195,26 @@ public class AlarmActivity extends BaseActivity {
             case R.id.alarm_activity_back:
                 finsh(this);
                 break;
+            case R.id.activity_alarm_histroy_load_date:
+                initDate(startTime, endTime);
+                break;
         }
 
     }
 
     private void requestDate() {
-        Map<String,Object> map = new WeakHashMap<>();
+        pageIndex = 0 ;
+        Map<String, Object> map = new WeakHashMap<>();
         map.put("termId", Config.termId);
-        map.put("status",status);
-        requestCallBeack(Config.alarm_status,map,Config.alarmStatus,Config.needAdd);
+        map.put("status", status);
+        requestCallBeack(Config.alarm_status, map, Config.alarmStatus, Config.needAdd);
     }
+
+
+    AlarmRecyclerViewAdapter.alarmRecyclerAdapterClickListener alarmRecyclerAdapterClickListener = new AlarmRecyclerViewAdapter.alarmRecyclerAdapterClickListener() {
+        @Override
+        public void clickCallBack(View v, Object bean) {
+            L.d("点击了 :" + bean);
+        }
+    };
 }

@@ -31,6 +31,7 @@ import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarStatusBean;
 import com.trust.ebikeapp.tool.bean.HomeViewPagerBean;
+import com.trust.ebikeapp.tool.bean.LockBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,7 +183,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                         break;
                     case MotionEvent.ACTION_UP:
                         L.d("ACTION_UP");
+                        advertisingHandler.removeMessages(1);
                         startAdvertisingHandler();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        advertisingHandler.removeMessages(1);
+                        L.d("ACTION_HOVER_MOVE");
                         break;
                 }
                 return false;
@@ -242,6 +248,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         switch (v.getId()){
             case R.id.home_fortification:
                 clickFortificationBtn = true;
+                if(fortificationStatus){
+                    fortificationStatus = false;
+                }else{
+                    fortificationStatus = true;
+                }
                 doLock();
                 break;
             case R.id.home_car_history:
@@ -286,17 +297,19 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 carStatus(obj);
                 break;
             case Config.lock:
+                LockBean bean = (LockBean) obj;
                 if(fortificationStatus){
-                    fortificationStatus = false;
-                    showWaitToast(context,"设防成功!",1);
 
-                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
-                    fortificationTv.setText("设防");
-                }else{
+
+                    showWaitToast(context,bean.getContent().getDescription(),1);
                     fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
                     fortificationTv.setText("解防");
-                    fortificationStatus = true;
-                    showWaitToast(context,"解防成功!",1);
+
+                }else{
+                    fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
+                    fortificationTv.setText("设防");
+
+                    showWaitToast(context,bean.getContent().getDescription(),1);
                 }
                 break;
         }
@@ -315,12 +328,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         //0解防 1设防
         if(bean.getContent().getLockStatus() == 0){
             fortificationStatus = false;
-            fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
-            fortificationTv.setText("解防");
-        }else{
-            fortificationStatus = true;
             fortificationBtn.setBackgroundResource(R.drawable.home_fortification_on_btn_bg);
             fortificationTv.setText("设防");
+        }else{
+            fortificationStatus = true;
+            fortificationBtn.setBackgroundResource(R.drawable.home_fortification_btn_bg);
+            fortificationTv.setText("解防");
         }
 
     }
@@ -337,5 +350,16 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     public void onDestroy() {
         advertisingHandler.removeMessages(1);
         super.onDestroy();
+    }
+
+    @Override
+    protected void doError(int type) {
+        if(type == Config.lock ){
+            if(fortificationStatus){
+                fortificationStatus = false;
+            }else{
+                fortificationStatus = true;
+            }
+        }
     }
 }

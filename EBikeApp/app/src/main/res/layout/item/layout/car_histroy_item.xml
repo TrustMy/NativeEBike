@@ -1,54 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.loginorregister.LoginActivity">
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:id="@+id/activity_car_histroy_item_time_title_lin"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:src="@drawable/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_marginLeftPercent = "16%"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/time"/>
 
         <TextView
+            app:layout_marginLeftPercent = "10%"
             android:id="@+id/activity_car_histroy_item_time_title"
-            android:textColor="#000000"
-            android:text="2017年05月1日"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="2017年05月1日"
+            android:textColor="#285067" />
 
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:gravity="center"
+        app:layout_widthPercent = "100%"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:orientation="horizontal">
 
         <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/activity_car_histroy_item_fireon_time"
-                android:textColor="#000000"
+                android:textColor="#285067"
                 android:text="21:13"
+                app:layout_widthPercent = "20%"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                app:layout_widthPercent = "20%"
                 android:id="@+id/activity_car_histroy_item_fireoff_time"
-                android:textColor="#000000"
+                android:textColor="#285067"
                 android:text="21:13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -67,53 +84,63 @@
 
             <ImageView
                 android:layout_centerInParent="true"
-                android:src="@drawable/time"
+                android:src="@drawable/time_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <LinearLayout
+            app:layout_marginLeftPercent = "2%"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center"
                     android:text="起点:"
-                    android:textColor="#000000"
+                    android:textColor="#285067"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_gravity="center"
                     android:id="@+id/activity_car_histroy_item_fireon_name"
-                    android:textColor="#000000"
-                    android:text="上海xxxxxxxxxxxxx"
-                    android:layout_width="wrap_content"
+                    android:textColor="#285067"
+                    android:layout_marginLeft="4dp"
+                    android:text="上海市黄浦区南京东路街道南京西路499号南都商厦附近"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="终点:"
-                    android:textColor="#000000"
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="终点:"
+                    android:textColor="#285067" />
 
                 <TextView
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
                     android:id="@+id/activity_car_histroy_item_fireoff_name"
-                    android:textColor="#000000"
-                    android:text="上海xxxxxxxxxxxxx"
+                    android:textColor="#285067"
+                    android:text="上海市黄浦区南京东路街道南京西路499号南都商厦附近"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -126,6 +153,8 @@
 
     </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
+
+    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
 
 
 </LinearLayout>

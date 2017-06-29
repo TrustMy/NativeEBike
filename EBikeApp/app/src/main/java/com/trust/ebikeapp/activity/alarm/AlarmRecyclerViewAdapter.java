@@ -10,6 +10,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
 import com.trust.ebikeapp.tool.bean.AlarmLocationAddressBean;
+import com.trust.ebikeapp.tool.bean.HistroyGpsBean;
 
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
     private Context context;
 
     public void setMl(List<AlarmBean.ContentBean.AlarmsBean> ml,List<AlarmLocationAddressBean> addressList) {
+        this.ml = null;
         this.ml = ml;
         this.addressList = addressList;
     }
@@ -36,6 +38,13 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
     public ViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.alarm_item, null);
         final ViewHodler holder = new ViewHodler(view);
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = holder.getAdapterPosition();
+                setAlarmRecyclerAdapterClickListener.clickCallBack(view,pos);
+            }
+        });
         return holder;
     }
 
@@ -62,4 +71,10 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
             type = (TextView) itemView.findViewById(R.id.alarm_item_type);
         }
     }
+
+    interface alarmRecyclerAdapterClickListener{
+        void  clickCallBack(View v,Object bean);
+    }
+
+    public  alarmRecyclerAdapterClickListener setAlarmRecyclerAdapterClickListener;
 }
