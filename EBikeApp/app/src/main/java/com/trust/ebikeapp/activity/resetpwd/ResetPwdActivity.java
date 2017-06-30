@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.tool.CheckNumTool;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
@@ -82,6 +83,7 @@ public class ResetPwdActivity extends BaseActivity {
             case Config.getCheckNum:
                     checkNum = Integer.parseInt(obj.toString());
                     checkNumEd.setText(obj.toString());
+                new CheckNumTool<>().startTime(getCheckNumBtn);
                 break;
             case Config.resetPwd:
                 showWaitToast(context,"重置密码成功!",1);

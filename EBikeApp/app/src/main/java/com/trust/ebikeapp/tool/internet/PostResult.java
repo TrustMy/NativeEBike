@@ -54,6 +54,7 @@ public class PostResult extends Handler {
 
     CarStrokeBean carStrokeBean;
     AlarmBean alarmBean;
+    int strokeType = 11111111;
 
     protected static ExecutorService threadPool = Executors.newCachedThreadPool();
     public PostResult(ResultCallBack callBack) {
@@ -115,7 +116,15 @@ public class PostResult extends Handler {
 
             case Config.carStroke:
                 if( checkMsgStatus(msg,Config.carStroke)){
+                    strokeType = Config.carStroke;
                     carStrokeResult((String)msg.obj,Config.carStroke);
+                }
+                break;
+
+            case Config.carNowStroke:
+                if( checkMsgStatus(msg,Config.carNowStroke)){
+                    strokeType = Config.carNowStroke;
+                    carStrokeResult((String)msg.obj,Config.carNowStroke);
                 }
                 break;
 
@@ -559,7 +568,7 @@ public class PostResult extends Handler {
             CarStrokeAndAddress carStrokeAndAddress = new CarStrokeAndAddress
                     (carStrokeBean.getContent().getTrips(),bean);
 
-            result(carStrokeAndAddress, Config.carStroke, Config.SUCCESS);
+            result(carStrokeAndAddress, strokeType, Config.SUCCESS);
         }
     };
 

@@ -8,12 +8,14 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.CarHistroyRecyclerViewNowAdapter;
 import com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TimeTool;
@@ -22,6 +24,7 @@ import com.trust.ebikeapp.tool.bean.CarStrokeBean;
 import com.trust.ebikeapp.tool.bean.HistroyGpsBean;
 import com.trust.ebikeapp.tool.bean.LocationAddressBean;
 import com.trust.ebikeapp.tool.trustinterface.EndlessRecyclerOnScrollListener;
+import com.trust.ebikeapp.tool.uitool.PercentLinearLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +38,14 @@ import butterknife.InjectView;
 public class CarHistroyActivity extends BaseActivity {
     @InjectView(R.id.activity_car_histroy_load_date_layou)
     LinearLayout activityCarHistroyLoadDateLayou;
+    @InjectView(R.id.activity_car_histroy_now_time)
+    TextView activityCarHistroyNowTime;
+    @InjectView(R.id.activity_car_histroy_new_update)
+    ImageView activityCarHistroyNewUpdate;
+    @InjectView(R.id.activity_car_histroy_now_recyclerview)
+    RecyclerView activityCarHistroyNowRecyclerview;
+    @InjectView(R.id.activity_car_histroy_now_layout)
+    PercentLinearLayout activityCarHistroyNowLayout;
     private Context context = CarHistroyActivity.this;
     private int pageIndex = 0, pageSize = 10;
     private RecyclerView recyclerView;
@@ -56,13 +67,16 @@ public class CarHistroyActivity extends BaseActivity {
     private List<CarStrokeBean.ContentBean.TripsBean> tripsBeanList = new ArrayList<>();
     private List<LocationAddressBean> locatoinBeanList = new ArrayList<>();
 
+    private CarHistroyRecyclerViewNowAdapter nowAdapter;
+
+    private PercentLinearLayout imgLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_histroy);
         ButterKnife.inject(this);
         initView();
-        init(whenTime, whenTime);
+        init(whenTime, whenTime, pageIndex, Config.carNowStroke);
     }
 
     private void initView() {
@@ -93,11 +107,29 @@ public class CarHistroyActivity extends BaseActivity {
         bachBtn = (ImageButton) findViewById(R.id.car_hirstory_back);
         onClick(bachBtn);
 
+        nowAdapter = new CarHistroyRecyclerViewNowAdapter(context);
+        LinearLayoutManager nowLayoutManager = new LinearLayoutManager(this);
+        nowLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        activityCarHistroyNowRecyclerview.setLayoutManager(nowLayoutManager);
+        nowAdapter.click = new CarHistroyRecyclerViewNowAdapter.onClick() {
+            @Override
+            public void clickCallBack(View v, HistroyGpsBean bean) {
+                intentBeanDate(bean);
+            }
+        };
+        activityCarHistroyNowRecyclerview.setAdapter(nowAdapter);
 
+
+        activityCarHistroyNowTime.setText(TimeTool.getTime(TimeTool.getSystemTimeDate(),
+                Config.timeTypeYears));
+
+        onClick(activityCarHistroyNewUpdate);
+
+        imgLayout = (PercentLinearLayout) findViewById(R.id.activity_car_histroy_img_layout);
     }
 
 
-    private void init(long onFire, long offFire) {
+    private void init(long onFire, long offFire, int pageIndex, int type) {
         Map<String, Object> map = new WeakHashMap<>();
         map.put("termId", Config.termId);
         map.put("startTime", onFire);
@@ -105,7 +137,7 @@ public class CarHistroyActivity extends BaseActivity {
         map.put("pageIndex", pageIndex);
         map.put("pageSize", pageSize);
 
-        requestCallBeack(Config.car_stroke, map, Config.carStroke, Config.needAdd);
+        requestCallBeack(Config.car_stroke, map, type, Config.needAdd);
     }
 
 
@@ -138,9 +170,31 @@ public class CarHistroyActivity extends BaseActivity {
                     recyclerAdapter.notifyDataSetChanged();
                     activityCarHistroyLoadDateLayou.setVisibility(View.VISIBLE);
                     loadDate.setText("点击继续加载");
+
+
                 }
             }
 
+        } else if (type == Config.carNowStroke) {
+            List<CarStrokeBean.ContentBean.TripsBean> tripsBeanList = new ArrayList<>();
+            CarStrokeAndAddress ml = (CarStrokeAndAddress) obj;
+            if (ml != null) {
+                if (ml.getTripsBeenList().size() != 0) {
+                    imgLayout.setVisibility(View.GONE);
+                    activityCarHistroyNowLayout.setVisibility(View.VISIBLE);
+                    //今天位置recy
+
+                    for (int i = 0; i < ml.getTripsBeenList().size(); i++) {
+                        tripsBeanList.add(ml.getTripsBeenList().get(i));
+                    }
+
+                    nowAdapter.setMl(tripsBeanList, ml.getAddressList());
+                    nowAdapter.notifyDataSetChanged();
+                } else {
+                    activityCarHistroyNowLayout.setVisibility(View.GONE);
+                    imgLayout.setVisibility(View.VISIBLE);
+                }
+            }
         }
     }
 
@@ -164,7 +218,7 @@ public class CarHistroyActivity extends BaseActivity {
                     timeTv.setText(fireOnTime + " ~ " + fireOffTime);
                     if (fireOffTimeDate != 0) {
                         carStrokeAndAddress = null;
-                        init(fireOnTimeDate, fireOffTimeDate);
+                        init(fireOnTimeDate, fireOffTimeDate, pageIndex, Config.carStroke);
 
                     } else {
                         L.e("fireOffTimeDate: = 0");
@@ -186,7 +240,11 @@ public class CarHistroyActivity extends BaseActivity {
                 finsh(this);
                 break;
             case R.id.activity_car_histroy_load_date:
-                init(fireOnTimeDate, fireOffTimeDate);
+                init(fireOnTimeDate, fireOffTimeDate, pageIndex, Config.carStroke);
+                break;
+
+            case R.id.activity_car_histroy_new_update:
+                init(whenTime, whenTime, 0, Config.carNowStroke);
                 break;
         }
     }
@@ -197,9 +255,13 @@ public class CarHistroyActivity extends BaseActivity {
         public void clickCallBack(View v, HistroyGpsBean bean) {
             L.d("bean getFireOnTime:" + bean.getFireOnTime() + "|bean getFireOnTime" + bean.
                     getFireOffTime() + "|onName:" + bean.getOnName() + "|offName:" + bean.getOffName());
-            Intent intent = new Intent(context, VehicleTrajectoryActivity.class);
-            intent.putExtra("gpsMessage", (Serializable) bean);
-            startActivity(intent);
+            intentBeanDate(bean);
         }
     };
+
+    private void intentBeanDate(Serializable bean) {
+        Intent intent = new Intent(context, VehicleTrajectoryActivity.class);
+        intent.putExtra("gpsMessage", bean);
+        startActivity(intent);
+    }
 }

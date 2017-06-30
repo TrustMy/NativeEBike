@@ -29,7 +29,7 @@ public class Config extends Application {
 
     public static String timeTypeYears = "yyyy-MM-dd";
     public static String timeTypeMinutesAndSeconds = "HH:mm:ss";
-
+    public static String timeTypeMinutes = "HH:mm";
     public static boolean loginStatus = false;//登录状态
 
     //实时追踪的配置
@@ -58,7 +58,7 @@ public class Config extends Application {
     public final static int getCheckNum = 0x007;
     public final static int bindCar = 0x008;
     public final static int changPwd = 0x009;//修改密码
-    public final static int carStroke = 0x010;
+    public final static int carStroke = 0x010;//车辆行程列表
     public final static int carHistoryLocation = 0x011;//通过时间获取车辆轨迹
     public final static int carAlarm = 0x012;//通过时间分页获取报警信息
     public final static int carStatus = 0x013;///查询车辆状态
@@ -72,6 +72,7 @@ public class Config extends Application {
     public final static int offTheOilOrElectricity = 0x021;//断油或断电
     public final static int carLight = 0x022;//开关车灯
     public final static int resetPwd = 0x023;//重置密码
+    public final static int carNowStroke = 0x024;//今天 行程
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";

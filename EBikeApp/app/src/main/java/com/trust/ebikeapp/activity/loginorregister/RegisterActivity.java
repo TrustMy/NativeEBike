@@ -10,11 +10,23 @@ import android.widget.ImageView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.tool.CheckNumTool;
+import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -68,24 +80,22 @@ public class RegisterActivity extends BaseActivity {
                 int type = 0;
 
                 if(user == 0 || pwd.equals("")){
-                    T.showToast(context,"账号或密码有误!");
+                    showErrorToast(context,"账号或密码有误!",1);
                     return;
                 }
                 if(check.equals("") || secret.equals("")){
-                    T.showToast(context,"密令或验证码有误!");
+                    showErrorToast(context,"密令或验证码有误!",1);
                     return;
                 }else{
 
                     if(checkNums == 0){
-                        T.showToast(this,"验证码有误!");
+                        showErrorToast(context,"验证码有误!",1);
                     }else{
-                        showDialog();
-
                         map.put("cp",user);
                         map.put("pw",pwd);
                         map.put("code",checkNums);
                         map.put("phoneType",3);
-                        post.Request(Config.Register,map,Config.register,Config.noAdd);
+                        requestCallBeack(Config.Register,map,Config.register,Config.noAdd);
                     }
 
 
@@ -100,33 +110,25 @@ public class RegisterActivity extends BaseActivity {
                 if(user == 0){
                     T.showToast(this,"手机号不能为空!");
                 }else {
-                    showDialog();
-
                     map.put("cp", user);
-                    post.Request(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
+                    requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
                 }
                 break;
         }
     }
 
-    @Override
-    public void resultCallBeack(Object obj, int type, int status) {
-        dissDialog();
-        if(type == Config.register){
-            if(status == Config.SUCCESS){
-                T.showToast(this,"注册成功!");
-            }else{
-                T.showToast(this,"注册失败!"+obj.toString());
-            }
-        }else if(type == Config.getCheckNum){
-            if(status == Config.SUCCESS){
-                T.showToast(this,"获取成功!");
-                checkNum.setText(obj.toString());
-            }else{
-                T.showToast(this,"获取失败!"+obj.toString());
-            }
-        }
+    private void doTime( final Button v) {
+
+        new CheckNumTool<>().startTime(v);
     }
 
-
+    @Override
+    public void successCallBeack(Object obj, int type) {
+        if(type == Config.register){
+                showErrorToast(context,"注册成功!",1);
+        }else if(type == Config.getCheckNum){
+                doTime(checkNumBtn);//倒计时
+                checkNum.setText(obj.toString());
+        }
+    }
 }

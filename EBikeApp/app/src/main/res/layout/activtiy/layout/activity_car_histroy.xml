@@ -61,12 +61,91 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <include layout="@layout/car_histroy_img"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_heightPercent = "30%"
         app:layout_widthPercent="100%"
-        />
+        android:orientation="horizontal">
+
+        <include
+
+            layout="@layout/car_histroy_img"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#285167"
+            android:visibility="gone"
+            android:id="@+id/activity_car_histroy_now_layout"
+            android:orientation="horizontal">
+
+            <ImageView
+                app:layout_marginLeftPercent = "6%"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/e_bike_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_heightPercent = "30%"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="@color/colorWhite"
+                        android:text="今天"
+                        android:textSize="24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/activity_car_histroy_now_time"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="24sp"
+                        android:textColor="@color/colorWhite"
+                        android:text="2017/6/00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <ImageView
+                        android:id="@+id/activity_car_histroy_new_update"
+                        android:layout_marginLeft="40dp"
+                        android:src="@drawable/update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/activity_car_histroy_now_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+
+            </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

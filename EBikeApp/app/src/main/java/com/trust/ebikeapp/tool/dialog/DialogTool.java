@@ -109,7 +109,9 @@ public class DialogTool  {
             public void onClick(View view) {
                 if(!activity.isFinishing()){
                     Config.loginStatus = false;
-                   activity.finish();
+                    if(!activity.isFinishing()){
+                        activity.finish();
+                    }
                 }
             }
         });
