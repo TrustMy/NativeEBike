@@ -3,6 +3,7 @@ package com.trust.ebikeapp.activity.loginorregister;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,11 @@ import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.bind.CarBindActivity;
 import com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity;
+import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.updateapp.APPDownLoad;
+import com.trust.ebikeapp.tool.updateapp.APPVersion;
+import com.trust.ebikeapp.tool.updateapp.UpdataInfo;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 
@@ -58,6 +63,8 @@ public class LoginActivity extends BaseActivity {
         }
 
 
+        requestGetCallBeack(Config.update_app,Config.updateApp);
+
     }
 
 
@@ -94,14 +101,12 @@ public class LoginActivity extends BaseActivity {
                     T.showToast(context, "密码或用户名有误!");
                 } else {
                     showWaitToast(context,"正在登陆,请稍后...",2);
-                    DialogTool.waitDialog(this);
-
                     Config.phone = user;
                     Config.pwd = pwdEd.getText().toString().trim();
                     Map<String, Object> map = new WeakHashMap<>();
                     map.put("cp", user);
                     map.put("pw", pwd);
-                    post.Request(Config.Login,map,Config.login,Config.noAdd);
+                    requestCallBeack(Config.Login,map,Config.login,Config.noAdd);
                 }
 
 
@@ -128,6 +133,15 @@ public class LoginActivity extends BaseActivity {
             }else{
 
                 startActivity(new Intent(context,MainActivity.class));
+            }
+        }else if(type == Config.updateApp){
+            UpdataInfo info = (UpdataInfo) obj;
+            try {
+                if(!info.getVersion() .equals(APPVersion.getVersion(context))){
+
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

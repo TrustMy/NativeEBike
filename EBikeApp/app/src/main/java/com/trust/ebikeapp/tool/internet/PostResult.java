@@ -283,10 +283,70 @@ public class PostResult extends Handler {
             Config.speed = bean.getContent().getSpeed();
             Config.emaill = bean.getContent().getEmail();
 
+
+            setAuthority(bean);
+
+
+
             result(bean.getContent().getTermId(),type,Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
         }
+    }
+
+    private void setAuthority(LoginResultBean bean) {
+        Config.FunctionCarStatus =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+        Config.FunctionLockClose =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+        Config.FunctionLockOpen =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+        Config.FunctionFoundCarOpen =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+        Config.FunctionFoundCarClose =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+
+        Config.FunctionTracking =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+
+        Config.FunctionCheckCar =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+
+        Config.FunctionSpeedLimit =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+        Config.FunctionCarLight =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
+
+
+
+        Config.FunctionOffTheOilOrElectricity =Character.
+                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
+                        getFunction().length()-6));
     }
 
     /**

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
@@ -20,6 +21,7 @@ import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -78,8 +80,13 @@ public class BaseFragment extends Fragment {
     }
 
     public void requestCallBeack(String url, Map<String,Object> map, int type, boolean isNeed){
-        showDialog();
-        post.Request(url,map,type,isNeed);
+        if(PersionAuthority.checkAuthority(type ,map) == 0){
+
+        }else{
+            showDialog();
+            post.Request(url,map,type,isNeed);
+        }
+
     }
 
 

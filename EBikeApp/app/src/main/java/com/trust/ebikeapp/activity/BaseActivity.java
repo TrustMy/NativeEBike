@@ -21,9 +21,11 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
+import com.trust.ebikeapp.tool.internet.ssl.Get;
 import com.trust.ebikeapp.tool.push.PushTool;
 import com.trust.ebikeapp.tool.push.Utils;
 import com.trust.ebikeapp.tool.trustinterface.PushCallBack;
@@ -41,6 +43,7 @@ import io.reactivex.functions.Consumer;
  */
 public class BaseActivity extends AppCompatActivity {
     protected Post post;
+    protected Get get;
     public static Activity activity ;
     private Context context = BaseActivity.this;
     public ResultCallBack resultCallBack = new ResultCallBack() {
@@ -86,29 +89,46 @@ public class BaseActivity extends AppCompatActivity {
 
     private void init() {
         post = new Post(resultCallBack);
+        get = new Get(resultCallBack);
         PushTool.pushCallBack = pushCallBack;
     }
 
 
     public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
-        showDialog();
-        post.Request(url,map,type,isNeed);
+        if(PersionAuthority.checkAuthority(type ,map) == 0){
+
+        }else{
+            showDialog();
+            post.Request(url,map,type,isNeed);
+        }
+
+    }
+
+
+
+    public void requestGetCallBeack(String url,int type){
+        get.Request(url,type);
     }
 
 
     //网络请求回调
 
     public void resultCallBeack(Object obj,int type,int status){
-
-        dissDialog();
+        if(type != Config.updateApp){
+            dissDialog();
+        }
         if(status == Config.SUCCESS){
             successCallBeack(obj,type);
         }else{
             errorCallBeack(obj,type);
         }
+
+
     }
     public void successCallBeack(Object obj,int type){
-
+        if(type == Config.updateApp){
+            L.d("update app Success");
+        }
     }
 
     public void errorCallBeack(Object obj,int type){
@@ -152,7 +172,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void dissDialog(){
-        DialogTool.dialog.dismiss();
+
+            DialogTool.dialog.dismiss();
+
     }
 
     public void showWaitToast(Context context,String msg,int time){

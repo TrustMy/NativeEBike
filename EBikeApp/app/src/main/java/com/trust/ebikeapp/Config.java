@@ -2,6 +2,7 @@ package com.trust.ebikeapp;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
 import android.app.backup.FullBackupDataOutput;
 import android.content.Context;
 import android.os.Bundle;
@@ -73,6 +74,7 @@ public class Config extends Application {
     public final static int carLight = 0x022;//开关车灯
     public final static int resetPwd = 0x023;//重置密码
     public final static int carNowStroke = 0x024;//今天 行程
+    public final static int updateApp = 0x025;//升级app
 
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
@@ -100,6 +102,21 @@ public class Config extends Application {
     public static final String car_light = "rest/cmd/controlLight/";//开关车灯
     public static final String reset_pwd = "register/setNewPwd/";//重置密码
 
+    public static final String update_app = "http://139.196.229.233/ebike/update/ebikeUpdate.xml";//检车app版本并升级
+
+
+    public static final int AuthorityYes = 1,AuthorityNo = 0;
+
+    public static  int FunctionTracking;//实时追踪的权限
+    public static  int FunctionFoundCarOpen;//开启寻车权限
+    public static  int FunctionFoundCarClose;//关闭寻车权限
+    public static  int FunctionCheckCar;//车辆自检权限
+    public static  int FunctionSpeedLimit;//车辆限速权限
+    public static  int FunctionCarLight;//车灯权限
+    public static  int FunctionOffTheOilOrElectricity;//断电或断油权限
+    public static  int FunctionCarStatus;//状态查询权限
+    public static  int FunctionLockClose;//设防
+    public static  int FunctionLockOpen;//解防
     @Override
     public void onCreate() {
         super.onCreate();
