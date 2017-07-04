@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,14 +20,15 @@ import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.bind.CarBindActivity;
 import com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity;
-import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
-import com.trust.ebikeapp.tool.updateapp.APPDownLoad;
-import com.trust.ebikeapp.tool.updateapp.APPVersion;
-import com.trust.ebikeapp.tool.updateapp.UpdataInfo;
-import com.trust.ebikeapp.tool.utils.MD5Utils;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
+import com.trust.ebikeapp.tool.updateapp.APPVersion;
+import com.trust.ebikeapp.tool.updateapp.CheckVersionTask;
+import com.trust.ebikeapp.tool.updateapp.UpdataInfo;
+import com.trust.ebikeapp.tool.updateapp.UpdataInfoParser;
+import com.trust.ebikeapp.tool.utils.MD5Utils;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -84,6 +86,8 @@ public class LoginActivity extends BaseActivity {
                 Config.checkBox = b;
             }
         });
+
+
     }
 
     @Override
@@ -92,13 +96,13 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_login:
                 String users = userEd.getText().toString().trim();
                 if(users.equals("")){
-                    T.showToast(context, "用户名不能为空!");
+                    showErrorToast(context, "用户名不能为空!",3);
                     return ;
                 }
                 long user = Long.parseLong(users);
                 String pwd = MD5Utils.encrypt(pwdEd.getText().toString().trim());
                 if (user == 0 || pwd.equals("")) {
-                    T.showToast(context, "密码或用户名有误!");
+                    showErrorToast(context, "密码或用户名有误!",3);
                 } else {
                     showWaitToast(context,"正在登陆,请稍后...",2);
                     Config.phone = user;
@@ -135,14 +139,16 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(context,MainActivity.class));
             }
         }else if(type == Config.updateApp){
-            UpdataInfo info = (UpdataInfo) obj;
-            try {
-                if(!info.getVersion() .equals(APPVersion.getVersion(context))){
+            InputStream updateMsg = (InputStream) obj;
 
-                }
+            try {
+                Thread thread = new Thread(new CheckVersionTask(context,APPVersion.getVersion(context),
+                        updateMsg ));
+                thread.start();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
+
         }
     }
 

@@ -135,7 +135,7 @@
             android:protectionLevel="signature"
             android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.phonegap.ebike" />
 
-        <activity android:name=".activity.ChangPwdActivity"></activity>
+        <activity android:name=".activity.changpwd.ChangPwdActivity"></activity>
     </application>
 
 </manifest>

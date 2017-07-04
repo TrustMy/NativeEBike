@@ -84,7 +84,7 @@ public class Config extends Application {
     public static final String Login = "rest/user/login/";
     public static final String car_location_url = "rest/gps/latest/";
     public static final String car_time_tracking_lcation_url = "rest/cmd/track/";//实时追踪
-    public static final String car_buzzer = "rest/cmd/buzzer/";//found car
+    public static final String car_buzzer = "rest/cmd/buzzer/";//寻车
     public static final String get_check_num = "register/applySmsCode/";//获取验证码
     public static final String bind_car = "rest/user/bind/";//车辆绑定
     public static final String chang_pwd = "rest/user/resetPwd/";//修改密码

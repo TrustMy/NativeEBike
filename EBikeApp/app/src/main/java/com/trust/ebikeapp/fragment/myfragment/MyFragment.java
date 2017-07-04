@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
-import com.trust.ebikeapp.activity.ChangPwdActivity;
+import com.trust.ebikeapp.activity.changpwd.ChangPwdActivity;
 import com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity;
 import com.trust.ebikeapp.activity.update.nickname.NickNameUpdateActivity;
 import com.trust.ebikeapp.activity.update.phone.PhoneUpdateActivity;

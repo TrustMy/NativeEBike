@@ -259,7 +259,6 @@ public class CarLocationActivity extends BaseActivity {
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        T.showToast(context,"已取消!");
                     }
                 });
                 builder.setPositiveButton("继续", new DialogInterface.OnClickListener() {

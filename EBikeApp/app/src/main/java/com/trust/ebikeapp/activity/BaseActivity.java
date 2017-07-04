@@ -1,18 +1,12 @@
 package com.trust.ebikeapp.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
@@ -25,7 +19,7 @@ import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
-import com.trust.ebikeapp.tool.internet.ssl.Get;
+import com.trust.ebikeapp.tool.internet.Get;
 import com.trust.ebikeapp.tool.push.PushTool;
 import com.trust.ebikeapp.tool.push.Utils;
 import com.trust.ebikeapp.tool.trustinterface.PushCallBack;
@@ -96,7 +90,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
         if(PersionAuthority.checkAuthority(type ,map) == 0){
-
+            DialogTool.showError(this,"您没有该功能权限!");
         }else{
             showDialog();
             post.Request(url,map,type,isNeed);

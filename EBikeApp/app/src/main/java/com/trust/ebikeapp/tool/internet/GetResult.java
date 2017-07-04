@@ -1,4 +1,4 @@
-package com.trust.ebikeapp.tool.internet.ssl;
+package com.trust.ebikeapp.tool.internet;
 
 import android.os.Handler;
 import android.os.Message;
@@ -71,12 +71,7 @@ public class GetResult extends Handler {
      * @param type
      */
     private void updateAppResult(Object obj, int type) {
-        InputStream updateMsg = (InputStream) obj;
-        try {
-            UpdataInfo info = UpdataInfoParser.getUpdataInfo(updateMsg);
-            result(info, type, Config.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        result(obj, type, Config.SUCCESS);
+
     }
 }

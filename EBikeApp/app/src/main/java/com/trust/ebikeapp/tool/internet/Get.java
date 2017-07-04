@@ -1,10 +1,10 @@
-package com.trust.ebikeapp.tool.internet.ssl;
+package com.trust.ebikeapp.tool.internet;
 
-import android.content.Context;
 import android.os.Message;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.internet.ssl.TrustAllCerts;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
 import org.json.JSONObject;

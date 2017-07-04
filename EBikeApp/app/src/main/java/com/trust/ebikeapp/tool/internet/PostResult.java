@@ -286,8 +286,6 @@ public class PostResult extends Handler {
 
             setAuthority(bean);
 
-
-
             result(bean.getContent().getTermId(),type,Config.SUCCESS);
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);
@@ -295,58 +293,36 @@ public class PostResult extends Handler {
     }
 
     private void setAuthority(LoginResultBean bean) {
-        Config.FunctionCarStatus =Character.
+        if(bean != null && bean.getContent().getFunction()!= null && !bean.getContent().getFunction().equals("")){
+
+        //状态查询
+        Config.FunctionCarStatus = authority(bean,1);
+        //设防
+        Config.FunctionLockClose = authority(bean,2);
+        //解防
+        Config.FunctionLockOpen = authority(bean,3);
+        //开启寻车
+        Config.FunctionFoundCarOpen = authority(bean,4);
+        //关闭寻车
+        Config.FunctionFoundCarClose = authority(bean,5);
+        //实时追踪
+        Config.FunctionTracking = authority(bean,6);
+        //自检
+        Config.FunctionCheckCar = authority(bean,7);
+        //限速
+        Config.FunctionSpeedLimit = authority(bean,8);
+        //车灯
+        Config.FunctionCarLight = authority(bean,9);
+        //断电/油
+        Config.FunctionOffTheOilOrElectricity = authority(bean,10);
+
+        }
+    }
+
+    private int authority(LoginResultBean bean , int num) {
+        return  Character.
                 getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-        Config.FunctionLockClose =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-        Config.FunctionLockOpen =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-        Config.FunctionFoundCarOpen =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-        Config.FunctionFoundCarClose =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-
-        Config.FunctionTracking =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-
-        Config.FunctionCheckCar =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-
-        Config.FunctionSpeedLimit =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-        Config.FunctionCarLight =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
-
-
-
-        Config.FunctionOffTheOilOrElectricity =Character.
-                getNumericValue( bean.getContent().getFunction().charAt(bean.getContent().
-                        getFunction().length()-6));
+                        getFunction().length()- num));
     }
 
     /**
@@ -393,6 +369,8 @@ public class PostResult extends Handler {
             } else {
                 result( getErrorMsg(obj), type, Config.ERROR);
             }
+        }else{
+            result( getErrorMsg(obj), type, Config.ERROR);
         }
     }
 

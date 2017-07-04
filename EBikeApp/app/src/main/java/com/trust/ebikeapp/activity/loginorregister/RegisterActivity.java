@@ -108,7 +108,7 @@ public class RegisterActivity extends BaseActivity {
 
             case R.id.register_checknum_btn:
                 if(user == 0){
-                    T.showToast(this,"手机号不能为空!");
+                    showErrorToast(context,"手机号不能为空!",3);
                 }else {
                     map.put("cp", user);
                     requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);

@@ -84,7 +84,7 @@ public class CarBindActivity extends BaseActivity {
                 break;
             case R.id.activity_car_bind_get_check_num:
                 if (phone == 0) {
-                    T.showToast(this,"手机号码有误!");
+                    showErrorToast(context,"手机号码有误!",3);
                     return;
                 }else{
                     map.put("cp", phone);
@@ -96,7 +96,7 @@ public class CarBindActivity extends BaseActivity {
                 break;
             case R.id.activity_car_bind_determine:
                 if(phone == 0 ||termId == 0 || checkNum == 0){
-                    T.showToast(this,"输入信息有误!");
+                    showErrorToast(context,"输入信息有误!",3);
                     return;
                 }else{
                     map.put("cp",phone);

@@ -1,14 +1,19 @@
 package com.trust.ebikeapp.tool.dialog;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -172,4 +177,93 @@ public class DialogTool  {
         void CallBack();
     }
     public static AlarmErrorDialogCallBack  alarmErrorDialogCallBack;
+
+
+
+
+    public static void handleToolBar(final Context context, final View search, final EditText editText) {
+        //隐藏
+        if (search.getVisibility() == View.VISIBLE) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                final Animator animatorHide = ViewAnimationUtils.createCircularReveal(search,
+                        search.getWidth() - 56,
+                        23,
+                        //确定元的半径（算长宽的斜边长，这样半径不会太短也不会很长效果比较舒服）
+                        (float) Math.hypot(search.getWidth(), search.getHeight()),
+                        0);
+                animatorHide.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        search.setVisibility(View.GONE);
+                        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(), 0);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animatorHide.setDuration(300);
+                animatorHide.start();
+            } else {
+//                关闭输入法
+                ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(), 0);
+                search.setVisibility(View.GONE);
+            }
+            editText.setText("");
+            search.setEnabled(false);
+        }
+        //显示
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                final Animator animator = ViewAnimationUtils.createCircularReveal(search,
+                        search.getWidth() - 56,
+                        23,
+                        0,
+                        (float) Math.hypot(search.getWidth(), search.getHeight()));
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                search.setVisibility(View.VISIBLE);
+                if (search.getVisibility() == View.VISIBLE) {
+                    animator.setDuration(300);
+                    animator.start();
+                    search.setEnabled(true);
+                }
+            } else {
+                search.setVisibility(View.VISIBLE);
+                search.setEnabled(true);
+                //                关闭输入法
+                ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+            }
+        }
+    }
 }

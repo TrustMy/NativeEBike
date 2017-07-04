@@ -1,16 +1,15 @@
-package com.trust.ebikeapp.activity;
+package com.trust.ebikeapp.activity.changpwd;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
