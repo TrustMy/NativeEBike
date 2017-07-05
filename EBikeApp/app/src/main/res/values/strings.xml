@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">EBikeApp</string>
+
+    <string name="errorPhone">手机号码有误!</string>
+    <string name="errorCheckNum">验证码有误!</string>
+    <string name="errorEnterMsg">输入信息有误!</string>
+    <string name="buildPrompt">绑定成功,请重新登录!</string>
+    <string name="persionAuthority">您没有该功能权限!</string>
+
+
+    <!--车辆位置-->
+    <string name="locationTrickLocationError">定位无效,请将车辆挪到空旷地带!</string>
+    <string name="routeWearning">当前数据为基站数据,可能与实际位置有所偏差是否继续?</string>
+    <string name="carlocation">{"status":false,"err":"车辆定位异常!"}</string>
+
+    <!--选择时间-->
+    <string name="chooseTimeOneWeekError">不能超过七天</string>
+    <!--车辆轨历史迹-->
+    <string name="carHistroytitle">查询历史信息</string>
+
+    <!--报警列表-->
+    <string name="alarmTitle">查询报警信息</string>
+    <string name="alarmLastData">已经是最后一条数据了!</string>
+
+
+    <!--报警信息页面-->
+    <string name="alarmTypePullOut">电池拔出</string>
+    <string name="alarmTypeElectricity">低电压</string>
+    <string name="alarmTypeShock">碰撞报警</string>
+
+
+    <!--车辆自检-->
+    <string name="checkHall">电机霍尔正常</string>
+    <string name="checkHallError">电机霍尔异常</string>
+
+
+    <string name="checkPhaseLine">电机相线正常</string>
+    <string name="checkPhaseLineError">电机相线异常</string>
+
+
+    <string name="checkTurnTheHandle">车辆转把正常</string>
+    <string name="checkTurnTheHandleError">车辆转把异常</string>
+
+
+    <string name="checkController">控制器正常</string>
+    <string name="checkControllerError">控制器异常</string>
+
+
+
+
+
 </resources>

@@ -23,6 +23,7 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
     private List<AlarmBean.ContentBean.AlarmsBean> ml ;
     private List<AlarmLocationAddressBean> addressList;
     private Context context;
+    private String type;
 
     public void setMl(List<AlarmBean.ContentBean.AlarmsBean> ml,List<AlarmLocationAddressBean> addressList) {
         this.ml = null;
@@ -52,7 +53,14 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmRecycler
     public void onBindViewHolder(ViewHodler holder, int position) {
         holder.time.setText(TimeTool.getTimeAll(ml.get(position).getGpsTime()));
         holder.address.setText(addressList.get(position).getAddress());
-        holder.type.setText(ml.get(position).getStatus()+"");
+        if(ml.get(position).getPlugout() == 1){
+            type = context.getResources().getString(R.string.alarmTypePullOut);
+        }else if (ml.get(position).getLowVoltage() == 1){
+            type = context.getResources().getString(R.string.alarmTypeElectricity);
+        }else if(ml.get(position).getVibration() == 1){
+            type = context.getResources().getString(R.string.alarmTypeShock);
+        }
+        holder.type.setText(type);
     }
 
     @Override

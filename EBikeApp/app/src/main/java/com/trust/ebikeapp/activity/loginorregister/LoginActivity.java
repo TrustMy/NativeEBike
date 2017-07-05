@@ -63,8 +63,6 @@ public class LoginActivity extends BaseActivity {
             userEd.setText(phone+"");
             pwdEd.setText(Config.pwd );
         }
-
-
         requestGetCallBeack(Config.update_app,Config.updateApp);
 
     }
@@ -132,10 +130,8 @@ public class LoginActivity extends BaseActivity {
         if(type == Config.login){
             long termId = (long) obj;
             if(termId == 0){
-
                 startActivity(new Intent(context,CarBindActivity.class));
             }else{
-
                 startActivity(new Intent(context,MainActivity.class));
             }
         }else if(type == Config.updateApp){

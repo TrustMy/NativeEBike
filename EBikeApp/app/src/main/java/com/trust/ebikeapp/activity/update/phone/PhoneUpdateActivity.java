@@ -54,7 +54,7 @@ public class PhoneUpdateActivity extends BaseActivity {
                 finsh(this);
                 break;
             case R.id.activity_phone_phone_get_check_num:
-                requestCheckNum();
+                requestCheckNum(Config.phone);
                 break;
             case R.id.activity_phone_cancel:
                 finish();

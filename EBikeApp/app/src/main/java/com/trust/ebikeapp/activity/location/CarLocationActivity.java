@@ -21,6 +21,7 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
@@ -74,13 +75,11 @@ public class CarLocationActivity extends BaseActivity {
      */
     public void successCallBeackLocation(Object object , int type){
             if(type == Config.trickLocation){
-
                 LocationResultBean bean = (LocationResultBean) object;
                 if(bean.getContent().getLat() != 0.0 && bean.getContent().getType() != 1){
                     doTrickLine(bean);
-
                 }else{
-                    showErrorToast(context,"车辆定位无效,请将车辆挪到空旷地带!",1);
+                    showErrorToast(context, TextUtlis.getMsg(R.string.locationTrickLocationError),1);
                 }
             }
     }
@@ -95,7 +94,6 @@ public class CarLocationActivity extends BaseActivity {
             switch (msg.what){
                 case Config.trickLocation:
                     count++;
-
                     if(count <= 20){
                         PostTrack postTrack = new PostTrack(resultCallBack);
                         Map<String, Object> map = new WeakHashMap<>();
@@ -255,7 +253,7 @@ public class CarLocationActivity extends BaseActivity {
         if(mDate!=null){
             if(carLoationMessage.getGpsType() == 1){
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("当前数据为基站数据,可能与实际位置有所偏差是否继续?");
+                builder.setTitle(TextUtlis.getMsg(R.string.routeWearning));
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -17,6 +17,7 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.MainActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.zxing.activity.CaptureActivity;
 
 import java.util.Map;
@@ -29,6 +30,7 @@ public class CarBindActivity extends BaseActivity {
     private TextView getCheckNumBtn;
     private Context context = CarBindActivity.this;
     private final int Scann = 0;
+    private long phone = 0,termId = 0 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +69,7 @@ public class CarBindActivity extends BaseActivity {
         String device = deviceEd.getText().toString().trim();
         String check = checkNumEd.getText().toString().trim();
         checkNumEd = (EditText) findViewById(R.id.activity_car_bind_check_num);
-        long phone = 0,termId = 0 , checkNum = 0;
+        long  checkNum = 0;
         if(!user.equals("")){
             phone  = Long.parseLong(user);
         }
@@ -84,7 +86,7 @@ public class CarBindActivity extends BaseActivity {
                 break;
             case R.id.activity_car_bind_get_check_num:
                 if (phone == 0) {
-                    showErrorToast(context,"手机号码有误!",3);
+                    showErrorToast(context, TextUtlis.getMsg(R.string.errorPhone),3);
                     return;
                 }else{
                     map.put("cp", phone);
@@ -96,7 +98,7 @@ public class CarBindActivity extends BaseActivity {
                 break;
             case R.id.activity_car_bind_determine:
                 if(phone == 0 ||termId == 0 || checkNum == 0){
-                    showErrorToast(context,"输入信息有误!",3);
+                    showErrorToast(context,TextUtlis.getMsg(R.string.errorEnterMsg),3);
                     return;
                 }else{
                     map.put("cp",phone);
@@ -111,20 +113,19 @@ public class CarBindActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void resultCallBeack(Object obj, int type, int status) {
-        if(status == Config.SUCCESS){
-            if(type == Config.getCheckNum){
 
-                checkNumEd.setText(obj.toString());
-            }else if(type == Config.bindCar){
-                startActivity(new Intent(this, MainActivity.class));
-            }
-        }else{
-            L.e("error："+obj.toString());
+
+    @Override
+    public void successCallBeack(Object obj, int type) {
+        if(type == Config.getCheckNum){
+            checkNumEd.setText(obj.toString());
+        }else if(type == Config.bindCar){
+            Config.termId = termId;
+            Config.phone = phone;
+            showWaitToast(context,TextUtlis.getMsg(R.string.buildPrompt),3);
+            finish();
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

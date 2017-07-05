@@ -58,14 +58,23 @@ public class CarStatusActivity extends BaseActivity {
     public void successCallBeack(Object obj, int type) {
         CarStatusBean bean = (CarStatusBean) obj;
         voltage(bean);
+        pullOut(bean);
+        lowVoltage(bean);
+
+    }
+
+    private void lowVoltage(CarStatusBean bean) {
+        // TODO: 2017/7/5  控制车辆状态显示
+
+    }
+
+    private void pullOut(CarStatusBean bean) {
         //电池是否拔出
         if(bean.getContent().getPlugOutAlarm().equals("0")){//正常
             showImg(11);
         }else{
             showImg(12);
         }
-
-
     }
 
     private void voltage(CarStatusBean bean) {

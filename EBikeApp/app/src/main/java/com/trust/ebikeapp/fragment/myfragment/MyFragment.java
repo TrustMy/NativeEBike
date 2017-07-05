@@ -85,7 +85,7 @@ public class MyFragment extends BaseFragment {
         emailUpdateBtn = (RelativeLayout) v.findViewById(R.id.myfragment_email_update);
 
 
-        onClick(phoneUpdateBtn);
+//        onClick(phoneUpdateBtn);
         onClick(termIdUpdateBtn);
         onClick(speedUpdateBtn);
         onClick(nickNameUpdateBtn);
@@ -224,5 +224,12 @@ public class MyFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+
+    @Override
+    public void onResume() {
+        update();
+        super.onResume();
     }
 }

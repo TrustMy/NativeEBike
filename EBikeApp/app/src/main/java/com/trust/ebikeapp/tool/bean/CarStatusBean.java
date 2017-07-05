@@ -116,4 +116,62 @@ public class CarStatusBean {
             return voltagePercent;
         }
     }
+
+    public static class FaultBean {
+        /**
+         * fault1 : 1
+         * fault2 : 1
+         * fault3 : 1
+         * fault4 : 1
+         * fault5 : 1
+         */
+
+        private int fault1;
+        private int fault2;
+        private int fault3;
+        private int fault4;
+        private int fault5;
+
+        public void setFault1(int fault1) {
+            this.fault1 = fault1;
+        }
+
+        public void setFault2(int fault2) {
+            this.fault2 = fault2;
+        }
+
+        public void setFault3(int fault3) {
+            this.fault3 = fault3;
+        }
+
+        public void setFault4(int fault4) {
+            this.fault4 = fault4;
+        }
+
+        public void setFault5(int fault5) {
+            this.fault5 = fault5;
+        }
+
+        public int getFault1() {
+            return fault1;
+        }
+
+        public int getFault2() {
+            return fault2;
+        }
+
+        public int getFault3() {
+            return fault3;
+        }
+
+        public int getFault4() {
+            return fault4;
+        }
+
+        public int getFault5() {
+            return fault5;
+        }
+    }
+
+
 }

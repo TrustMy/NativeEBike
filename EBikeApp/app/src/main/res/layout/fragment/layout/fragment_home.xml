@@ -177,7 +177,7 @@
 
                         <RelativeLayout
                             android:id="@+id/homefragment_alarm_num_layout"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             android:layout_alignEnd="@+id/home_alarm"
                             android:layout_alignRight="@+id/home_alarm"
                             android:layout_marginEnd="6dp"

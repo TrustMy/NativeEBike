@@ -8,6 +8,7 @@ import android.os.Message;
 import com.amap.api.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.bean.AlarmAddressAndroidBean;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
@@ -367,7 +368,7 @@ public class PostResult extends Handler {
                     result(locationMessagne, type, Config.SUCCESS);
 
             } else {
-                result( getErrorMsg(obj), type, Config.ERROR);
+                result(getErrorMsg(Config.context.getResources().getString(R.string.carlocation)), type, Config.ERROR);
             }
         }else{
             result( getErrorMsg(obj), type, Config.ERROR);

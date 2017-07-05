@@ -17,6 +17,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.carhistroy.ChooseTimeActivity;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.AlarmAddressAndroidBean;
 import com.trust.ebikeapp.tool.bean.AlarmBean;
@@ -107,7 +108,7 @@ public class AlarmActivity extends BaseActivity {
 
     public void chooseTime(View v) {
         Intent intent = new Intent(context, ChooseTimeActivity.class);
-        intent.putExtra("title", "查询报警信息");
+        intent.putExtra("title", TextUtlis.getMsg(R.string.alarmTitle));
 
         startActivityForResult(intent, requestCode);
     }
@@ -119,7 +120,7 @@ public class AlarmActivity extends BaseActivity {
             if (bean != null) {
                 if (bean.getAlarmsBeanList().size() == 0) {
                     if (beanList.size() != 0) {
-                        loadDateBtn.setText("已经是最后一条数据了!");
+                        loadDateBtn.setText(TextUtlis.getMsg(R.string.alarmLastData));
                         activityAlarmHistroyLoadDateLayout.setVisibility(View.VISIBLE);
                     } else {
                         nothingTv.setVisibility(View.VISIBLE);

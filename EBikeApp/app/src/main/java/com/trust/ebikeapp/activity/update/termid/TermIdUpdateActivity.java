@@ -17,6 +17,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.loginorregister.LoginActivity;
 import com.trust.ebikeapp.activity.loginorregister.RegisterActivity;
+import com.trust.ebikeapp.tool.TextUtlis;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -61,10 +62,19 @@ public class TermIdUpdateActivity extends BaseActivity{
                 finish();
                 break;
             case R.id.activity_termid_determine:
-                unBindCar();
+                String phone = checkMessage(phoneEd, TextUtlis.getMsg(R.string.errorPhone));
+                if(phone!= null){
+                    String checkNum = checkMessage(checkNumEd,TextUtlis.getMsg(R.string.errorCheckNum));
+                    if (checkNum != null) {
+                        unBindCar(Long.parseLong(phone),Integer.parseInt(checkNum));
+                    }
+                }
                 break;
             case R.id.activity_termid_get_check_num:
-                requestCheckNum();
+                String phones = checkMessage(phoneEd,TextUtlis.getMsg(R.string.errorPhone));
+                if(phones != null){
+                    requestCheckNum(Long.parseLong(phones));
+                }
                 break;
             case R.id.activity_termid_back:
                 finsh(this);
@@ -72,9 +82,9 @@ public class TermIdUpdateActivity extends BaseActivity{
         }
     }
 
-    private void unBindCar() {
+    private void unBindCar(long phone , long checkNum) {
         Map<String,Object> map = new WeakHashMap<>();
-        map.put("cp",Config.phone);
+        map.put("cp",phone);
         map.put("termId",Config.termId);
         map.put("code",checkNum);
         requestCallBeack(Config.un_bind_car, map, Config.unBindCar, Config.needAdd);

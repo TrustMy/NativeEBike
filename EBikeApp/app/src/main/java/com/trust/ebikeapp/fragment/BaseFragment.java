@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.Config;
+import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
@@ -81,7 +83,7 @@ public class BaseFragment extends Fragment {
 
     public void requestCallBeack(String url, Map<String,Object> map, int type, boolean isNeed){
         if(PersionAuthority.checkAuthority(type ,map) == 0){
-
+            DialogTool.showError(context, TextUtlis.getMsg(R.string.persionAuthority));
         }else{
             showDialog();
             post.Request(url,map,type,isNeed);
@@ -124,7 +126,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void dissDialog(){
-        DialogTool.dialog.dismiss();
+        DialogTool.dismissWartDialog();
     }
 
     public void showWaitToast(Context context, String msg, int time){

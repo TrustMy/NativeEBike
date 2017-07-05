@@ -41,5 +41,11 @@
     </style>
 
 
+    <style name="errorDialog"  parent="android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/error_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/error_dialog_out</item>
+    </style>
+
+
 
 </resources>

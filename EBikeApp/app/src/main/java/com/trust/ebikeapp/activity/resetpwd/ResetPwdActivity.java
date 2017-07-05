@@ -1,6 +1,7 @@
 package com.trust.ebikeapp.activity.resetpwd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.activity.customerservice.CustomerServiceActivity;
 import com.trust.ebikeapp.tool.CheckNumTool;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
@@ -54,13 +57,13 @@ public class ResetPwdActivity extends BaseActivity {
     public void clickResult(View v) {
         switch (v.getId()){
             case R.id.activity_reset_pwd_get_check_num:
-                String phone = checkMessage(phoneEd,"手机号不能为空!");
+                String phone = checkMessage(phoneEd, TextUtlis.getMsg(R.string.errorPhone));
                 if(phone != null){
-                    Config.phone = Long.parseLong(phoneEd.getText().toString().trim());
-                    requestCheckNum();
+                    requestCheckNum(Long.parseLong(phone));
                 }
                 break;
             case R.id.activity_never:
+                startActivity(new Intent(this, CustomerServiceActivity.class));
                 break;
             case R.id.activity_reset_pwd_cancel:
                 finish();
@@ -93,7 +96,7 @@ public class ResetPwdActivity extends BaseActivity {
     }
 
     private void doDate() {
-        String phone = checkMessage(phoneEd,"手机号不能为空!");
+        String phone = checkMessage(phoneEd,TextUtlis.getMsg(R.string.errorPhone));
         String checkNumt = checkMessage(checkNumEd,"验证码不能为空!");
         String pwd = checkMessage(newPwdEd,"密码不能为空!");
         String twoPwd = checkMessage(newTwoEd,"确认密码不能为空!");

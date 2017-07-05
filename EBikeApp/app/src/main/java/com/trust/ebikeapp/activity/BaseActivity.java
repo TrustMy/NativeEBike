@@ -17,6 +17,7 @@ import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.internet.Get;
@@ -25,6 +26,8 @@ import com.trust.ebikeapp.tool.push.Utils;
 import com.trust.ebikeapp.tool.trustinterface.PushCallBack;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +43,7 @@ public class BaseActivity extends AppCompatActivity {
     protected Get get;
     public static Activity activity ;
     private Context context = BaseActivity.this;
+    protected MainActivity mainActivity ;
     public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
         public void CallBeck(Object obj, int type, int status) {
@@ -59,7 +63,7 @@ public class BaseActivity extends AppCompatActivity {
                     if(Config.loginStatus){
                        startActivity(new Intent(activity, AlarmActivity.class));
                     }else{
-                        showErrorToast(context,"请先登录,在查看详细信息!",3);
+                        DialogTool.showError(activity,"请先登录,在查看详细信息!");
                     }
                 }
             };
@@ -90,7 +94,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
         if(PersionAuthority.checkAuthority(type ,map) == 0){
-            DialogTool.showError(this,"您没有该功能权限!");
+            DialogTool.showError(activity, TextUtlis.getMsg(R.string.persionAuthority));
         }else{
             showDialog();
             post.Request(url,map,type,isNeed);
@@ -187,9 +191,9 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 申请验证码
      */
-    protected void requestCheckNum() {
+    protected void requestCheckNum(long phone) {
         Map<String,Object> map =  new WeakHashMap<>();
-        map.put("cp", Config.phone);
+        map.put("cp",phone);
         requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);
     }
 

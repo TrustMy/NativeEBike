@@ -13,6 +13,7 @@ import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.dialog.DoubleDatePickerDialog;
 
@@ -85,7 +86,7 @@ public class ChooseTimeActivity extends BaseActivity {
             case R.id.choose_time_determine:
 
                 if(Math.abs(TimeTool.getTime(timeOff) - TimeTool.getTime(timeOn)) > lastWeek){
-                    showErrorToast(context,"时间不能超过七天!",1);
+                    showErrorToast(context, TextUtlis.getMsg(R.string.chooseTimeOneWeekError),1);
                 }else{
                     startTime = TimeTool.getTime(startTv.getText().toString());
                     endTime = TimeTool.getTime(endTv.getText().toString());

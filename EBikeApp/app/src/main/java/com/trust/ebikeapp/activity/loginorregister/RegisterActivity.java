@@ -13,6 +13,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.tool.CheckNumTool;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
@@ -108,7 +109,7 @@ public class RegisterActivity extends BaseActivity {
 
             case R.id.register_checknum_btn:
                 if(user == 0){
-                    showErrorToast(context,"手机号不能为空!",3);
+                    showErrorToast(context, TextUtlis.getMsg(R.string.errorPhone),3);
                 }else {
                     map.put("cp", user);
                     requestCallBeack(Config.get_check_num, map, Config.getCheckNum, Config.noAdd);

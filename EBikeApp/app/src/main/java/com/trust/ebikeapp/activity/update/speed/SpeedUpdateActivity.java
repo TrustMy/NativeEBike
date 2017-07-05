@@ -90,7 +90,9 @@ public class SpeedUpdateActivity extends BaseActivity  implements RadioGroup.OnC
     public void successCallBeack(Object obj, int type) {
         switch (type){
             case Config.speedLimit:
+                Config.speed = String.valueOf(speed);
                 showWaitToast(context,"设置成功",1);
+                finish();
                 break;
         }
     }

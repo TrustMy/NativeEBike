@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         initFargment();
 
         Config.loginStatus = true;
+        mainActivity = this;
     }
 
     private void initView() {

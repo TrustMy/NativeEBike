@@ -54,7 +54,7 @@
    </android.support.v7.widget.Toolbar>
 
     <android.support.percent.PercentRelativeLayout
-        app:layout_marginTopPercent = "6%"
+        app:layout_marginTopPercent = "4%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -65,6 +65,8 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:visibility="invisible"
+            android:id="@+id/carstatus_fragment_ic"
             android:background="@drawable/circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +80,7 @@
     <Button
         android:id="@+id/carstatus_checkCarStatus"
         android:textColor="@color/colorWhite"
-        app:layout_marginTopPercent = "8%"
+        app:layout_marginTopPercent = "6%"
         android:background="@drawable/carstatus_fragment_check_btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -90,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_widthPercent="80%"
-        app:layout_marginTopPercent = "10%"
+        app:layout_marginTopPercent = "6%"
         android:orientation="horizontal">
 
         <TextView
@@ -105,8 +107,30 @@
             android:layout_marginLeft="8dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/carstatus_fragment_hall"
                 android:textColor="@color/colorWhite"
                 android:text="电机霍尔正常"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/carstatus_fragment_phase_line"
+                android:textColor="@color/colorWhite"
+                android:text="电机相线正常"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/carstatus_fragment_turn_the_handle"
+                android:textColor="@color/colorWhite"
+                android:text="车辆转把正常"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/carstatus_fragment_controller"
+                android:textColor="@color/colorWhite"
+                android:text="控制器正常"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
@@ -125,6 +149,7 @@
         >
 
         <ImageView
+            android:id="@+id/carstatus_fragment_hall_status_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -144,6 +169,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/carstatus_fragment_hall_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/motor_hall"
@@ -177,6 +203,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/carstatus_fragment_phase_line_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/motor_phase_line"
@@ -188,6 +215,7 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:id="@+id/carstatus_fragment_phase_line_status_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -210,6 +238,7 @@
         >
 
         <ImageView
+            android:id="@+id/carstatus_fragment_turn_the_handle_status_img"
             app:layout_marginLeftPercent="6%"
             android:layout_centerVertical="true"
             android:src="@drawable/turn"
@@ -229,6 +258,7 @@
             android:layout_marginRight="4dp" />
 
         <TextView
+            android:id="@+id/carstatus_fragment_turn_the_handle_status"
             android:textColor="@color/colorWhite"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
@@ -260,6 +290,7 @@
             android:layout_marginLeft="8dp" />
 
         <TextView
+            android:id="@+id/carstatus_fragment_controller_status"
             android:textColor="@color/colorWhite"
             android:layout_marginTop="4dp"
             android:text="正常"
@@ -271,6 +302,7 @@
             android:layout_marginLeft="8dp" />
 
         <ImageView
+            android:id="@+id/carstatus_fragment_controller_status_img"
             app:layout_marginRightPercent="6%"
             android:layout_centerVertical="true"
             android:src="@drawable/control"

@@ -18,6 +18,7 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.CarHistroyRecyclerViewNowAdapter;
 import com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarStrokeAndAddress;
 import com.trust.ebikeapp.tool.bean.CarStrokeBean;
@@ -150,7 +151,7 @@ public class CarHistroyActivity extends BaseActivity {
                 if (ml.getTripsBeenList().size() == 0) {
                     if (tripsBeanList.size() != 0) {
                         activityCarHistroyLoadDateLayou.setVisibility(View.VISIBLE);
-                        loadDate.setText("已经是最后一条数据了!");
+                        loadDate.setText(TextUtlis.getMsg(R.string.alarmLastData));
                         messageTv.setVisibility(View.GONE);
                     } else {
                         activityCarHistroyLoadDateLayou.setVisibility(View.GONE);
@@ -200,7 +201,7 @@ public class CarHistroyActivity extends BaseActivity {
 
     public void chooseTime(View v) {
         Intent intent = new Intent(context, ChooseTimeActivity.class);
-        intent.putExtra("title", "查询历史信息");
+        intent.putExtra("title", TextUtlis.getMsg(R.string.carHistroytitle));
 
         startActivityForResult(intent, requestCode);
 

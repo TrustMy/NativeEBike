@@ -11,6 +11,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,6 +78,11 @@ public class DialogTool  {
         handler.sendEmptyMessageDelayed(1,1000*15);
 
 
+    }
+
+    public static void dismissWartDialog(){
+        handler.removeMessages(1);
+        dialog.dismiss();
     }
 
 
@@ -146,6 +152,9 @@ public class DialogTool  {
         TextView msgTv = (TextView) view.findViewById(R.id.error_dialog_msg);
         msgTv.setText(msg);
         dialog.setCanceledOnTouchOutside(false);
+
+        Window window = dialog.getWindow();
+        window.setWindowAnimations(R.style.errorDialog);
         dialog.setContentView(view);
         if(!activity.isFinishing()){
             dialog.show();

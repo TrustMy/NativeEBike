@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.tool.TextUtlis;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -20,6 +21,7 @@ public class NickNameUpdateActivity extends BaseActivity {
     private Button cancelBtn,determine;
     private EditText nickNameEd;
     private ImageButton backBtn;
+    private  String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,22 +54,24 @@ public class NickNameUpdateActivity extends BaseActivity {
     }
 
     private void request() {
-        String name = nickNameEd.getText().toString().trim();
+        name = nickNameEd.getText().toString().trim();
         if(!name .equals("")){
             Map<String,Object> map = new WeakHashMap<>();
             map.put("cp", Config.phone);
             map.put("nickName", name);
             requestCallBeack(Config.nick_name_update,map,Config.nickNameUpdate,Config.needAdd);
+        }else{
+            showErrorToast(context, TextUtlis.getMsg(R.string.errorEnterMsg),3);
         }
-
-
     }
 
     @Override
     public void successCallBeack(Object obj, int type) {
         switch (type){
             case Config.nickNameUpdate:
+                Config.nickname = name;
                 showWaitToast(context,"设置成功",3);
+                finish();
                 break;
         }
     }
