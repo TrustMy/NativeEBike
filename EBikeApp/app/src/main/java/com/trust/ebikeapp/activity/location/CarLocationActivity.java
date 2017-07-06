@@ -68,6 +68,7 @@ public class CarLocationActivity extends BaseActivity {
         }
     };
 
+
     /**
      * 实时追踪请求坐标成功回调
      * @param object
@@ -311,13 +312,20 @@ public class CarLocationActivity extends BaseActivity {
                 if (isTrack) {
                     closeTrick();
                     locationTimeTv.setVisibility(View.GONE);
+                    setImgBackAndStatus(locationBtn,R.drawable.location_btn_bg,true);
+                    setImgBackAndStatus(routePlanBtn,R.drawable.location_route_plan_btn_bg,true);
+                    setImgBackAndStatus(foundCarBtn,R.drawable.location_found_car_btn_bg,true);
                 }else{
                     isTrack = true;
                     trackBtn.setBackgroundResource(R.drawable.location_trick_on_btn_bg);
                     trickHandler.sendEmptyMessage(Config.trickLocation);
-                    //开始
+                    //开始   开启成功
                     trickHandler.sendEmptyMessage(Config.locationTime);
                     locationTimeTv.setVisibility(View.VISIBLE);
+
+                    setImgBackAndStatus(locationBtn,R.drawable.location_off,false);
+                    setImgBackAndStatus(routePlanBtn,R.drawable.walk_2,false);
+                    setImgBackAndStatus(foundCarBtn,R.drawable.found_car_off,false);
                 }
 
                 break;
@@ -335,6 +343,11 @@ public class CarLocationActivity extends BaseActivity {
         }
     }
 
+    private void setImgBackAndStatus(ImageButton imageButton,int id ,boolean status) {
+        imageButton.setBackgroundResource(id);
+        imageButton.setEnabled(status);
+    }
+
 
     /**
      * 切换关闭状态配置
@@ -347,6 +360,12 @@ public class CarLocationActivity extends BaseActivity {
         trickHandler.removeMessages(Config.locationTime);
         count = 0;
         sumSecond = 300;
+
+        setImgBackAndStatus(locationBtn,R.drawable.location_btn_bg,true);
+        setImgBackAndStatus(routePlanBtn,R.drawable.location_route_plan_btn_bg,true);
+        setImgBackAndStatus(foundCarBtn,R.drawable.location_found_car_btn_bg,true);
+
+        locationTimeTv.setVisibility(View.INVISIBLE);
         locationTimeTv.setText("05:00");
     }
 

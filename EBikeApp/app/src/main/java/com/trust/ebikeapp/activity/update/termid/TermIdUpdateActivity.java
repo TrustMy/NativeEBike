@@ -100,8 +100,7 @@ public class TermIdUpdateActivity extends BaseActivity{
                 break;
             case Config.unBindCar:
                 showWaitToast(context,"解绑成功",3);
-                startActivity(new Intent(context, LoginActivity.class));
-                finish();
+                killAllActivtiy(context);
                 break;
         }
     }

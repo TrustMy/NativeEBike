@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.TextUtlis;
+import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
@@ -83,7 +85,7 @@ public class BaseFragment extends Fragment {
 
     public void requestCallBeack(String url, Map<String,Object> map, int type, boolean isNeed){
         if(PersionAuthority.checkAuthority(type ,map) == 0){
-            DialogTool.showError(context, TextUtlis.getMsg(R.string.persionAuthority));
+            DialogTool.showError((BaseActivity) context, TextUtlis.getMsg(R.string.persionAuthority));
         }else{
             showDialog();
             post.Request(url,map,type,isNeed);
@@ -99,18 +101,18 @@ public class BaseFragment extends Fragment {
         if(status == Config.SUCCESS){
             successCallBeack(obj,type);
         }else{
-            errorCallBeack(obj,type);
+            errorCallBeack((ErrorResultBean)obj,type);
         }
     }
-    public void successCallBeack(Object obj,int type){
 
+    public void successCallBeack(Object obj,int type){
     }
 
-    public void errorCallBeack(Object obj,int type){
+    public void errorCallBeack(ErrorResultBean obj, int type){
         if(type == Config.trickLocation){
             showErrorToast(Config.context,obj.toString(),3);
         }else{
-            DialogTool.showError(context,obj.toString());
+            DialogTool.showError((BaseActivity)context,obj);
         }
             doError(type);
     }

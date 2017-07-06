@@ -1,6 +1,7 @@
 package com.trust.ebikeapp.activity.changpwd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.activity.loginorregister.LoginActivity;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
@@ -96,6 +98,7 @@ public class ChangPwdActivity extends BaseActivity {
         switch (type){
             case Config.changPwd:
                 showErrorToast(context,"修改成功!",1);
+                killAllActivtiy(context);
                 break;
         }
     }

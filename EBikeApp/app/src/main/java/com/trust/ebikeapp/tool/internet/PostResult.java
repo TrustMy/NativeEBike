@@ -225,9 +225,9 @@ public class PostResult extends Handler {
        callBack.CallBeck(obj,type,status);
    }
 
-   public String getErrorMsg(String obj){
+   public Object getErrorMsg(String obj){
        ErrorResultBean errorBean = gson.fromJson(obj,ErrorResultBean.class);
-       return errorBean.getErr();
+       return errorBean;
    }
 
     /**

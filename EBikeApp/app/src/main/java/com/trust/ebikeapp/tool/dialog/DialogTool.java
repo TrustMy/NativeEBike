@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -139,7 +140,7 @@ public class DialogTool  {
     }
 
 
-    public static void showError(final Activity activity,String msg){
+    public static void showError(final BaseActivity activity, final Object bean){
         final Dialog dialog = new Dialog(activity, R.style.customDialog);
         View view = LayoutInflater.from(activity).inflate(R.layout.error_dialog,null);
         Button determine = (Button) view.findViewById(R.id.error_dialog_determine);
@@ -147,10 +148,20 @@ public class DialogTool  {
             @Override
             public void onClick(View view) {
                     dialog.dismiss();
+                if(bean instanceof  ErrorResultBean){
+                    if (((ErrorResultBean)bean).getCode() == 1) {
+                        activity.killAllActivtiy(activity);
+                    }
+                }
             }
         });
         TextView msgTv = (TextView) view.findViewById(R.id.error_dialog_msg);
-        msgTv.setText(msg);
+
+        if(bean instanceof String){
+            msgTv.setText(bean.toString());
+        } else if (bean instanceof ErrorResultBean) {
+            msgTv.setText(((ErrorResultBean)bean).getErr());
+        }
         dialog.setCanceledOnTouchOutside(false);
 
         Window window = dialog.getWindow();

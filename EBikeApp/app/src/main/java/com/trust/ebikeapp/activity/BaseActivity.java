@@ -14,10 +14,13 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
+import com.trust.ebikeapp.activity.loginorregister.LoginActivity;
+import com.trust.ebikeapp.tool.ActivityCollector;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.TextUtlis;
+import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
 import com.trust.ebikeapp.tool.internet.Get;
@@ -63,7 +66,7 @@ public class BaseActivity extends AppCompatActivity {
                     if(Config.loginStatus){
                        startActivity(new Intent(activity, AlarmActivity.class));
                     }else{
-                        DialogTool.showError(activity,"请先登录,在查看详细信息!");
+                        DialogTool.showError(BaseActivity.this,"请先登录,在查看详细信息!");
                     }
                 }
             };
@@ -75,6 +78,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lgin);
         activity = this;
+        ActivityCollector.addActivity(this);
         init();
         initPush();
     }
@@ -94,7 +98,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
         if(PersionAuthority.checkAuthority(type ,map) == 0){
-            DialogTool.showError(activity, TextUtlis.getMsg(R.string.persionAuthority));
+            DialogTool.showError(BaseActivity.this, TextUtlis.getMsg(R.string.persionAuthority));
         }else{
             showDialog();
             post.Request(url,map,type,isNeed);
@@ -118,7 +122,7 @@ public class BaseActivity extends AppCompatActivity {
         if(status == Config.SUCCESS){
             successCallBeack(obj,type);
         }else{
-            errorCallBeack(obj,type);
+            errorCallBeack((ErrorResultBean)obj,type);
         }
 
 
@@ -129,11 +133,11 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void errorCallBeack(Object obj,int type){
+    public void errorCallBeack(ErrorResultBean bean,int type){
         if(type == Config.trickLocation){
-            showErrorToast(Config.context,obj.toString(),3);
+            showErrorToast(Config.context,bean.getErr(),3);
         }else{
-            DialogTool.showError(this,obj.toString());
+            DialogTool.showError(this,bean);
         }
     }
 
@@ -212,5 +216,20 @@ public class BaseActivity extends AppCompatActivity {
             return null;
         }
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
+
+
+    public void killAllActivtiy(Context context){
+        context.startActivity(new Intent(context, LoginActivity.class));
+        ActivityCollector.finishAll();
+
+    }
+
 
 }
