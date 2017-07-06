@@ -4,6 +4,7 @@ import android.os.Message;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TrustException;
 import com.trust.ebikeapp.tool.internet.ssl.TrustAllCerts;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
@@ -56,7 +57,7 @@ public class Get {
                 L.e("onFailure:"+e.toString());
                 Map<String,Object> map = new WeakHashMap<>();
                 map.put("status",false);
-                map.put("err","与服务器连接超时!");
+                map.put("err", TrustException.getException(e));
                 JSONObject json = new JSONObject(map);
                 sendMessage(json.toString(),Config.ERROR,type);
             }
@@ -81,7 +82,7 @@ public class Get {
                     L.e("error code :"+response.code());
                     Map<String,Object> map = new WeakHashMap<>();
                     map.put("status",false);
-                    map.put("err",response.code());
+                    map.put("err","错误码:"+response.code());
                     JSONObject jsons = new JSONObject(map);
                     sendMessage(jsons.toString(),Config.ERROR,type);
                 }

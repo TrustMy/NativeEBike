@@ -4,6 +4,7 @@ import android.os.Message;
 
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.tool.L;
+import com.trust.ebikeapp.tool.TrustException;
 import com.trust.ebikeapp.tool.internet.PostResult;
 import com.trust.ebikeapp.tool.internet.ssl.TrustAllCerts;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
@@ -76,7 +77,7 @@ public class PostTrack {
                 L.e("onFailure:"+e.toString());
                 Map<String,Object> map = new WeakHashMap<>();
                 map.put("status",false);
-                map.put("err","与服务器连接超时!");
+                map.put("err", TrustException.getException(e));
                 JSONObject json = new JSONObject(map);
                 sendMessage(json.toString(),Config.ERROR,type);
             }

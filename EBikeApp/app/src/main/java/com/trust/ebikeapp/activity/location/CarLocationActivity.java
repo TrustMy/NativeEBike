@@ -300,8 +300,7 @@ public class CarLocationActivity extends BaseActivity {
             case Config.location:
                 CarLoationMessage carLoationMessage = (CarLoationMessage) obj;
                 if(!isRoute){
-                    Maker.showMakerGif(aMap,carLoationMessage);
-
+                    Maker.showMakerGif(aMap,carLoationMessage,true,1500);
                 }else{
                     //路径规划
                     route(carLoationMessage);
@@ -375,7 +374,8 @@ public class CarLocationActivity extends BaseActivity {
      */
     private void doTrickLine(LocationResultBean bean) {
         latLngs.add(new LatLng(bean.getContent().getLat(),bean.getContent().getLng()));
-        drawLiner.drawTrickLine(aMap,latLngs);
+        drawLiner.drawTrickLine(aMap,latLngs,
+                bean.getContent().getGpsTime());
     }
 
     private void showTime() {
@@ -408,6 +408,7 @@ public class CarLocationActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        trickHandler.removeMessages(Config.locationTime);
     }
 
     @Override
@@ -441,6 +442,5 @@ public class CarLocationActivity extends BaseActivity {
     public void ext(View v){
         onClickFinsh(activity);
     }
-
 
 }

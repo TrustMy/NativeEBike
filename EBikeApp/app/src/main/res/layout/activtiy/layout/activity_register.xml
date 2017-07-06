@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
     <ImageView
-
+        android:padding="4dp"
         android:id="@+id/register_finsh"
         android:src="@drawable/ext"
         android:layout_width="wrap_content"
@@ -54,6 +54,7 @@
             />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/register_user"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
@@ -89,6 +90,7 @@
             />
 
         <EditText
+            android:inputType="numberPassword"
             android:id="@+id/register_pwd"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
@@ -160,6 +162,7 @@
             />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/register_secret_order"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
@@ -186,6 +189,8 @@
 
 
         <EditText
+            android:inputType="number"
+            android:paddingLeft="20dp"
             android:id="@+id/register_checknum"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"

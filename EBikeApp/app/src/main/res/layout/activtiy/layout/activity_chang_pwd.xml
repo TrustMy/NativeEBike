@@ -95,6 +95,7 @@
                 />
 
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_chang_pwd_old_pwd"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -138,6 +139,7 @@
                 />
 
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_chang_pwd_new_pwd"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -181,10 +183,11 @@
                 />
 
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_chang_pwd_new_two_pwd"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@null"
+                android:background = "@null"
                 android:gravity="center_vertical"
                 app:layout_heightPercent="100%"
                 app:layout_widthPercent="70%" />

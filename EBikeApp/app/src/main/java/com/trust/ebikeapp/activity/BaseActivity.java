@@ -16,6 +16,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.activity.loginorregister.LoginActivity;
 import com.trust.ebikeapp.tool.ActivityCollector;
+import com.trust.ebikeapp.tool.TrustException;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
@@ -29,8 +30,6 @@ import com.trust.ebikeapp.tool.push.Utils;
 import com.trust.ebikeapp.tool.trustinterface.PushCallBack;
 import com.trust.ebikeapp.tool.trustinterface.ResultCallBack;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
@@ -97,13 +96,16 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void requestCallBeack(String url, Map<String,Object> map,int type,boolean isNeed){
-        if(PersionAuthority.checkAuthority(type ,map) == 0){
-            DialogTool.showError(BaseActivity.this, TextUtlis.getMsg(R.string.persionAuthority));
+        if(TrustException.isNetConnected()){
+                if(PersionAuthority.checkAuthority(type ,map) == 0){
+                    DialogTool.showError(BaseActivity.this, TextUtlis.getMsg(R.string.persionAuthority));
+            }else{
+                    showDialog();
+                    post.Request(url,map,type,isNeed);
+            }
         }else{
-            showDialog();
-            post.Request(url,map,type,isNeed);
+            DialogTool.showError(BaseActivity.this, TextUtlis.getMsg(R.string.internetError));
         }
-
     }
 
 

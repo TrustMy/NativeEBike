@@ -51,6 +51,7 @@
             />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/login_user"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
@@ -88,6 +89,7 @@
             />
 
         <EditText
+            android:inputType="numberPassword"
             android:textColor="@color/colorWhite"
             android:id="@+id/login_pwd"
             android:gravity="center_vertical"

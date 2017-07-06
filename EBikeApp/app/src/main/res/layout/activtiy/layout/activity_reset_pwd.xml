@@ -96,6 +96,7 @@
                 />
 
             <EditText
+                android:inputType="number"
                 android:id="@+id/activity_reset_pwd_phone"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -137,6 +138,7 @@
                 android:text="验证码:" />
 
             <EditText
+                android:inputType="number"
                 android:id="@+id/activity_reset_pwd_check_num"
                 android:gravity="center_vertical"
                 android:layout_width="0dp"
@@ -164,6 +166,7 @@
 
 
     <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        android:id="@+id/activity_reset_pwd_new_pwd_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -172,12 +175,14 @@
         app:layout_heightPercent = "6%"
         app:layout_marginTopPercent = "3%"
         app:layout_widthPercent="80%"
+        android:visibility="gone"
         >
 
         <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -188,6 +193,7 @@
                 />
 
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_reset_pwd_new_pwd"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -212,12 +218,15 @@
         android:gravity="center_vertical"
         app:layout_heightPercent = "6%"
         app:layout_marginTopPercent = "3%"
+        android:visibility="gone"
         app:layout_widthPercent="80%"
+        android:id="@+id/activity_reset_pwd_new_two_pwd_layout"
         >
 
         <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="horizontal">
 
             <TextView
@@ -230,6 +239,7 @@
                 />
 
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_reset_pwd_new_two_pwd"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

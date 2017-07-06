@@ -17,6 +17,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.trust.ebikeapp.R;
+import com.trust.ebikeapp.tool.bean.CarLoationMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class DrawLiner {
     private static final int END = 1;
     private String startName,endName;
     private Context context;
-
+    private CarLoationMessage carLoationMessage;
     public DrawLiner(Context context) {
         this.context = context;
         init();
@@ -125,12 +126,13 @@ public class DrawLiner {
     };
 
 
-    public void drawTrickLine(AMap aMap,List<LatLng> latLngs){
+    public void drawTrickLine(AMap aMap,List<LatLng> latLngs ,long time){
         aMap.clear();
         aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(30).color(Color.parseColor("#020176")).
                 setCustomTextureList(texTuresList));
         Maker.showMaker(aMap,latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude);
-
+        Maker.showMakerGif(aMap,carLoationMessage = new CarLoationMessage(latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude
+        ,time,"asd",0),false,1500);
     }
 
 }

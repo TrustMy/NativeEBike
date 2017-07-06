@@ -48,7 +48,7 @@ public class Maker {
                 0  ////偏航角 0~360° (正北方为0)
         )));
     }
-    public static void showMakerGif(AMap aMap,CarLoationMessage message){
+    public static void showMakerGif(AMap aMap,CarLoationMessage message , boolean need , int size){
         LatLng data = new LatLng(message.getLat(),message.getLon());
         MarkerOptions markerOptions = new MarkerOptions();
         ArrayList<BitmapDescriptor> ml = new ArrayList<>();
@@ -68,14 +68,16 @@ public class Maker {
 
         markerOptions.icons(ml);
         markerOptions.position(data);
-        markerOptions.title(message.getType());
+        if(need){
+            markerOptions.title(message.getType());
+        }
         markerOptions.snippet(TimeTool.getTimeAll(message.getGpsTime()));
         markerOptions.period(3);
 
         aMap.addMarker(markerOptions).showInfoWindow();
         aMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
                 new LatLng(data.latitude,data.longitude),//新的中心点坐标
-                500, //新的缩放级别
+                size, //新的缩放级别
                 0, //俯仰角0°~45°（垂直与地图时为0）
                 0  ////偏航角 0~360° (正北方为0)
         )));

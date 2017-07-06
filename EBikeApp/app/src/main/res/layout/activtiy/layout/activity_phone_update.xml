@@ -71,12 +71,11 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_widthPercent = "80%"
-        app:layout_heightPercent = "8%"
-        app:layout_marginTopPercent = "6%"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        >
+        app:layout_heightPercent="8%"
+        app:layout_marginTopPercent="6%"
+        app:layout_widthPercent="80%">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,22 +83,24 @@
             android:orientation="horizontal">
 
             <TextView
-                android:textSize="18sp"
-                android:text="输入密码:"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="输入密码:"
+                android:textSize="18sp" />
+
             <EditText
+                android:inputType="numberPassword"
                 android:id="@+id/activity_phone_pwd_ed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"/>
+                android:background="@null" />
         </LinearLayout>
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            app:layout_widthPercent = "90%"
-            android:background="#000000"/>
+            android:background="#000000"
+            app:layout_widthPercent="90%" />
     </LinearLayout>
 
 
@@ -123,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:inputType="number"
                 android:id="@+id/activity_phone_new_pwd_ed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,6 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:inputType="number"
                 android:id="@+id/activity_phone_check_num_ed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

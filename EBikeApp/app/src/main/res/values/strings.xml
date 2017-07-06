@@ -8,6 +8,12 @@
     <string name="persionAuthority">您没有该功能权限!</string>
 
 
+
+    <string name="internetError">网络异常!</string>
+
+
+
+
     <!--车辆位置-->
     <string name="locationTrickLocationError">定位无效,请将车辆挪到空旷地带!</string>
     <string name="routeWearning">当前数据为基站数据,可能与实际位置有所偏差是否继续?</string>

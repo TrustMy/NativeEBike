@@ -15,22 +15,32 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.activity.customerservice.CustomerServiceActivity;
 import com.trust.ebikeapp.tool.CheckNumTool;
 import com.trust.ebikeapp.tool.TextUtlis;
+import com.trust.ebikeapp.tool.uitool.PercentLinearLayout;
 import com.trust.ebikeapp.tool.utils.MD5Utils;
 
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class ResetPwdActivity extends BaseActivity {
+    @InjectView(R.id.activity_reset_pwd_new_pwd_layout)
+    PercentLinearLayout activityResetPwdNewPwdLayout;
+    @InjectView(R.id.activity_reset_pwd_new_two_pwd_layout)
+    PercentLinearLayout activityResetPwdNewTwoPwdLayout;
     private ImageButton backBtn;
-    private EditText phoneEd,checkNumEd,newPwdEd,newTwoEd;
+    private EditText phoneEd, checkNumEd, newPwdEd, newTwoEd;
     private TextView getCheckNumBtn;
-    private Button neverCheckNumBtn,cancelBtn,determineBtn;
+    private Button neverCheckNumBtn, cancelBtn, determineBtn;
     private int checkNum;
     private Context context = ResetPwdActivity.this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pwd);
+        ButterKnife.inject(this);
         initView();
     }
 
@@ -55,10 +65,10 @@ public class ResetPwdActivity extends BaseActivity {
 
     @Override
     public void clickResult(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.activity_reset_pwd_get_check_num:
                 String phone = checkMessage(phoneEd, TextUtlis.getMsg(R.string.errorPhone));
-                if(phone != null){
+                if (phone != null) {
                     requestCheckNum(Long.parseLong(phone));
                 }
                 break;
@@ -78,39 +88,41 @@ public class ResetPwdActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void successCallBeack(Object obj, int type) {
 
-        switch (type){
+        switch (type) {
             case Config.getCheckNum:
-                    checkNum = Integer.parseInt(obj.toString());
-                    checkNumEd.setText(obj.toString());
+                checkNum = Integer.parseInt(obj.toString());
+                checkNumEd.setText(obj.toString());
                 new CheckNumTool<>().startTime(getCheckNumBtn);
+
+                activityResetPwdNewPwdLayout.setVisibility(View.VISIBLE);
+                activityResetPwdNewTwoPwdLayout.setVisibility(View.VISIBLE);
                 break;
             case Config.resetPwd:
-                showWaitToast(context,"重置密码成功!",1);
-                finish();
+                showWaitToast(context, "重置密码成功!", 1);
+                killAllActivtiy(context);
                 break;
         }
     }
 
     private void doDate() {
-        String phone = checkMessage(phoneEd,TextUtlis.getMsg(R.string.errorPhone));
-        String checkNumt = checkMessage(checkNumEd,"验证码不能为空!");
-        String pwd = checkMessage(newPwdEd,"密码不能为空!");
-        String twoPwd = checkMessage(newTwoEd,"确认密码不能为空!");
-        if(phone != null){
+        String phone = checkMessage(phoneEd, TextUtlis.getMsg(R.string.errorPhone));
+        String checkNumt = checkMessage(checkNumEd, "验证码不能为空!");
+        String pwd = checkMessage(newPwdEd, "密码不能为空!");
+        String twoPwd = checkMessage(newTwoEd, "确认密码不能为空!");
+        if (phone != null) {
             Config.phone = Long.parseLong(phone);
-            if(checkNumt != null){
-                checkNum =  Integer.parseInt(checkNumt);
-                if(pwd != null){
-                    if(twoPwd!=null){
-                        if(pwd .equals(twoPwd)){
+            if (checkNumt != null) {
+                checkNum = Integer.parseInt(checkNumt);
+                if (pwd != null) {
+                    if (twoPwd != null) {
+                        if (pwd.equals(twoPwd)) {
                             String newPwd = MD5Utils.encrypt(twoPwd);
                             requestChangPwd(newPwd);
-                        }else{
-                            showErrorToast(context,"两次密码不一致!",1);
+                        } else {
+                            showErrorToast(context, "两次密码不一致!", 1);
                         }
                     }
                 }
@@ -121,12 +133,12 @@ public class ResetPwdActivity extends BaseActivity {
     }
 
     private void requestChangPwd(String newPwd) {
-        Map<String,Object> map = new WeakHashMap<>();
-        map.put("cp",Config.phone);
-        map.put("code",checkNum);
-        map.put("pwd",newPwd);
+        Map<String, Object> map = new WeakHashMap<>();
+        map.put("cp", Config.phone);
+        map.put("code", checkNum);
+        map.put("pwd", newPwd);
 
-        requestCallBeack(Config.reset_pwd,map,Config.resetPwd,Config.noAdd);
+        requestCallBeack(Config.reset_pwd, map, Config.resetPwd, Config.noAdd);
     }
 
 

@@ -18,6 +18,7 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.PersionAuthority;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.TextUtlis;
+import com.trust.ebikeapp.tool.TrustException;
 import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.dialog.DialogTool;
 import com.trust.ebikeapp.tool.internet.Post;
@@ -84,11 +85,15 @@ public class BaseFragment extends Fragment {
     }
 
     public void requestCallBeack(String url, Map<String,Object> map, int type, boolean isNeed){
-        if(PersionAuthority.checkAuthority(type ,map) == 0){
-            DialogTool.showError((BaseActivity) context, TextUtlis.getMsg(R.string.persionAuthority));
+        if(TrustException.isNetConnected()){
+            if(PersionAuthority.checkAuthority(type ,map) == 0){
+                DialogTool.showError((BaseActivity) context, TextUtlis.getMsg(R.string.persionAuthority));
+            }else{
+                showDialog();
+                post.Request(url,map,type,isNeed);
+            }
         }else{
-            showDialog();
-            post.Request(url,map,type,isNeed);
+            DialogTool.showError((BaseActivity)context, TextUtlis.getMsg(R.string.internetError));
         }
 
     }
