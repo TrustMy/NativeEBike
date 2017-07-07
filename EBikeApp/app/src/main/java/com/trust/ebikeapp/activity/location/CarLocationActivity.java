@@ -407,8 +407,8 @@ public class CarLocationActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        closeTrick();
         mapView.onDestroy();
-        trickHandler.removeMessages(Config.locationTime);
     }
 
     @Override
