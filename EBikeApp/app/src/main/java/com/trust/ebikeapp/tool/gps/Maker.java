@@ -70,6 +70,8 @@ public class Maker {
         markerOptions.position(data);
         if(need){
             markerOptions.title(message.getType());
+        }else{
+            markerOptions.title("实时追踪");
         }
         markerOptions.snippet(TimeTool.getTimeAll(message.getGpsTime()));
         markerOptions.period(3);

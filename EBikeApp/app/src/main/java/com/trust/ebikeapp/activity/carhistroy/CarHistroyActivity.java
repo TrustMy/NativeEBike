@@ -60,7 +60,9 @@ public class CarHistroyActivity extends BaseActivity {
     private CarStrokeAndAddress carStrokeAndAddress;
     private int requestCode = 1;
 
-    private long whenTime = TimeTool.getSystemTimeDate();
+    private long whenTime = TimeTool.getTime(TimeTool.getTime(TimeTool.getSystemTimeDate(),Config.timeTypeYears));
+    private long offTime = 86399000;//offtime 结束时间+offtime就是当天23:59:59
+
 
     private ImageButton bachBtn;
     private long fireOnTimeDate, fireOffTimeDate;
@@ -77,7 +79,7 @@ public class CarHistroyActivity extends BaseActivity {
         setContentView(R.layout.activity_car_histroy);
         ButterKnife.inject(this);
         initView();
-        init(whenTime, whenTime, pageIndex, Config.carNowStroke);
+        init(whenTime, whenTime+offTime, pageIndex,100, Config.carNowStroke);
     }
 
     private void initView() {
@@ -130,7 +132,7 @@ public class CarHistroyActivity extends BaseActivity {
     }
 
 
-    private void init(long onFire, long offFire, int pageIndex, int type) {
+    private void init(long onFire, long offFire, int pageIndex,int pageSize, int type) {
         Map<String, Object> map = new WeakHashMap<>();
         map.put("termId", Config.termId);
         map.put("startTime", onFire);
@@ -148,14 +150,21 @@ public class CarHistroyActivity extends BaseActivity {
             CarStrokeAndAddress ml = (CarStrokeAndAddress) obj;
 
             if (ml != null) {
-                if (ml.getTripsBeenList().size() == 0) {
+                if (ml.getAddressList().size() == 0) {
                     if (tripsBeanList.size() != 0) {
                         activityCarHistroyLoadDateLayou.setVisibility(View.VISIBLE);
                         loadDate.setText(TextUtlis.getMsg(R.string.alarmLastData));
                         messageTv.setVisibility(View.GONE);
+
+
                     } else {
+                        L.d("行程 为 000000");
                         activityCarHistroyLoadDateLayou.setVisibility(View.GONE);
                         messageTv.setVisibility(View.VISIBLE);
+
+                        recyclerAdapter.setMl(tripsBeanList, locatoinBeanList);
+                        recyclerAdapter.notifyDataSetChanged();
+
                     }
                 } else {
                     pageIndex++;
@@ -219,7 +228,10 @@ public class CarHistroyActivity extends BaseActivity {
                     timeTv.setText(fireOnTime + " ~ " + fireOffTime);
                     if (fireOffTimeDate != 0) {
                         carStrokeAndAddress = null;
-                        init(fireOnTimeDate, fireOffTimeDate, pageIndex, Config.carStroke);
+                        pageIndex = 0;
+                        tripsBeanList.clear();
+                        locatoinBeanList.clear();
+                        init(fireOnTimeDate, fireOffTimeDate, pageIndex,pageSize, Config.carStroke);
 
                     } else {
                         L.e("fireOffTimeDate: = 0");
@@ -241,11 +253,11 @@ public class CarHistroyActivity extends BaseActivity {
                 finsh(this);
                 break;
             case R.id.activity_car_histroy_load_date:
-                init(fireOnTimeDate, fireOffTimeDate, pageIndex, Config.carStroke);
+                init(fireOnTimeDate, fireOffTimeDate, pageIndex,pageSize, Config.carStroke);
                 break;
 
             case R.id.activity_car_histroy_new_update:
-                init(whenTime, whenTime, 0, Config.carNowStroke);
+                init(whenTime, whenTime, 0,pageSize ,Config.carNowStroke);
                 break;
         }
     }

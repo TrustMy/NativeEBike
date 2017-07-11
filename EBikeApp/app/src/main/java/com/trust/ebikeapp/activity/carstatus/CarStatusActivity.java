@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public class CarStatusActivity extends BaseActivity {
-    private ImageView voltageImg , voltageStatusImg;
+    private ImageView voltageImg , voltageStatusImg,getVoltageNumImg , carStatusImg;
     private ImageButton backBtn;
     private Context context = CarStatusActivity.this;
     private TextView electractNum;
@@ -38,6 +38,8 @@ public class CarStatusActivity extends BaseActivity {
     private void initView() {
         voltageImg = (ImageView) findViewById(R.id.carstatus_voltage);
         voltageStatusImg = (ImageView) findViewById(R.id.carstatus_voltage_status);
+        getVoltageNumImg = (ImageView) findViewById(R.id.carstatus_voltage_num);
+        carStatusImg = (ImageView) findViewById(R.id.carstatus_status);
         electractNum = (TextView) findViewById(R.id.carstatus_electract_num);
 
         backBtn = (ImageButton) findViewById(R.id.carstatus_back);
@@ -64,49 +66,62 @@ public class CarStatusActivity extends BaseActivity {
     }
 
     private void lowVoltage(CarStatusBean bean) {
-        // TODO: 2017/7/5  控制车辆状态显示
+        int num = bean.getContent().getVoltagePercent();
+        int type;
+        if(num >30){
+            type = 15;
+        }else{
+            type = 16;
+        }
 
+        showImg(type,getVoltageNumImg);
     }
 
     private void pullOut(CarStatusBean bean) {
+        int type;
         //电池是否拔出
         if(bean.getContent().getPlugOutAlarm().equals("0")){//正常
-            showImg(11);
+            type = 11;
         }else{
-            showImg(12);
+            type = 12;
         }
+        showImg(type,voltageStatusImg);
     }
 
     private void voltage(CarStatusBean bean) {
         int num = bean.getContent().getVoltagePercent();
         electractNum.setText(num+"");
+        int type = 0;
         if(num == 100){
-            showImg(10);
+            type = 10;
         }else if(num >= 90){
-            showImg(9);
+            type = 9;
         }else if(num >= 80){
-            showImg(8);
+            type = 8;
         }else if(num >= 70){
-            showImg(7);
+            type = 7;
         }else if(num >= 60){
-            showImg(6);
+            type = 6;
         }else if(num >= 50){
-            showImg(5);
+            type = 5;
         }else if(num >= 40){
-            showImg(4);
+            type = 4;
         }else if(num >= 30){
-            showImg(3);
+            type = 3;
         }else if(num >= 20){
-            showImg(2);
+            type = 2;
         }else if(num >= 10){
-            showImg(1);
+            type = 1;
         }else{
-            showImg(0);
+            type = 0;
         }
+
+
+        showImg(type,voltageImg);
     }
 
-    public void showImg(int num){
-        Glide.with(context).load(Id[num]);
+    public void showImg(int num,ImageView imageView){
+        Glide.with(context).load(Id[num]).into(imageView);
     }
 
     public void reload(View v){

@@ -341,7 +341,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     HomeViewPagerAdapter.ViewPagerAdapterOnClickListener  viewPagerAdapterOnClickListener = new HomeViewPagerAdapter.ViewPagerAdapterOnClickListener() {
         @Override
         public void adapterOnClick(String url) {
-            showWaitToast(context,"你点击了广告url:"+url,3);
+//            showWaitToast(context,"你点击了广告url:"+url,3);
         }
     };
 

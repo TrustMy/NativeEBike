@@ -42,7 +42,8 @@ public class AlarmActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private AlarmRecyclerViewAdapter adapter;
     private TextView nothingTv, timeTv;
-    private long ontime = TimeTool.getSystemTimeDate();
+    private long ontime = TimeTool.getTime(TimeTool.getTime(TimeTool.getSystemTimeDate(),Config.timeTypeYears));
+    private long offTime = 86399000;//offtime 结束时间+offtime就是当天23:59:59
     private long startTime, endTime;
     private int requestCode = 1;
     private List<AlarmBean.ContentBean.AlarmsBean> beanList = new ArrayList<>();
@@ -57,7 +58,7 @@ public class AlarmActivity extends BaseActivity {
         setContentView(R.layout.activity_alarm_activity);
         ButterKnife.inject(this);
         initView();
-        initDate(ontime, ontime);
+        initDate(ontime, ontime+offTime);
     }
 
     private void initView() {
@@ -84,6 +85,11 @@ public class AlarmActivity extends BaseActivity {
         backBtn = (ImageButton) findViewById(R.id.alarm_activity_back);
         onClick(backBtn);
         onClick(loadDateBtn);
+
+
+
+        startTime = ontime;
+        endTime = ontime+offTime;
     }
 
     private void initDate(long onFire, long offFire) {
@@ -125,6 +131,12 @@ public class AlarmActivity extends BaseActivity {
                     } else {
                         nothingTv.setVisibility(View.VISIBLE);
                         activityAlarmHistroyLoadDateLayout.setVisibility(View.GONE);
+                        beanList.clear();
+                        addressList.clear();
+                        adapter.setMl(beanList, addressList);
+                        adapter.notifyDataSetChanged();
+
+                        pageIndex = 0;
                     }
                 } else {
                     nothingTv.setVisibility(View.GONE);
@@ -167,6 +179,7 @@ public class AlarmActivity extends BaseActivity {
                         beanList.clear();
                         startTime = fireOnTimeDate;
                         endTime = fireOffTimeDate;
+                        pageIndex = 0;
                         initDate(startTime, endTime);
                         timeTv.setText(fireOnTime + " ~ " + fireOffTime);
                     } else {

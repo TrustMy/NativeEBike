@@ -20,11 +20,14 @@ import com.robinhood.ticker.TickerView;
 import com.trust.ebikeapp.Config;
 import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.BaseActivity;
+import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.T;
 import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
 import com.trust.ebikeapp.tool.bean.CarLoationMessage;
+import com.trust.ebikeapp.tool.bean.ErrorResultBean;
 import com.trust.ebikeapp.tool.bean.LocationResultBean;
+import com.trust.ebikeapp.tool.gps.CoordinateTransformation;
 import com.trust.ebikeapp.tool.gps.DrawLiner;
 import com.trust.ebikeapp.tool.gps.GPSRoutePlanning;
 import com.trust.ebikeapp.tool.gps.Maker;
@@ -57,13 +60,23 @@ public class CarLocationActivity extends BaseActivity {
 
     private int sumSecond = 300,minute,second;
 
+    private CoordinateTransformation coordinateTransformation;
+
     public ResultCallBack resultCallBack = new ResultCallBack() {
         @Override
         public void CallBeck(Object obj, int type, int status) {
+            String msg ;
             if(status == Config.SUCCESS){
                 successCallBeackLocation(obj,type);
             }else{
-                showErrorToast(context,obj.toString(),1);
+
+                if(obj instanceof ErrorResultBean){
+                    ErrorResultBean errorResultBean = (ErrorResultBean) obj;
+                    msg = errorResultBean.getErr();
+                }else{
+                    msg = (String) obj;
+                }
+                showErrorToast(context,msg,1);
             }
         }
     };
@@ -156,6 +169,8 @@ public class CarLocationActivity extends BaseActivity {
         locationTimeTv = (TickerView) findViewById(R.id.activity_car_location_time);
         locationTimeTv.setCharacterList(TickerUtils.getDefaultListForUSCurrency());
 
+        coordinateTransformation = new CoordinateTransformation(context);
+
     }
 
     @Override
@@ -176,6 +191,7 @@ public class CarLocationActivity extends BaseActivity {
 
             case R.id.activity_car_location_route_plan:
                 isRoute = true;
+                positioning.startGps();
                 carLocation();
                 break;
 
@@ -279,6 +295,9 @@ public class CarLocationActivity extends BaseActivity {
 
             }
 
+        }else{
+            showErrorToast(context,"定位失败请稍后重试!",1);
+            positioning.startGps();
         }
     }
 
@@ -373,7 +392,7 @@ public class CarLocationActivity extends BaseActivity {
      * @param bean
      */
     private void doTrickLine(LocationResultBean bean) {
-        latLngs.add(new LatLng(bean.getContent().getLat(),bean.getContent().getLng()));
+        latLngs.add(coordinateTransformation.transformation(new LatLng(bean.getContent().getLat(),bean.getContent().getLng())));
         drawLiner.drawTrickLine(aMap,latLngs,
                 bean.getContent().getGpsTime());
     }

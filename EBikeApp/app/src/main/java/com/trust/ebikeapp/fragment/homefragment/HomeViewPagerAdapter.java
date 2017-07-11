@@ -34,7 +34,7 @@ public class HomeViewPagerAdapter extends PagerAdapter {
             ImageView img= new ImageView(context);
 //            img.setBackgroundResource(articles.get(i).getImgId());
             img.setScaleType(ImageView.ScaleType.FIT_XY);//铺满屏幕
-            Glide.with(context).load(articles.get(i).getImgId()).into(img);
+            Glide.with(context).load(articles.get(i).getImgId()).placeholder(articles.get(i).getImgId()).crossFade().into(img);
             ml.add(img);
 
         }

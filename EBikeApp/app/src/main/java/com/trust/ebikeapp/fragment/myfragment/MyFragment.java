@@ -113,6 +113,7 @@ public class MyFragment extends BaseFragment {
                 toIntent(intent);
                 break;
             case R.id.myfragment_termid_update:
+                intent.putExtra("speed",Config.speed);
                 intent.setClass(context, TermIdUpdateActivity.class);
                 toIntent(intent);
                 break;

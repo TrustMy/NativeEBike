@@ -126,6 +126,8 @@
             />
 
         <EditText
+            android:textColorHint="#c4c4c4"
+            android:hint="选填项"
             android:id="@+id/register_email"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
@@ -162,7 +164,7 @@
             />
 
         <EditText
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:id="@+id/register_secret_order"
             android:textColor="@color/colorWhite"
             android:gravity="center_vertical"

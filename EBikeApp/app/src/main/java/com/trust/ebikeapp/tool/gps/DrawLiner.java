@@ -130,9 +130,9 @@ public class DrawLiner {
         aMap.clear();
         aMap.addPolyline(new PolylineOptions().addAll(latLngs).width(30).color(Color.parseColor("#020176")).
                 setCustomTextureList(texTuresList));
-        Maker.showMaker(aMap,latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude);
+//        Maker.showMaker(aMap,latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude);
         Maker.showMakerGif(aMap,carLoationMessage = new CarLoationMessage(latLngs.get(latLngs.size()-1).latitude,latLngs.get(latLngs.size()-1).longitude
-        ,time,"asd",0),false,1500);
+        ,time,"asd",0),false,4000);
     }
 
 }

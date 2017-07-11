@@ -21,6 +21,7 @@
 
     <!--选择时间-->
     <string name="chooseTimeOneWeekError">不能超过七天</string>
+    <string name="chooseTimeError">时间错误</string>
     <!--车辆轨历史迹-->
     <string name="carHistroytitle">查询历史信息</string>
 

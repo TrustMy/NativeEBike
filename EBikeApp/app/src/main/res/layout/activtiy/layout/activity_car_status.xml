@@ -65,29 +65,30 @@
                 android:src="@drawable/watch0" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/carstatus_electract_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="@color/colorWhite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorWhite" />
+
                 <TextView
-                    android:text="%"
-                    android:textColor="@color/colorWhite"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textColor="@color/colorWhite" />
 
             </LinearLayout>
 
             <TextView
-                android:textColor="@color/colorWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="电池电量" />
+                android:text="电池电量"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
 
     </android.support.percent.PercentRelativeLayout>

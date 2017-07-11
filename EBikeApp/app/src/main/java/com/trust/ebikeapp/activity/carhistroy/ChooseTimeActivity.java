@@ -2,7 +2,9 @@ package com.trust.ebikeapp.activity.carhistroy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,6 +17,7 @@ import com.trust.ebikeapp.activity.BaseActivity;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.TextUtlis;
 import com.trust.ebikeapp.tool.TimeTool;
+import com.trust.ebikeapp.tool.dialog.DialogTimeTool;
 import com.trust.ebikeapp.tool.dialog.DoubleDatePickerDialog;
 
 import java.util.Calendar;
@@ -23,12 +26,13 @@ public class ChooseTimeActivity extends BaseActivity {
     private Button determineBtn,cancelBtn,todayBtn,yesterdatBtn,lastWeekBtn;
     private TextView startTv,endTv;
     private long startTime,endTime;
-    private long day = 86400000,lastWeek = 604800000;
+    private long day = 86400000,lastWeek = 518400000,offTime = 86399000;//offtime 结束时间+offtime就是当天23:59:59
     private String timeOn ,timeOff;
     private Context context = ChooseTimeActivity.this;
     private TextView title;
     private long mTime = TimeTool.getSystemTimeDate();
     private ImageButton backBtn;
+    private DialogTimeTool dialogTimeTool;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +73,20 @@ public class ChooseTimeActivity extends BaseActivity {
         String time = TimeTool.getTime(mTime,Config.timeTypeYears);
         startTv.setText(time);
         endTv.setText(time);
+        timeOff = time;
+        timeOn = time;
 
         title = (TextView) findViewById(R.id.choose_time_title);
 
         backBtn = (ImageButton) findViewById(R.id.choose_time_back);
         onClick(backBtn);
+
+
+
+        dialogTimeTool = new DialogTimeTool();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void clickResult(View v) {
 
@@ -84,20 +95,27 @@ public class ChooseTimeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.choose_time_determine:
-
+                L.d("Math.abs(TimeTool.getTime(timeOff) - TimeTool.getTime(timeOn)):"+Math.abs(TimeTool.getTime(timeOff) - TimeTool.getTime(timeOn))+
+                "|offtime:"+TimeTool.getTime(timeOff)+"|onTime:"+TimeTool.getTime(timeOn));
                 if(Math.abs(TimeTool.getTime(timeOff) - TimeTool.getTime(timeOn)) > lastWeek){
                     showErrorToast(context, TextUtlis.getMsg(R.string.chooseTimeOneWeekError),1);
                 }else{
                     startTime = TimeTool.getTime(startTv.getText().toString());
                     endTime = TimeTool.getTime(endTv.getText().toString());
-                    L.d("startTime:"+startTime+"|endTime"+endTime);
-                    Intent intent = new Intent(context,CarHistroyActivity.class);
-                    intent.putExtra("fireOnTimeDate",startTime);
-                    intent.putExtra("fireOffTimeDate",endTime);
-                    intent.putExtra("fireOnTime",startTv.getText().toString());
-                    intent.putExtra("fireOffTime",endTv.getText().toString());
-                    setResult(1,intent);
-                    finish();
+                    endTime = endTime+ offTime;
+                    if(startTime <= endTime){
+                        L.d("startTime:"+startTime+"|endTime"+endTime);
+                        Intent intent = new Intent(context,CarHistroyActivity.class);
+                        intent.putExtra("fireOnTimeDate",startTime);
+                        intent.putExtra("fireOffTimeDate",endTime);
+                        intent.putExtra("fireOnTime",startTv.getText().toString());
+                        intent.putExtra("fireOffTime",endTv.getText().toString());
+                        setResult(1,intent);
+                        finish();
+                    }else{
+                        showErrorToast(context, TextUtlis.getMsg(R.string.chooseTimeError),1);
+                    }
+
                 }
 
                 break;
@@ -128,8 +146,36 @@ public class ChooseTimeActivity extends BaseActivity {
                 break;
 
             case R.id.choose_time_starttv:
+                dialogTimeTool.showTimeDialog(this);
+                dialogTimeTool.times = new DialogTimeTool.Time() {
+                    @Override
+                    public void getTime(String time) {
+                        if(time != null){
+                            timeOn = time;
+                            startTv.setText(timeOn);
+                        }else{
+                            timeOn = TimeTool.getTimeAll(TimeTool.getSystemTimeDate());
+                        }
+
+                    }
+                };
+
+                break;
             case R.id.choose_time_endtv:
-                showChooseTime();
+                dialogTimeTool.showTimeDialog(this);
+                dialogTimeTool.times = new DialogTimeTool.Time() {
+                    @Override
+                    public void getTime(String time) {
+                        if(time != null){
+                            timeOff = time;
+                            endTv.setText(timeOff);
+                        }else{
+                            timeOff = TimeTool.getTimeAll(TimeTool.getSystemTimeDate());
+                        }
+
+                    }
+                };
+//                showChooseTime();
                 break;
 
             case R.id.choose_time_back:

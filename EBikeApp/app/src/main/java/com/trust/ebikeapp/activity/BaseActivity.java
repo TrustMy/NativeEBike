@@ -16,6 +16,7 @@ import com.trust.ebikeapp.R;
 import com.trust.ebikeapp.activity.alarm.AlarmActivity;
 import com.trust.ebikeapp.activity.loginorregister.LoginActivity;
 import com.trust.ebikeapp.tool.ActivityCollector;
+import com.trust.ebikeapp.tool.AndroidCheckVersion;
 import com.trust.ebikeapp.tool.TrustException;
 import com.trust.ebikeapp.tool.L;
 import com.trust.ebikeapp.tool.PersionAuthority;
@@ -92,6 +93,9 @@ public class BaseActivity extends AppCompatActivity {
         post = new Post(resultCallBack);
         get = new Get(resultCallBack);
         PushTool.pushCallBack = pushCallBack;
+
+        AndroidCheckVersion androidCheckVersion = new AndroidCheckVersion(context);
+        androidCheckVersion.checkVersion();
     }
 
 
@@ -176,9 +180,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void dissDialog(){
-
-            DialogTool.dialog.dismiss();
-
+            DialogTool.dismissWartDialog();
     }
 
     public void showWaitToast(Context context,String msg,int time){

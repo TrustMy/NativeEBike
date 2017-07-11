@@ -27,7 +27,7 @@ public class PushTool extends PushMessageReceiver {
     @Override
     public void onBind(Context context, int i, String s, String s1, String s2, String s3) {
 
-        L.i("onBin i:"+i+"| s:"+s+"| s1 :"+s1+"|s2:"+s2+"|s3:"+s3);
+        L.i("onBin i:"+i+"| s:"+s+"| s1 :"+s1+"|s2 PushId:"+s2+"|s3:"+s3);
         if(i == 0 && s2 != null)
         {
             PushId.ID = s2;

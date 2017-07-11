@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.trust.ebikeapp.Config;
@@ -23,6 +24,7 @@ import java.util.WeakHashMap;
 public class SpeedUpdateActivity extends BaseActivity  implements RadioGroup.OnCheckedChangeListener{
     private Button cancelBtn,determine;
     private RadioGroup radioGroup;
+    private RadioButton radio1,radio2,radio3;
     private ImageButton backBtn;
     private int speed;
     private Context context = SpeedUpdateActivity.this;
@@ -42,6 +44,29 @@ public class SpeedUpdateActivity extends BaseActivity  implements RadioGroup.OnC
         onClick(cancelBtn);
         onClick(determine);
         onClick(backBtn);
+        radio1 = (RadioButton) findViewById(R.id.activty_speed_update_radio1);
+        radio2 = (RadioButton) findViewById(R.id.activty_speed_update_radio2);
+        radio3 = (RadioButton) findViewById(R.id.activty_speed_update_radio3);
+
+        if(getIntent().getStringExtra("speed") != null && !getIntent().getStringExtra("speed").equals("")){
+            int speedString =Integer.parseInt(getIntent().getStringExtra("speed") );
+            switch (speedString){
+                case 30:
+                    radio1.setChecked(true);
+                    break;
+
+                case 35:
+                    radio1.setChecked(true);
+                    break;
+
+                case 40:
+                    radio1.setChecked(true);
+                    break;
+            }
+        }else{
+            radio1.setChecked(true);
+        }
+
 
     }
 

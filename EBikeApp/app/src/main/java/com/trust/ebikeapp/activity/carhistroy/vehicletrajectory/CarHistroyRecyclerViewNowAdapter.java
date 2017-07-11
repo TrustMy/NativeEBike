@@ -68,8 +68,8 @@ public class CarHistroyRecyclerViewNowAdapter extends RecyclerView.Adapter<CarHi
 
     @Override
     public void onBindViewHolder(ViewHodler holder, int position) {
-        holder.time.setText(TimeTool.getTime(tripsBeanList.get(position).getFireOnTime(),Config.timeTypeMinutes)
-        +" - "+TimeTool.getTime(tripsBeanList.get(position).getFireOffTime(),Config.timeTypeMinutes));
+        holder.onTime.setText(TimeTool.getTime(tripsBeanList.get(position).getFireOnTime(),Config.timeTypeMinutes));
+        holder.offTime.setText( TimeTool.getTime(tripsBeanList.get(position).getFireOffTime(),Config.timeTypeMinutes));
 
         holder.fireOnName.setText(locationAddressBeanList.get(position).getFireOnName());
         holder.fireOffName.setText(locationAddressBeanList.get(position).getFireOffName());
@@ -81,13 +81,14 @@ public class CarHistroyRecyclerViewNowAdapter extends RecyclerView.Adapter<CarHi
     }
 
     class ViewHodler extends RecyclerView.ViewHolder{
-        TextView time,fireOnName,fireOffName;
+        TextView onTime,offTime,fireOnName,fireOffName;
         PercentLinearLayout linearLayout;
         View view;
         public ViewHodler(View itemView) {
             super(itemView);
             view = itemView;
-            time = (TextView) itemView.findViewById(R.id.activity_car_now_histroy_item_time);
+            onTime = (TextView) itemView.findViewById(R.id.activity_car_now_histroy_item_time_on_time);
+            offTime = (TextView) itemView.findViewById(R.id.activity_car_now_histroy_item_time_off_time);
             fireOnName = (TextView) itemView.findViewById(R.id.activity_car_histroy_now_item_fireon_name);
             fireOffName = (TextView) itemView.findViewById(R.id.activity_car_histroy_now_item_fireoff_name);
 
