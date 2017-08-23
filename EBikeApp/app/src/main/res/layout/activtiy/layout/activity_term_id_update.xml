@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.trust.ebikeapp.activity.update.termid.TermIdUpdateActivity">
+    tools:context="com.phonegap.ebike.activity.update.termid.TermIdUpdateActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_car_location_toolbar"
@@ -119,7 +119,7 @@
         android:orientation="vertical"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -145,7 +145,7 @@
                 android:layout_height="match_parent"
                 android:textSize="10sp"
                 android:text="点击获取验证码"/>
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
         <View
             android:layout_width="wrap_content"
@@ -183,4 +183,4 @@
     </LinearLayout>
 
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>

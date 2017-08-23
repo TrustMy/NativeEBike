@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.trust.ebikeapp.activity.carstatus.CarStatusActivity">
+    tools:context="com.phonegap.ebike.activity.carstatus.CarStatusActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_help_toolbar"
@@ -117,6 +117,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/carstatus_voltage_num_tv"
                     android:layout_centerInParent="true"
                     android:text="电量充足"
                     android:textColor="@color/colorWhite"
@@ -147,6 +148,7 @@
                     android:layout_alignParentStart="true" />
 
                 <TextView
+                    android:id="@+id/carstatus_voltage_status_tv"
                     android:layout_centerInParent="true"
                     android:text="电池插入"
                     android:textColor="@color/colorWhite"
@@ -175,6 +177,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/carstatus_status_tv"
                 android:layout_centerInParent="true"
                 android:text="车辆正常"
                 android:textColor="@color/colorWhite"
@@ -187,4 +190,4 @@
     </LinearLayout>
 
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>

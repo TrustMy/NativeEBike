@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.trust.ebikeapp.activity.resetpwd.ResetPwdActivity">
+    tools:context="com.phonegap.ebike.activity.resetpwd.ResetPwdActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_car_location_toolbar"
@@ -70,7 +70,7 @@
         android:src="@drawable/lock"
         app:layout_marginTopPercent="6%" />
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -81,7 +81,7 @@
         app:layout_widthPercent="80%"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -104,16 +104,16 @@
                 android:gravity="center_vertical"
                 app:layout_heightPercent="100%"
                 app:layout_widthPercent="70%" />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="0dp"
@@ -124,7 +124,7 @@
         app:layout_widthPercent="80%"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -156,16 +156,16 @@
                 android:layout_height="match_parent"
                 android:textSize="10sp"
                 android:text="点击获取验证码"/>
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:id="@+id/activity_reset_pwd_new_pwd_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -178,7 +178,7 @@
         android:visibility="gone"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -201,16 +201,16 @@
                 android:gravity="center_vertical"
                 app:layout_heightPercent="100%"
                 app:layout_widthPercent="70%" />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -223,7 +223,7 @@
         android:id="@+id/activity_reset_pwd_new_two_pwd_layout"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
@@ -247,14 +247,14 @@
                 android:gravity="center_vertical"
                 app:layout_heightPercent="100%"
                 app:layout_widthPercent="70%" />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
 
@@ -268,7 +268,7 @@
         android:background="#00000000"/>
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -296,11 +296,11 @@
             android:textColor="@color/colorWhite" />
 
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
 
 
 
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>

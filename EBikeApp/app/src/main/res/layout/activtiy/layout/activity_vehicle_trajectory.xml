@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.trust.ebikeapp.activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity">
+    tools:context="com.phonegap.ebike.activity.carhistroy.vehicletrajectory.VehicleTrajectoryActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/vehicle_activity_toolbar"
@@ -56,4 +56,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.amap.api.maps.MapView>
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>

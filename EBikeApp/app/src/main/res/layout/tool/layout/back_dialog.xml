@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/back_dialog_bg"
@@ -34,7 +34,7 @@
             android:layout_height="1dp"
             android:background="#000000" />
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -58,9 +58,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="取消" />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
 </LinearLayout>

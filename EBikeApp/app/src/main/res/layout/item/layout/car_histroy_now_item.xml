@@ -9,14 +9,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.loginorregister.LoginActivity">
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         android:orientation="vertical">
 
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:gravity="center"
@@ -25,7 +25,7 @@
             android:paddingRight="10dp"
             app:layout_widthPercent="100%">
 
-            <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+            <com.phonegap.ebike.tool.uitool.PercentLinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -61,7 +61,7 @@
 
 
 
-            </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+            </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -139,10 +139,10 @@
             </LinearLayout>
 
 
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
 </LinearLayout>

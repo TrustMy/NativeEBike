@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.trust.ebikeapp"
+        applicationId "com.phonegap.ebike"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -13,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -26,7 +26,8 @@ android {
                     'src/main/res/layout/item',
                     'src/main/res/layout/tool',
                     'src/main/res/layout',
-                    'src/main/res/'];
+                    'src/main/res' +
+                            '/'];
         }
     }
 }

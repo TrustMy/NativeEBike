@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.trust.ebikeapp.activity.bind.CarBindActivity">
+    tools:context="com.phonegap.ebike.activity.bind.CarBindActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -23,6 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
+                android:id="@+id/activity_car_bind_back"
                 android:layout_centerVertical="true"
                 android:background="@null"
                 android:onClick="ext"
@@ -69,7 +70,7 @@
 
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -79,7 +80,7 @@
         app:layout_widthPercent="80%"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -102,16 +103,16 @@
             app:layout_widthPercent="70%"
             android:background="@null"
             />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -121,7 +122,7 @@
         app:layout_widthPercent="80%"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -149,16 +150,16 @@
                 android:src="@drawable/fullscreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -168,7 +169,7 @@
         app:layout_widthPercent="80%"
         >
 
-        <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+        <com.phonegap.ebike.tool.uitool.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -200,16 +201,16 @@
                 android:layout_height="match_parent"
                 android:textSize="10sp"
                 android:text="点击获取验证码"/>
-        </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+        </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
         <View
             android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
-    <com.trust.ebikeapp.tool.uitool.PercentLinearLayout
+    <com.phonegap.ebike.tool.uitool.PercentLinearLayout
         android:layout_gravity="center_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -237,10 +238,10 @@
             android:textColor="@color/colorWhite" />
 
 
-    </com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+    </com.phonegap.ebike.tool.uitool.PercentLinearLayout>
 
 
 
 
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>

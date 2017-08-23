@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.trust.ebikeapp.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.phonegap.ebike.tool.uitool.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="com.trust.ebikeapp.activity.customerservice.CustomerServiceActivity">
+    tools:context="com.phonegap.ebike.activity.customerservice.CustomerServiceActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -73,4 +73,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</com.trust.ebikeapp.tool.uitool.PercentLinearLayout>
+</com.phonegap.ebike.tool.uitool.PercentLinearLayout>
