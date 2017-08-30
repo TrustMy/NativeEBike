@@ -2,6 +2,7 @@ package com.phonegap.ebike.tool.gps;
 
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.services.core.LatLonPoint;
@@ -76,18 +77,17 @@ public class GPSRoutePlanning implements RouteSearch.OnRouteSearchListener{
     @Override
     public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
 
-
        if (i == 3003) {
-           T.showToast(context, "距离车辆位置过长!");
+           Toast.makeText(context,"距离车辆位置过长!",Toast.LENGTH_SHORT).show();
         }else if(i ==3001)
         {
-            T.showToast(context,"附近搜不到路!");
+            Toast.makeText(context,"附近搜不到路!",Toast.LENGTH_SHORT).show();
         }else if(i == 3002)
         {
-            T.showToast(context,"路线计算失败!");
+            Toast.makeText(context,"路线计算失败!",Toast.LENGTH_SHORT).show();
         }else if(i == 3000)
         {
-            T.showToast(context,"不在中国陆地范围内!");
+            Toast.makeText(context,"不在中国陆地范围内!",Toast.LENGTH_SHORT).show();
         }else
         {
 

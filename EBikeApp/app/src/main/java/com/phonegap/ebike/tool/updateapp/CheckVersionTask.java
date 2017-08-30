@@ -243,7 +243,7 @@ public class CheckVersionTask implements Runnable {
     //安装apk
 
     protected void installApk(File file) {
-
+        //7.0以下
         Intent intent = new Intent();
 
         //执行动作
@@ -255,7 +255,7 @@ public class CheckVersionTask implements Runnable {
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
 
         context.startActivity(intent);
-
+        //7.0以上
 
 
     }

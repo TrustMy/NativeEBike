@@ -8,8 +8,9 @@ import java.util.List;
 
 public class AlarmBean {
 
+
     /**
-     * content : {"totalElements":47,"currentPage":0,"alarms":[{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":5,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62322,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":20,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62322,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":18,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":4,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":3,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":5,"lat":31.165916},{"gpsTime":1497150576000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":22,"lat":0},{"gpsTime":1497150564000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":24,"lat":0},{"gpsTime":1497150551000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":24,"lat":0},{"gpsTime":1497150537000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":20,"lat":0}],"currentSize":10,"totalPages":5}
+     * content : {"totalElements":18,"currentPage":0,"alarms":[{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":871.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":22,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":20,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":20,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":22,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":901.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":17,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":23,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987228000,"status":1,"engine":0,"station":29652,"block":30383,"lng":0,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":0,"alt":0,"gpsSpeed":0,"vibration":1,"rssi":18,"lat":0}],"currentSize":10,"totalPages":2}
      * status : true
      */
 
@@ -34,11 +35,11 @@ public class AlarmBean {
 
     public static class ContentBean {
         /**
-         * totalElements : 47
+         * totalElements : 18
          * currentPage : 0
-         * alarms : [{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":5,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62322,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":20,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62322,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":18,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":4,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":3,"lat":31.165916},{"gpsTime":1497152956000,"status":1,"engine":0,"station":6265,"block":62610,"lng":121.445024,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1040,"fix":1,"alt":23.3,"gpsSpeed":0.9,"vibration":1,"rssi":5,"lat":31.165916},{"gpsTime":1497150576000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":22,"lat":0},{"gpsTime":1497150564000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":24,"lat":0},{"gpsTime":1497150551000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":24,"lat":0},{"gpsTime":1497150537000,"status":1,"engine":0,"station":6265,"block":61490,"lng":0,"acc":0,"termId":860337030784222,"course":0,"plugout":0,"lowVoltage":0,"voltage":1025,"fix":0,"alt":0,"gpsSpeed":0.8,"vibration":1,"rssi":20,"lat":0}]
+         * alarms : [{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":871.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":22,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":20,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":20,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":22,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":901.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":17,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":23,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987951000,"status":1,"engine":0,"station":29652,"block":30383,"lng":112.557976,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":1,"alt":216.1,"gpsSpeed":0.1,"vibration":1,"rssi":21,"lat":26.89336},{"gpsTime":1503987228000,"status":1,"engine":0,"station":29652,"block":30383,"lng":0,"acc":0,"termId":860337030798859,"course":0,"plugout":0,"lowVoltage":0,"voltage":886.4,"fix":0,"alt":0,"gpsSpeed":0,"vibration":1,"rssi":18,"lat":0}]
          * currentSize : 10
-         * totalPages : 5
+         * totalPages : 2
          */
 
         private int totalElements;
@@ -89,24 +90,24 @@ public class AlarmBean {
 
         public static class AlarmsBean {
             /**
-             * gpsTime : 1497152956000
+             * gpsTime : 1503987951000
              * status : 1
              * engine : 0
-             * station : 6265
-             * block : 62610
-             * lng : 121.445024
+             * station : 29652
+             * block : 30383
+             * lng : 112.557976
              * acc : 0
-             * termId : 860337030784222
+             * termId : 860337030798859
              * course : 0
              * plugout : 0
              * lowVoltage : 0
-             * voltage : 1040
+             * voltage : 871.4
              * fix : 1
-             * alt : 23.3
-             * gpsSpeed : 0.9
+             * alt : 216.1
+             * gpsSpeed : 0.1
              * vibration : 1
-             * rssi : 5
-             * lat : 31.165916
+             * rssi : 22
+             * lat : 26.89336
              */
 
             private long gpsTime;
@@ -120,7 +121,7 @@ public class AlarmBean {
             private int course;
             private int plugout;
             private int lowVoltage;
-            private int voltage;
+            private double voltage;
             private int fix;
             private double alt;
             private double gpsSpeed;
@@ -172,7 +173,7 @@ public class AlarmBean {
                 this.lowVoltage = lowVoltage;
             }
 
-            public void setVoltage(int voltage) {
+            public void setVoltage(double voltage) {
                 this.voltage = voltage;
             }
 
@@ -244,7 +245,7 @@ public class AlarmBean {
                 return lowVoltage;
             }
 
-            public int getVoltage() {
+            public double getVoltage() {
                 return voltage;
             }
 

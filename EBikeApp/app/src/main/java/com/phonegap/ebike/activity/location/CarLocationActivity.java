@@ -312,9 +312,10 @@ public class CarLocationActivity extends BaseActivity {
 
     @Override
     public void successCallBeack(Object obj, int type) {
-        aMap.clear();
+
         switch (type){
             case Config.location:
+                aMap.clear();
                 CarLoationMessage carLoationMessage = (CarLoationMessage) obj;
                 if(!isRoute){
                     Maker.showMakerGif(aMap,carLoationMessage,true,1500);
@@ -325,6 +326,7 @@ public class CarLocationActivity extends BaseActivity {
                 break;
 
             case Config.isTrack:
+                aMap.clear();
                 if (isTrack) {
                     closeTrick();
                     locationTimeTv.setVisibility(View.GONE);
