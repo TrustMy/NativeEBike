@@ -18,6 +18,7 @@ import com.phonegap.ebike.activity.alarm.AlarmActivity;
 import com.phonegap.ebike.activity.loginorregister.LoginActivity;
 import com.phonegap.ebike.tool.ActivityCollector;
 import com.phonegap.ebike.tool.AndroidCheckVersion;
+import com.phonegap.ebike.tool.AndroidPermissionTool;
 import com.phonegap.ebike.tool.CheckNumTool;
 import com.phonegap.ebike.tool.TrustException;
 import com.phonegap.ebike.tool.L;
@@ -98,8 +99,10 @@ public class BaseActivity extends AppCompatActivity {
         get = new Get(resultCallBack);
         PushTool.pushCallBack = pushCallBack;
 
-        AndroidCheckVersion androidCheckVersion = new AndroidCheckVersion(context);
-        androidCheckVersion.checkVersion();
+//        AndroidCheckVersion androidCheckVersion = new AndroidCheckVersion(context);
+//        androidCheckVersion.checkVersion();
+        AndroidPermissionTool androidPermissionTool =new AndroidPermissionTool();
+        androidPermissionTool.checkPermission(this);
         dialogTool= new DialogTool();
     }
 

@@ -77,7 +77,8 @@ public class Config extends Application {
     //url'
 //    public static final String Server = "http://192.168.1.160:8080/EBWebServer-2.0/";
 //    public static final String Server = "http://192.168.1.134:8080/";
-    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";
+
+    public static final String Server = "http://139.196.229.233:8080/EBWebServer-2.0/";//服务器
     public static final String Register = "register/";
     public static final String Login = "rest/user/login/";
     public static final String car_location_url = "rest/gps/latest/";

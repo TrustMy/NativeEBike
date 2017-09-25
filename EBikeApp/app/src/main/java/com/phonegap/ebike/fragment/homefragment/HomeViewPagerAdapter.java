@@ -26,6 +26,8 @@ public class HomeViewPagerAdapter extends PagerAdapter {
 
     }
 
+
+
     public void setArticles(List<HomeViewPagerBean> articles) {
         this.articles = articles;
         for (int i = 0; i < articles.size(); i++) {

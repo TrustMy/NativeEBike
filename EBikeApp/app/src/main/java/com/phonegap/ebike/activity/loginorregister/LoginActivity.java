@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.phonegap.ebike.activity.BaseActivity;
@@ -160,5 +162,27 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    boolean permissionStatus = false;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode){
+            case 1:
+                if(grantResults.length > 0 ){
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                            permissionStatus = false;
+                            break;
+                        }else{
+                            permissionStatus = true;
+                        }
+                    }
+                    if (!permissionStatus) {
+                        Toast.makeText(this,"请允许全部权限,否则有些功能无法正常使用!",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+        }
+    }
 
 }

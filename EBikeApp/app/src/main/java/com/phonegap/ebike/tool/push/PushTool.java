@@ -1,9 +1,12 @@
 package com.phonegap.ebike.tool.push;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
 
 import com.baidu.android.pushservice.PushMessageReceiver;
+import com.phonegap.ebike.Config;
+import com.phonegap.ebike.R;
 import com.phonegap.ebike.tool.L;
 import com.phonegap.ebike.tool.trustinterface.PushCallBack;
 
@@ -22,7 +25,8 @@ public class PushTool extends PushMessageReceiver {
     }
 
     public static PushCallBack pushCallBack;
-
+    private MediaPlayer mp;
+    private boolean isStart = false;//是否处于播放中
     @Override
     public void onBind(Context context, int i, String s, String s1, String s2, String s3) {
 
@@ -31,6 +35,8 @@ public class PushTool extends PushMessageReceiver {
         {
             PushId.ID = s2;
         }
+
+
     }
 
 
@@ -80,7 +86,18 @@ public class PushTool extends PushMessageReceiver {
     public void onNotificationArrived(Context context, String s, String s1, String s2) {
         L.i("onNotificationArrived"+s+"|\ns1 \n"+s1+"|\ns2"+s2);
 //        Toast.makeText(context, "onNotificationArrived", Toast.LENGTH_SHORT).show();
-
-
+        if (mp == null) {
+            mp = MediaPlayer.create(context, R.raw.alarm);
+        }
+        if (!isStart && s.equals("报警")) {
+            isStart = true;
+            mp.start();
+        }
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                isStart = false;
+            }
+        });
     }
 }

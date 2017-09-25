@@ -24,7 +24,7 @@ import com.phonegap.ebike.tool.gps.gpsconfig.WalkRouteOverlay;
 public class GPSRoutePlanning implements RouteSearch.OnRouteSearchListener{
 
     private RouteSearch routeSearch;
-    private Context context = Config.context;
+    private Context context = Config.context.getApplicationContext();
     private RouteSearch.FromAndTo fromAndTol;
     private LatLonPoint startLat;
     private LatLonPoint endLat;

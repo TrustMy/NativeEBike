@@ -48,6 +48,7 @@ public class Post {
         JSONObject jsonObject = new JSONObject(map);
         L.d("jsonObject:"+jsonObject);
         needHeader(Config.Server+url,type,jsonObject.toString(),needHeader);
+        L.d("Config.Server+url:"+Config.Server+url);
     }
 
 

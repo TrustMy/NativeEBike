@@ -6,10 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
+
+import com.phonegap.ebike.tool.L;
 
 import java.io.File;
 import java.io.InputStream;
@@ -243,20 +247,19 @@ public class CheckVersionTask implements Runnable {
     //安装apk
 
     protected void installApk(File file) {
-        //7.0以下
         Intent intent = new Intent();
-
         //执行动作
-
         intent.setAction(Intent.ACTION_VIEW);
-
-        //执行的数据类型
-
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            //7.0以上
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(FileProvider.getUriForFile(context, "com.phonegap.ebike.file_provider", file), "application/vnd.android.package-archive");
+        } else {
+            //执行的数据类型
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        }
 
         context.startActivity(intent);
-        //7.0以上
-
 
     }
 
